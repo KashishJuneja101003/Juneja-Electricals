@@ -1,0 +1,77 @@
+html{
+    scroll-behavior: smooth;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#title {
+    margin-top: -50px;
+    text-align: center;
+    font-size: 50px;
+    text-decoration: none;
+}
+
+.navigation{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.navLinks {
+    margin-top: -40px;
+    display: flex;
+    gap: 15px;
+    justify-content:right;
+    margin-right: 20px;    
+}
+
+.navLinks a{
+    font-size: large;
+    font-weight: bold;
+    text-decoration: None;  /* Remove underline */
+    color: black;   /* Link color */
+}
+
+.about-us-text-container{
+    width: 700px;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 7px;
+    padding-left: 4px;
+    padding-top: 1px;
+}
+
+.contact-items{
+    text-decoration: none;
+}
+
+.visit-us{
+    display: flex;
+    align-items: flex-start;
+    justify-content:space-evenly;
+}
+
+.map-container{
+    width: 600px; 
+    height: 450px;
+
+    border: 1.5px;
+    border-radius: 4px;
+    border-color: black;
+    border-style: solid;
+}
+
+.timings-container{
+    border: 2px solid;
+    width: 200px;
+    height: 300px;
+
+    display: block;
+    justify-content: flex-end;
+
+}
