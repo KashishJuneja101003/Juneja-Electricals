@@ -4,16 +4,18 @@ html{
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
-    background: linear-gradient(to bottom right, #f0f9ff, #e0f7fa); /* Light gradient */
-    color: #333; /* Darker text for readability */
+    background: #433633;
     font-family: Arial, sans-serif;
+    
   }
 
-
+h2{
+  color: #F7F0F5;
+}
 
 a{
     text-decoration: none;
-    color: black;
+    color: #DECBB7;
 
 }
 
@@ -30,7 +32,7 @@ a:hover{
     text-decoration: none;
 }
 #anchor-title:hover{
-    color: #000;
+    color: #DECBB7;
     text-decoration: none;
 }
 
@@ -53,12 +55,32 @@ a:hover{
     font-weight: bold;
 }
 
+.navLinks a:hover{
+  color: #F7F0F5;
+  text-decoration: none;
+}
+
+#share-btn{
+  background-color: #8F857D; 
+  color: white; 
+  padding: 3px 3px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#share-btn:hover{
+  background-color: #F7F0F5;
+}
+
 .about-us-text-container{
     width: 700px;
     background-color: whitesmoke;
     border: 3px;
     border-style: solid;
     border-radius: 7px;
+    border-color: #DECBB7;
     padding-left: 4px;
     padding-top: 1px;
 }
@@ -141,7 +163,14 @@ a:hover{
 
   .contact-links-text{
     font-size: 20px;
+    color: #5C5552;
   }
+
+  .contact-links-text:hover{
+    color: #463633;
+    text-decoration: none;
+  }
+
   .contact-img{
     height: 20px;
   }
@@ -161,6 +190,6 @@ a:hover{
 
     border: 1.5px;
     border-radius: 4px;
-    border-color: black;
+    border-color: #F7F0F5;
     border-style: solid;
 }
