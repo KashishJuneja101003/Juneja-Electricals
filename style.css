@@ -43,8 +43,11 @@ header {
   border: 2px rgb(67, 54, 51) solid;
   border-radius: 10px;
   background-color: #433633;
-  height: 118px;
+  height: 18vh;
   margin-bottom: 0px;
+  position: fixed;
+  width: 100vw;
+  z-index: 10px;
 }
 #hr-header-about{
   margin-top: 0px;
@@ -90,6 +93,7 @@ header {
 #share-btn:hover {
   background-color: #f7f0f5;
 }
+
 
 .about-us-text-container {
   margin-left: 10px;
