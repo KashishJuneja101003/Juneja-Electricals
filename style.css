@@ -30,7 +30,7 @@ a {
 }
 
 #title {
-  margin-top: -50px;
+  margin-top: -60px;
   text-align: center;
   font-size: 50px;
   text-decoration: none;
@@ -58,7 +58,7 @@ header {
 }
 
 .navLinks {
-  margin-top: -50px;
+  margin-top: -40px;
   display: flex;
   gap: 15px;
   justify-content: right;
