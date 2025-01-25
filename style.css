@@ -8,6 +8,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0px;
   padding: 0px;
+  z-index: -2px;
 }
 
 h2 {
@@ -41,20 +42,15 @@ a {
 
 header {
   border: 2px rgb(67, 54, 51) solid;
-  border-radius: 10px;
+  border-radius: 0px 0px 50px 50px;
   background-color: #433633;
-  height: 18vh;
-  margin-bottom: 0px;
+  height: 16vh;
+  top:0px;
   position: fixed;
-  width: 100vw;
+  width: 98.44vw;
   z-index: 10px;
 }
-#hr-header-about{
-  margin-top: 0px;
-  border: 1.2px solid;
-  border-color: #8f857d;
-  
-}
+
 .navigation {
   display: flex;
   justify-content: space-evenly;
@@ -62,11 +58,11 @@ header {
 }
 
 .navLinks {
-  margin-top: -40px;
+  margin-top: -50px;
   display: flex;
   gap: 15px;
   justify-content: right;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .navLinks a {
@@ -88,6 +84,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin-right:0px;
 }
 
 #share-btn:hover {
@@ -124,11 +121,13 @@ header {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
 }
 
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 0;
 }
 
 .card img {
