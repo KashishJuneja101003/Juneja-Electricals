@@ -11,7 +11,7 @@ This project is a professional website built for Juneja Electricals to showcase 
 
 ## Tools and Technologies
 - Frontend: HTML, CSS (Tailwind CSS)
-- Version Control: Git, GitHub
+- Version Control: Git(2.46.2.windows.1), GitHub
 - Deployment: GitHub Pages
 
 ## Development Tools
