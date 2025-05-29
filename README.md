@@ -19,7 +19,7 @@ This project is a professional website built for Juneja Electricals to showcase 
 - Excalidraw - For sketching wireframes and planning layouts
 
 ## Documentation
-For a detailed overview of the project, including goals, design decisions, and future plans, see the [Project Documentation](docs/Project_Overview.md).
+For a detailed overview of the project, including goals, design decisions, and future plans, see the [Project Documentation](Documentation/Project_Overview.md).
 
 ## Contact
 For any questions or feedback, feel free to reach out to me at [kashishjuneja1010@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=kashishjuneja1010@gmail.com) or connect on [Linkedin](https://www.linkedin.com/in/kashish-juneja-756673209).
