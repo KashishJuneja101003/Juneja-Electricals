@@ -22,7 +22,7 @@ This project is a professional website built for Juneja Electricals to showcase 
 For a detailed overview of the project, including goals, design decisions, and future plans, see the [Project Documentation](docs/Project_Overview.md).
 
 ## Contact
-For any questions or feedback, feel free to reach out to me at [kashishjuneja1010@gmail.com](mailto:kashishjuneja1010@gmail.com) or connect on [Linkedin](www.linkedin.com/in/kashish-juneja-756673209).
+For any questions or feedback, feel free to reach out to me at [kashishjuneja1010@gmail.com](https://mail.google.com/mail/?view=cm&fs=1&to=kashishjuneja1010@gmail.com) or connect on [Linkedin](https://www.linkedin.com/in/kashish-juneja-756673209).
 
 ---
 
