@@ -16,7 +16,7 @@ This project is a professional website built for Juneja Electricals to showcase 
 
 ## Development Tools
 - Visual Studio Code (1.100.2) - For coding and project management
-- Excalidraw - For sketching wireframes and planning layouts
+- Canva - For sketching wireframes and planning layouts
 
 ## Documentation
 For a detailed overview of the project, including goals, design decisions, and future plans, see the [Project Documentation](Documentation/Project_Overview.md).
