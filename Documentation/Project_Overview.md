@@ -20,13 +20,17 @@ This project is driven by the need to modernize our family’s electrical applia
 - **Canva** - For sketching wireframes and planning layouts
 
 ## Designs
-![HomePage](image.png)
+- **Colors:** Colors we used primarily, are: ![Colors we used primarily](image-3.png)
+- **Design 1:** ![HomePage](image.png)
+- **Design 2:** ![Hover on Navbar Items (Search by Category)](image-1.png)
+- **Design 3:** ![Hover on Navbar Items (Brands We Sell)](image-2.png)
 
 ## Timeline & Progress
 **Started on:** May 29th, 2025 
 - **Week 1:**
     - Created repository (public) on GitHub.
     - Generated home page designs using Canva.
+    - Generated navbar items hovering designs using Canva.
 
 ## Future Scope
 - Order & Billing section can be created before Payment.
