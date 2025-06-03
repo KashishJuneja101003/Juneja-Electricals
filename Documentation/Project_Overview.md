@@ -22,19 +22,26 @@ This project is driven by the need to modernize our family’s electrical applia
 ## Designs
 - **Colors:** Colors we used primarily, are: ![Colors we used primarily](image-3.png)
 - **Design 1:** ![HomePage](image.png)
-- **Design 2:** ![Hover on Navbar Items (Search by Category)](image-1.png)
-- **Design 3:** ![Hover on Navbar Items (Brands We Sell)](image-2.png)
+- **Design 2:** ![Hover on Navbar Items (Search by Category)](https://github.com/user-attachments/assets/c84e4238-6584-447a-a603-94cfba08aa37)
+- **Design 3:** ![Hover on Navbar Items (Brands We Sell)](https://github.com/user-attachments/assets/33611c91-da01-4a81-9390-e00da351ed96)
+- **Design 4:** ![Hover on Navbar Items (Contact Us)](https://github.com/user-attachments/assets/6b6e8ad5-bce1-4a56-a665-a9ab3bc3f072)
+- **Design 5:** ![Explore Our Products](https://github.com/user-attachments/assets/1ab94db5-e23a-44df-bcb6-abb764a48171)
+- **Design 6:** ![Meet The Owner](https://github.com/user-attachments/assets/49acbe0e-8d2a-4ee0-92ac-e01894f583c6)
+- **Design 7:** ![Contact Us](https://github.com/user-attachments/assets/adf2a93d-ee4f-4a9f-a967-b05dd51534c8)
+- **Design 8:** ![Footer Section](https://github.com/user-attachments/assets/8acb4687-9029-4247-bb92-0fb4238bfe31)
 
 ## Timeline & Progress
 **Started on:** May 29th, 2025 
 - **Week 1:**
     - Created repository (public) on GitHub.
-    - Generated home page designs using Canva.
-    - Generated navbar items hovering designs using Canva.
+    - Created home page designs (design 1) using Canva.
+    - Created navbar items hovering designs (design 2, 3, 4) using Canva.
+    - Created a products section (design 5), owner section (design 6), contact us section (design 7), and footer section (design 8) for the homepage.
 
 ## Future Scope
 - Order & Billing section can be created before Payment.
 - An Android application can be developed.
+- An iOS application can be developed.
 
 ## Links & References
 - **GitHub Repo link:** https://github.com/KashishJuneja101003/Juneja-Electricals
