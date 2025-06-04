@@ -1,0 +1,27 @@
+{
+  "name": "juneja-electricals",
+  "version": "1.0.0",
+  "description": "This project is a professional website built for Juneja Electricals to showcase their electrical products and services. The site is designed to attract new customers, provide essential business information, and enhance the business's online presence.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KashishJuneja101003/Juneja-Electricals.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KashishJuneja101003/Juneja-Electricals/issues"
+  },
+  "homepage": "https://github.com/KashishJuneja101003/Juneja-Electricals#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "vite": "^6.3.5"
+  }
+}
