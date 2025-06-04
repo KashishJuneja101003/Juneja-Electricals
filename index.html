@@ -16,13 +16,13 @@
          <nav class="w-full">
 
             <!-- Parent div -->
-             <div class="flex justify-between border-b-[0.5px] pb-0.5 bg-JELightWhite h-16">
+             <div class="flex justify-between pb-0.5 bg-JELightWhite h-16">
 
                 <!-- Left div -->
                  <div class="flex justify-between w-[50%]">
 
                     <!-- Logo + Name -->
-                    <div class="flex items-center gap-1 p-1">
+                    <div class="flex items-center gap-3 p-1">
                         <img src="./Assets/Business Logo.png" alt="Business Logo" class="w-8">
                         <p class="text-lg text-JEBlue">JUNEJA <br> ELECTRICALS</p>
                     </div>
@@ -52,12 +52,96 @@
 
                   <!-- Toggle -->
                    <div class="flex sm:hidden items-center justify-center gap-1 pr-4">
-                    <i class="fa-solid fa-bars text-2xl" style="color: #28548A;"></i>
-                    
+                    <i class="fa-solid fa-bars text-2xl cursor-pointer" style="color: #28548A;"></i>
                    </div>
              </div>
          </nav>
 
+         <!-- Image Carousel -->
+          <div class="w-full h-60 border-y-[0.5px] relative overflow-hidden">
+
+            <div id="slider" class="flex w-full h-full transition-transform duration-700 ease-linear absolute">
+
+                <!-- Original Slides -->
+                <!-- Slide 1 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 2 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 3 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 4 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 5 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Cloned Slides -->
+                <!-- Slide 1 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 2 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 3 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 4 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill">
+                 </div>
+
+                 <!-- Slide 5 -->
+                 <div class="w-full flex-shrink-0">
+                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill">
+                 </div>
+            </div>
+            
+            <script>
+                const slider = document.getElementById('slider');
+                const totalSlides = slider.children.length / 2;
+                let currentIndex = 0;
+
+                function slide(){
+                    currentIndex++;
+                    slider.style.transition = `transform 0.7s linear`;
+                    slider.style.transform = `translateX(-${currentIndex*100}%)`;
+
+                    if(currentIndex == totalSlides){
+                        setTimeout(() => {
+                            slider.style.transition = `none`;
+                            slider.style.transform = `translateX(0)`;
+                            currentIndex = 0;
+                        }, 700);
+                    }
+                }
+
+                setInterval(slide, 3000);
+            </script>
+
+          </div>
+
+          
+
+          
     </div>
 </body>
 </html>
