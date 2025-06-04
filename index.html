@@ -10,108 +10,108 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <div>
+    <div class="transition-all">
 
         <!-- Navbar -->
          <nav class="w-full">
 
             <!-- Parent div -->
-             <div class="flex justify-between pb-0.5 bg-JELightWhite h-16">
+             <div class="flex justify-between pb-0.5 bg-JELightWhite h-16 gap-2">
 
                 <!-- Left div -->
-                 <div class="flex justify-between w-[50%]">
+                 <div class="flex justify-between w-[50%] md:w-[50%] lg:w-[70%] xl:w-[70%] items-center gap-2">  
 
                     <!-- Logo + Name -->
                     <div class="flex items-center gap-3 p-1">
-                        <img src="./Assets/Business Logo.png" alt="Business Logo" class="w-8">
-                        <p class="text-lg text-JEBlue">JUNEJA <br> ELECTRICALS</p>
+                        <img src="./Assets/Business Logo.png" alt="Business Logo" class="w-8 lg:w-12">
+                        <p class="text-lg lg:text-xl text-JEBlue">JUNEJA <br> ELECTRICALS</p>
                     </div>
 
                     <!-- Search Bar -->
-                     <div class="hidden sm:flex w-96 my-2 mt-3 items-center gap-1.5 border-[0.6px] px-2 rounded-3xl bg-white border-gray-400">
-                        <i class="fa-solid fa-magnifying-glass text-gray-700"></i>
-                        <p class="text-gray-600">Search Products</p>
+                     <div class="hidden md:flex md:w-30 lg:w-73 my-2 mt-3 items-center gap-1.5 border-[0.6px] xl:border-1 px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all">
+                        <i class="fa-solid fa-magnifying-glass text-gray-700 md:text-xs xl:text-lg"></i>
+                        <p class="text-gray-600 md:text-xs xl:text-lg">Search Products</p>
                      </div>
                  </div>
 
                  <!-- Right div -->
-                  <div class="hidden sm:flex gap-6 items-end justify-end pr-12 w-[50%]">
-                    <div class="flex items-center justify-center gap-1">
-                        <p class="text-xl">Search by Category</p>
+                  <div class="hidden md:flex md:w-[70%] gap-6 items-center justify-end pr-8">
+                    <div class="flex items-center justify-center gap-1 cursor-pointer">
+                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Search by Category</p>
                         <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
                     </div>
-                    <div class="flex items-center justify-center gap-1">
-                        <p class="text-xl">Brands We Sell </p>
+                    <div class="flex items-center justify-center gap-1  cursor-pointer">
+                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Brands We Sell </p>
                         <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
                     </div>
-                    <div class="flex items-center justify-center gap-1">
-                        <p class="text-xl">Contact Us</p>
+                    <div class="flex items-center justify-center gap-1  cursor-pointer">
+                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Contact Us</p>
                         <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
                     </div>
                   </div>
 
                   <!-- Toggle -->
-                   <div class="flex sm:hidden items-center justify-center gap-1 pr-4">
+                   <div class="flex md:hidden items-center justify-center gap-1 pr-4">
                     <i class="fa-solid fa-bars text-2xl cursor-pointer" style="color: #28548A;"></i>
                    </div>
              </div>
          </nav>
 
          <!-- Image Carousel -->
-          <div class="w-full h-60 border-y-[0.5px] relative overflow-hidden">
+          <div class="w-full h-60 sm:h-120 md:object-cover border-y-[0.5px] relative overflow-hidden transition-all">
 
             <div id="slider" class="flex w-full h-full transition-transform duration-700 ease-linear absolute">
 
                 <!-- Original Slides -->
                 <!-- Slide 1 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill">
+                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 2 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill">
+                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 3 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill">
+                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 4 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill">
+                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 5 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill">
+                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Cloned Slides -->
                 <!-- Slide 1 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill">
+                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 2 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill">
+                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 3 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill">
+                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 4 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill">
+                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill md:object-fit">
                  </div>
 
                  <!-- Slide 5 -->
                  <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill">
+                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill md:object-fit">
                  </div>
             </div>
             
