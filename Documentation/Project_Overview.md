@@ -37,12 +37,18 @@ This project is driven by the need to modernize our family’s electrical applia
     - Created home page designs (design 1) using Canva.
     - Created navbar items hovering designs (design 2, 3, 4) using Canva.
     - Created a products section (design 5), owner section (design 6), contact us section (design 7), and footer section (design 8) for the homepage.
+    - Created responsive navbar for homepage.
+
+- **Week 2:**
+    - 
 
 ## Future Scope
+- Inventory system can be developed.
 - Order & Billing section can be created before Payment.
 - An Android application can be developed.
 - An iOS application can be developed.
 
 ## Links & References
 - **GitHub Repo link:** https://github.com/KashishJuneja101003/Juneja-Electricals
-- **Deployment link:** http://junejaelectricals.com/
+- **Deployment link (GitHub):** https://kashishjuneja101003.github.io/Juneja-Electricals/
+- **Deployment link (Netlify):** https://junejaelectricals.netlify.app/
