@@ -1,212 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./Assets/Business Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="./Assets/Business Logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="transition-all">
-
-        <!-- Navbar -->
-         <nav class="w-full">
-
-            <!-- Parent div -->
-             <div class="flex justify-between pb-0.5 h-16 gap-2" style="background-color: rgb(250, 250, 250);">
-
-                <!-- Left div -->
-                 <div class="flex justify-between w-[50%] md:w-[50%] lg:w-[70%] xl:w-[70%] items-center gap-2">  
-
-                    <!-- Logo + Name -->
-                    <div class="flex items-center gap-3 p-1">
-                        <img src="./Assets/Business Logo.png" alt="Business Logo" class="w-8 lg:w-12">
-                        <p class="text-lg lg:text-xl" style="color: #27548a;">JUNEJA <br> ELECTRICALS</p>
-                    </div>
-
-                    <!-- Search Bar -->
-                     <div class="hidden md:flex md:w-30 lg:w-73 my-2 mt-3 items-center gap-1.5 border-[0.6px] xl:border-1 px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all">
-                        <i class="fa-solid fa-magnifying-glass text-gray-700 md:text-xs xl:text-lg"></i>
-                        <p class="text-gray-600 md:text-xs xl:text-lg">Search Products</p>
-                     </div>
-                 </div>
-
-                 <!-- Right div -->
-                  <div class="hidden md:flex md:w-[70%] gap-6 items-center justify-end pr-8">
-                    <div class="flex items-center justify-center gap-1 cursor-pointer">
-                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Search by Category</p>
-                        <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
-                    </div>
-                    <div class="flex items-center justify-center gap-1  cursor-pointer">
-                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Brands We Sell </p>
-                        <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
-                    </div>
-                    <div class="flex items-center justify-center gap-1  cursor-pointer">
-                        <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">Contact Us</p>
-                        <i class="fa-solid fa-angle-down" style="color: #27548a;"></i>
-                    </div>
-                  </div>
-
-                  <!-- Toggle -->
-                   <div class="flex md:hidden items-center justify-center gap-1 pr-4">
-                    <i class="fa-solid fa-bars text-2xl cursor-pointer" style="color: #28548A;"></i>
-                   </div>
-             </div>
-         </nav>
-
-         <!-- Image Carousel -->
-          <div class="w-full h-60 sm:h-120 md:object-cover border-y-[0.5px] relative overflow-hidden transition-all">
-
-            <div id="slider" class="flex w-full h-full transition-transform duration-700 ease-linear absolute">
-
-                <!-- Original Slides -->
-                <!-- Slide 1 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 2 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 3 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 4 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 5 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Cloned Slides -->
-                <!-- Slide 1 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Ceilng-fan.jpg" alt="Slide-1" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 2 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Switches.jpg" alt="Slide-2" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 3 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Irons.jpg" alt="Slide-3" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 4 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Bulbs.webp" alt="Slide-4" class="w-full h-full object-fill md:object-fit">
-                 </div>
-
-                 <!-- Slide 5 -->
-                 <div class="w-full flex-shrink-0">
-                    <img src="./Assets/Wires.jpg" alt="Slide-5" class="w-full h-full object-fill md:object-fit">
-                 </div>
+      <!-- Navbar -->
+      <nav class="w-full">
+        <!-- Parent div -->
+        <div
+          class="flex justify-between pb-0.5 h-16 gap-2"
+          style="background-color: rgb(250, 250, 250)"
+        >
+          <!-- Left div -->
+          <div
+            class="flex justify-between w-[50%] md:w-[50%] lg:w-[70%] xl:w-[70%] items-center gap-2"
+          >
+            <!-- Logo + Name -->
+            <div class="flex items-center gap-3 p-1">
+              <img
+                src="./Assets/Business Logo.png"
+                alt="Business Logo"
+                class="w-8 lg:w-12"
+              />
+              <p class="text-lg lg:text-xl" style="color: #27548a">
+                JUNEJA <br />
+                ELECTRICALS
+              </p>
             </div>
-            
-            <script>
-                const slider = document.getElementById('slider');
-                const totalSlides = slider.children.length / 2;
-                let currentIndex = 0;
 
-                function slide(){
-                    currentIndex++;
-                    slider.style.transition = `transform 0.7s linear`;
-                    slider.style.transform = `translateX(-${currentIndex*100}%)`;
-
-                    if(currentIndex == totalSlides){
-                        setTimeout(() => {
-                            slider.style.transition = `none`;
-                            slider.style.transform = `translateX(0)`;
-                            currentIndex = 0;
-                        }, 700);
-                    }
-                }
-
-                setInterval(slide, 3000);
-            </script>
-
+            <!-- Search Bar -->
+            <div
+              class="hidden md:flex md:w-30 lg:w-73 my-2 mt-3 items-center gap-1.5 border-[0.6px] xl:border-1 px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all"
+            >
+              <i
+                class="fa-solid fa-magnifying-glass text-gray-700 md:text-xs xl:text-lg"
+              ></i>
+              <p class="text-gray-600 md:text-xs xl:text-lg">Search Products</p>
+            </div>
           </div>
 
-         
-         <!-- Explore Our Products -->
-         <div class="my-6">
-            <!-- Upper Div -->
-             <div class="text-xl font-semibold mb-2">Explore Our Products</div>
-             
-             <!-- Lower Div -->
-              <div class="flex flex-col gap-4 w-full p-3" style="background-color: #E1D9D9;">
+          <!-- Right div -->
+          <div
+            class="hidden md:flex md:w-[70%] gap-6 items-center justify-end pr-8"
+          >
+            <div class="flex items-center justify-center gap-1 cursor-pointer">
+              <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+                Search by Category
+              </p>
+              <i class="fa-solid fa-angle-down" style="color: #27548a"></i>
+            </div>
+            <div class="flex items-center justify-center gap-1 cursor-pointer">
+              <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+                Brands We Sell
+              </p>
+              <i class="fa-solid fa-angle-down" style="color: #27548a"></i>
+            </div>
+            <div class="flex items-center justify-center gap-1 cursor-pointer">
+              <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+                Contact Us
+              </p>
+              <i class="fa-solid fa-angle-down" style="color: #27548a"></i>
+            </div>
+          </div>
 
-               <!-- Card 1: Fans -->
-                <div class="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                  <img src="./Assets/Ceiling-fan-2.png" alt="" class="rounded-2xl group-hover:scale-102">
-                  <p class="text-xl font-semibold group-hover:translate-y-1">Fans</p>
-                </div>
+          <!-- Toggle -->
+          <div class="flex md:hidden items-center justify-center gap-1 pr-4">
+            <i
+              class="fa-solid fa-bars text-2xl cursor-pointer"
+              style="color: #28548a"
+            ></i>
+          </div>
+        </div>
+      </nav>
 
-                <!-- 4 Product Cards -->
-                 <div class="flex flex-col gap-4">
-                  <!-- Upper Cards -->
-                  <div class="flex justify-between">
-                     <!-- Card 2: Irons -->
-                     <div class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                        <img src="./Assets/iron-1.jpeg" alt="" class="rounded-2xl group-hover:scale-102">
-                        <p class="text-xl font-semibold group-hover:translate-y-1">Irons</p>
-                     </div>
+      <!-- Image Carousel -->
+      <div
+        class="w-full h-60 sm:h-120 md:object-cover border-y-[0.5px] relative overflow-hidden transition-all"
+      >
+        <div
+          id="slider"
+          class="flex w-full h-full transition-transform duration-700 ease-linear absolute"
+        >
+          <!-- Original Slides -->
+          <!-- Slide 1 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Ceilng-fan.jpg"
+              alt="Slide-1"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
 
-                     <!-- Card 3: Bulbs -->
-                     <div class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                        <img src="./Assets/Bulbs-1.jpg" alt="" class="h-18 rounded-2xl group-hover:scale-102">
-                        <p class="text-xl font-semibold group-hover:translate-y-1">Bulbs</p>
-                     </div>
-                  </div>
+          <!-- Slide 2 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Switches.jpg"
+              alt="Slide-2"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
 
-                  <!-- Lower Cards -->
-                  <div class="flex justify-between">
-                     <!-- Card 4: Switches -->
-                     <div class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                        <img src="./Assets/Switch-1.jpg" alt="" class="rounded-2xl group-hover:scale-102">
-                        <p class="text-xl font-semibold group-hover:translate-y-1">Switches</p>
-                     </div>
+          <!-- Slide 3 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Irons.jpg"
+              alt="Slide-3"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
 
-                     <!-- Card 5: Wires -->
-                     <div class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                        <img src="./Assets/Wires-1.jpg" alt="" class="rounded-2xl group-hover:scale-102">
-                        <p class="text-xl font-semibold group-hover:translate-y-1">Wires</p>
-                     </div>
-                  </div>
+          <!-- Slide 4 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Bulbs.webp"
+              alt="Slide-4"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
 
-                 </div>
-                
-                 <!-- Card 6: PVC Pipes -->
-                <div class="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl">
-                  <img src="./Assets/PVC Pipes.jpeg" alt="" class="h-40 w-full rounded-2xl group-hover:scale-102">
-                  <p class="text-xl font-semibold group-hover:translate-y-1">PVC Pipes</p>
-                </div>
+          <!-- Slide 5 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Wires.jpg"
+              alt="Slide-5"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
 
+          <!-- Cloned Slides -->
+          <!-- Slide 1 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Ceilng-fan.jpg"
+              alt="Slide-1"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Switches.jpg"
+              alt="Slide-2"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Irons.jpg"
+              alt="Slide-3"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Bulbs.webp"
+              alt="Slide-4"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="w-full flex-shrink-0">
+            <img
+              src="./Assets/Wires.jpg"
+              alt="Slide-5"
+              class="w-full h-full object-fill md:object-fit"
+            />
+          </div>
+        </div>
+
+        <script>
+          const slider = document.getElementById("slider");
+          const totalSlides = slider.children.length / 2;
+          let currentIndex = 0;
+
+          function slide() {
+            currentIndex++;
+            slider.style.transition = `transform 0.7s linear`;
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            if (currentIndex == totalSlides) {
+              setTimeout(() => {
+                slider.style.transition = `none`;
+                slider.style.transform = `translateX(0)`;
+                currentIndex = 0;
+              }, 700);
+            }
+          }
+
+          setInterval(slide, 3000);
+        </script>
+      </div>
+
+      <!-- Explore Our Products -->
+      <div class="my-10">
+        <!-- Upper Div -->
+        <div class="text-2xl font-semibold mb-2">Explore Our Products</div>
+
+        <!-- Lower Div -->
+        <div
+          class="flex flex-col gap-4 w-full p-3 lg:flex-row lg:justify-between"
+          style="background-color: #e1d9d9"
+        >
+          <!-- Card 1: Fans -->
+          <div
+            class="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl lg:w-[35%]"
+          >
+            <img
+              src="./Assets/Ceiling-fan-2.png"
+              alt=""
+              class="rounded-2xl group-hover:scale-102"
+            />
+            <p class="text-xl font-semibold group-hover:translate-y-1">Fans</p>
+          </div>
+
+          <!-- 4 Product Cards -->
+          <div
+            class="flex flex-col gap-4 sm:flex-row sm:gap-16 sm:justify-between lg:flex-col lg:w-[25%] lg:justify-around"
+          >
+            <!-- Upper Cards -->
+            <div class="flex justify-between sm:w-[50%] lg:w-[100%] lg:gap-4">
+              <!-- Card 2: Irons -->
+              <div
+                class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              >
+                <img
+                  src="./Assets/iron-1.jpeg"
+                  alt=""
+                  class="rounded-2xl group-hover:scale-102"
+                />
+                <p class="text-xl font-semibold group-hover:translate-y-1">
+                  Irons
+                </p>
               </div>
 
+              <!-- Card 3: Bulbs -->
+              <div
+                class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              >
+                <img
+                  src="./Assets/Bulbs-1.jpg"
+                  alt=""
+                  class="h-18 rounded-2xl group-hover:scale-102"
+                />
+                <p class="text-xl font-semibold group-hover:translate-y-1">
+                  Bulbs
+                </p>
+              </div>
+            </div>
 
-
+            <!-- Lower Cards -->
+            <div class="flex justify-between sm:w-[50%] lg:w-[100%] lg:gap-4">
+              <!-- Card 4: Switches -->
+              <div
+                class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              >
+                <img
+                  src="./Assets/Switch-1.jpg"
+                  alt=""
+                  class="rounded-2xl group-hover:scale-102"
+                />
+                <p class="text-xl font-semibold group-hover:translate-y-1">
+                  Switches
+                </p>
               </div>
 
-              
+              <!-- Card 5: Wires -->
+              <div
+                class="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              >
+                <img
+                  src="./Assets/Wires-1.jpg"
+                  alt=""
+                  class="rounded-2xl group-hover:scale-102"
+                />
+                <p class="text-xl font-semibold group-hover:translate-y-1">
+                  Wires
+                </p>
+              </div>
+            </div>
+          </div>
 
-         </div>
-
-          
-
-          
+          <!-- Card 6: PVC Pipes -->
+          <div
+            class="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl lg:w-[35%]"
+          >
+            <img
+              src="./Assets/PVC Pipes.jpeg"
+              alt=""
+              class="h-40 sm:h-72 w-full rounded-2xl group-hover:scale-102"
+            />
+            <p class="text-xl font-semibold group-hover:translate-y-1">
+              PVC Pipes
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
