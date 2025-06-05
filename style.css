@@ -3,9 +3,3 @@
 *{
     font-family: serif;
 }
-
-@theme {
-    --color-JEBlue: #27548A;
-    --color-JELightWhite: rgb(250, 250, 250);
-    --color-JEProductsBg: #E1D9D9;
-}
