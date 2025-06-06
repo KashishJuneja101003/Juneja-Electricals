@@ -40,7 +40,7 @@ This project is driven by the need to modernize our family’s electrical applia
     - Created responsive navbar for homepage.
 
 - **Week 2:**
-    - 
+    - Created Explore our Products section, Meet the Owner section, Contact us Section and Footer Section.
 
 ## Future Scope
 - Inventory system can be developed.
