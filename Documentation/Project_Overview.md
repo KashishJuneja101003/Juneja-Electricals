@@ -41,6 +41,7 @@ This project is driven by the need to modernize our family’s electrical applia
 
 - **Week 2:**
     - Created Explore our Products section, Meet the Owner section, Contact us Section and Footer Section.
+    - Made the sections responsive.
 
 ## Future Scope
 - Inventory system can be developed.
