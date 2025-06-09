@@ -6,12 +6,17 @@
     <title>Juneja Electricals</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./Assets/Business Logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
   <body>
-
     <div class="transition-all">
       <!-- Navbar -->
       <nav class="w-full">
@@ -22,7 +27,7 @@
         >
           <!-- Left div -->
           <div
-            class="flex justify-between w-[50%] md:w-[50%] lg:w-[70%] xl:w-[70%] items-center gap-2"
+            class="flex justify-between w-[50%] md:w-[70%] lg:w-[80%] xl:w-[70%] items-center gap-2"
           >
             <!-- Logo + Name -->
             <div class="flex items-center gap-3 p-1">
@@ -39,7 +44,7 @@
 
             <!-- Search Bar -->
             <div
-              class="hidden md:flex md:w-30 lg:w-73 my-2 mt-3 items-center gap-1.5 border-[0.6px] xl:border-1 px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all"
+              class="hidden md:flex md:w-68 lg:w-73 my-2 mt-3 items-center gap-1.5 border-[0.6px] xl:border-1 px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all"
             >
               <i
                 class="fa-solid fa-magnifying-glass text-gray-700 md:text-xs xl:text-lg"
@@ -73,12 +78,130 @@
           </div>
 
           <!-- Toggle -->
-          <div class="flex md:hidden items-center justify-center gap-1 pr-4">
+          <div
+            class="flex md:hidden items-center justify-center gap-1 pr-4"
+            id="hamburger"
+          >
             <i
               class="fa-solid fa-bars text-2xl cursor-pointer"
               style="color: #28548a"
             ></i>
           </div>
+
+          <ul
+            class="hidden h-fit overflow-hidden w-full text-md md:hidden flex-col gap-2 bg-white shadow-md absolute top-[12.2%] p-4 rounded-md z-50 duration-300 ease-in-out"
+            id="navLinks"
+            style="background-color: rgb(250, 250, 250)"
+          >
+            <!-- Category -->
+            <li>
+              <div
+                id="toggleCategory"
+                class="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
+              >
+                <span>Search By Category</span>
+                <i
+                  id="iconCategory"
+                  class="fa-solid fa-angle-down fa-sm text-blue-800"
+                ></i>
+              </div>
+              <ul
+                class="hidden flex-col gap-2 ml-4 mt-2 text-base text-gray-700"
+                id="menuCategory"
+              >
+                <li
+                  class="p-1 hover:bg-gray-100 rounded gap-2 items-center justify-center"
+                >
+                  Fans
+                </li>
+                <li
+                  class="p-1 hover:bg-gray-100 rounded gap-3 items-center justify-center"
+                >
+                  Lighting
+                </li>
+                <li
+                  class="p-1 hover:bg-gray-100 rounded gap-3 items-center justify-center"
+                >
+                  Switches & Accessories
+                </li>
+                <li
+                  class="p-1 hover:bg-gray-100 rounded gap-3 items-center justify-center"
+                >
+                  Home Electricals
+                </li>
+              </ul>
+            </li>
+
+            <!-- Brands -->
+            <li>
+              <div
+                id="toggleBrands"
+                class="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
+              >
+                <span>Brands We Sell</span>
+                <i class="iconCategory fa-solid fa-angle-down fa-sm text-blue-800" id="iconCategory"></i>
+              </div>
+              <ul
+                class="hidden flex-col gap-2 ml-4 mt-2 text-base text-gray-700"
+                id="menuBrands"
+              >
+                <li class="p-1 hover:bg-gray-100 rounded">Usha</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Havells</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Cona</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Tibcon</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Plaza Cables</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Bentex</li>
+                <li class="p-1 hover:bg-gray-100 rounded">Victoria</li>
+              </ul>
+            </li>
+
+            <!-- Contact -->
+            <li>
+              <div
+                id="toggleContact"
+                class="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
+              >
+                <span>Contact Us</span>
+                <i class="iconCategory fa-solid fa-angle-down fa-sm text-blue-800"></i>
+              </div>
+              <ul
+                class="hidden flex-col gap-2 ml-4 mt-2 text-base text-gray-700"
+                id="menuContact"
+              >
+                <a
+                  href="https://www.google.com/maps?ll=29.450816,77.319164&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=511390419161759350"
+                  target="_blank"
+                  class="flex gap-2"
+                >
+                  <i class="fa-solid fa-location-dot self-center text-base"></i>
+                  <p class="text-base">Locate Our Store</p>
+                </a>
+                <a href="tel:+919027400868" class="flex gap-2">
+                  <i class="fa-solid fa-phone self-center text-base"></i>
+                  <p class="text-base">Call us</p>
+                </a>
+                <a
+                  href="https://wa.me/919027400868"
+                  target="_blank"
+                  class="flex gap-2"
+                >
+                  <i
+                    class="fa-solid fa-brands fa-whatsapp self-center text-base"
+                  ></i>
+                  <p class="text-base">Text on WhatsApp</p>
+                </a>
+
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=junejaelectricals100@gmail.com"
+                  target="_blank"
+                  class="flex gap-2"
+                >
+                  <i class="fa-solid fa-envelope self-center text-base"></i>
+                  <p class="text-base">Mail us</p>
+                </a>
+              </ul>
+            </li>
+          </ul>
         </div>
       </nav>
 
@@ -209,7 +332,9 @@
       <!-- Explore Our Products -->
       <div class="my-10">
         <!-- Upper Div -->
-        <div class="text-2xl font-semibold mb-2 md:text-3xl">Explore Our Products</div>
+        <div class="text-2xl font-semibold mb-2 md:text-3xl">
+          Explore Our Products
+        </div>
 
         <!-- Lower Div -->
         <div
@@ -313,12 +438,21 @@
 
       <!-- Meet The Owner -->
       <div class="my-10">
-        <div class="text-2xl font-semibold mb-2 md:text-3xl">Meet The Owner</div>
+        <div class="text-2xl font-semibold mb-2 md:text-3xl">
+          Meet The Owner
+        </div>
 
-        <div class="flex flex-col gap-5 p-3 md:flex-row" style="background-color: #e1d9d9">
+        <div
+          class="flex flex-col gap-5 p-3 md:flex-row"
+          style="background-color: #e1d9d9"
+        >
           <!-- Image -->
           <div class="">
-            <img src="./Assets/Owner Image.jpg" alt="" class="rounded-4xl shadow-md shadow-white w-full md:h-[100%]"  />
+            <img
+              src="./Assets/Owner Image.jpg"
+              alt=""
+              class="rounded-4xl shadow-md shadow-white w-full md:h-[100%]"
+            />
           </div>
 
           <!-- Text -->
@@ -345,38 +479,64 @@
       <div class="my-10">
         <div class="text-2xl font-semibold mb-2 md:text-3xl">Contact Us</div>
 
-        <div class="flex flex-col gap-5 p-3 md:flex-row" style="background-color: #e1d9d9">
-          <iframe class="w-full shadow-lg rounded-xl lg:h-96 lg:w-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3474.2463382544083!2d77.31658321054786!3d29.450816275124538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c2ed21eaaaaab%3A0x718d2e073acbe76!2sJuneja%20Electricals!5e0!3m2!1sen!2sin!4v1749207425596!5m2!1sen!2sin"></iframe>
+        <div
+          class="flex flex-col gap-5 p-3 md:flex-row"
+          style="background-color: #e1d9d9"
+          id="mapLocation"
+        >
+          <iframe
+            class="w-full shadow-lg rounded-xl lg:h-96 lg:w-full"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3474.2463382544083!2d77.31658321054786!3d29.450816275124538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c2ed21eaaaaab%3A0x718d2e073acbe76!2sJuneja%20Electricals!5e0!3m2!1sen!2sin!4v1749207425596!5m2!1sen!2sin"
+          ></iframe>
 
-          <div class="bg-white p-2 rounded-2xl flex flex-col gap-1 shadow-lg md:text-xl lg:gap-3 h-fit self-center">
-              <a href="https://www.google.com/maps?ll=29.450816,77.319164&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=511390419161759350" target="_blank" class="flex gap-2">
-                <i class="fa-solid fa-location-dot self-center"></i>
-                <p>Railpar Punjabi Colony, Shamli, Uttar Pradesh, 247776</p>
-              </a>
-              <a href="tel:+919027400868" class="flex gap-2">
-                <i class="fa-solid fa-phone self-center"></i>
-                <p>9027400868</p>
-              </a>
-              <a href="https://wa.me/919027400868" target="_blank" class="flex gap-2">
-                <i class="fa-solid fa-brands fa-whatsapp self-center"></i>
-                <p>9027400868</p>
-              </a>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=junejaelectricals100@gmail.com" target="_blank" class="flex gap-2">
-                <i class="fa-solid fa-envelope self-center"></i>
-                <p>junejaelectricals100@gmail.com</p>
-              </a>
-            </div>
+          <div
+            class="bg-white p-2 rounded-2xl flex flex-col gap-1 shadow-lg md:text-xl lg:gap-3 h-fit self-center"
+          >
+            <a
+              href="https://www.google.com/maps?ll=29.450816,77.319164&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=511390419161759350"
+              target="_blank"
+              class="flex gap-2"
+            >
+              <i class="fa-solid fa-location-dot self-center"></i>
+              <p>Railpar Punjabi Colony, Shamli, Uttar Pradesh, 247776</p>
+            </a>
+            <a href="tel:+919027400868" class="flex gap-2">
+              <i class="fa-solid fa-phone self-center"></i>
+              <p>9027400868</p>
+            </a>
+            <a
+              href="https://wa.me/919027400868"
+              target="_blank"
+              class="flex gap-2"
+            >
+              <i class="fa-solid fa-brands fa-whatsapp self-center"></i>
+              <p>9027400868</p>
+            </a>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=junejaelectricals100@gmail.com"
+              target="_blank"
+              class="flex gap-2"
+            >
+              <i class="fa-solid fa-envelope self-center"></i>
+              <p>junejaelectricals100@gmail.com</p>
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- Footer Sectin -->
-         <div class="mt-10">
-          <p class="text-xs text-center md:text-sm">Copyright <i class="fa-regular fa-copyright"></i> 2025 Juneja Electricals. All rights reserved.</p>
-          <div>
-            <div class="w-full h-2" style="background-color: #DDA853;"></div>
-            <div class="w-full h-2" style="background-color: #27548a;"></div>
-          </div>
-         </div>
+      <!-- Footer Sectin -->
+      <div class="mt-10">
+        <p class="text-xs text-center md:text-sm">
+          Copyright <i class="fa-regular fa-copyright"></i> 2025 Juneja
+          Electricals. All rights reserved.
+        </p>
+        <div>
+          <div class="w-full h-2" style="background-color: #dda853"></div>
+          <div class="w-full h-2" style="background-color: #27548a"></div>
+        </div>
+      </div>
+
+      <script src="./index.js"></script>
     </div>
   </body>
 </html>
