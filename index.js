@@ -33,6 +33,7 @@ toggleContact.addEventListener("click", () => {
   iconContact.classList.toggle("rotate-180");
 });
 
+// Navbar Toggles
 document.getElementById('toggleSearchNavbar').addEventListener("click", () => {
   document.getElementById("iconSearchNavbar").classList.toggle("rotate-180");
 })
