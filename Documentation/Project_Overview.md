@@ -29,6 +29,12 @@ This project is driven by the need to modernize our family’s electrical applia
 - **Design 6:** ![Meet The Owner](https://github.com/user-attachments/assets/49acbe0e-8d2a-4ee0-92ac-e01894f583c6)
 - **Design 7:** ![Contact Us](https://github.com/user-attachments/assets/adf2a93d-ee4f-4a9f-a967-b05dd51534c8)
 - **Design 8:** ![Footer Section](https://github.com/user-attachments/assets/8acb4687-9029-4247-bb92-0fb4238bfe31)
+- **Design 9:** ![Fans.html](https://github.com/user-attachments/assets/c1b2b71e-ec1f-432a-a632-60ef035f04b8)
+- **Design 10:** ![Irons.html](https://github.com/user-attachments/assets/8e2fbd50-995e-41be-a9fb-9bbad5135472)
+- **Design 11:** ![Lightings.html](https://github.com/user-attachments/assets/e4d0b8f4-f701-4bc5-9e4e-c0273699aba2)
+- **Design 12:** ![Switches-Sockets.html](https://github.com/user-attachments/assets/968c30ff-d7e2-4a95-918c-809bead362b1)
+- **Design 13:** ![PVC-Pipes.html](https://github.com/user-attachments/assets/549cce56-679a-469b-9bcf-ceea74b83edd)
+- **Design 14:** ![Wirings.html](https://github.com/user-attachments/assets/fc7d06a8-37b8-43a3-b182-0e86f5fa0aab)
 
 ## Timeline & Progress
 **Started on:** May 29th, 2025 
@@ -42,6 +48,8 @@ This project is driven by the need to modernize our family’s electrical applia
 - **Week 2:**
     - Created Explore our Products section, Meet the Owner section, Contact us Section and Footer Section.
     - Made the sections responsive.
+    - Designed fans.html, switches-sockets.html, pvc-pipes.html, lightings.html, irons.html, wires.html.
+    - Created hamburger menu. Responsive with transitions and toggling effects.
 
 ## Future Scope
 - Inventory system can be developed.
