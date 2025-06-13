@@ -16,8 +16,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
 
-  <body>
-    <div class="transition-all">
+  <body class="w-full">
+    <div class="body" id="body">
+      <div id="pre-loader" class="loader">
+        <div class="loader-text items-center">
+          <h1 class="text-4xl font-semibold">Welcome to Juneja Electricals!</h1>
+          <div class="italic text-xl slogan">
+            "Wiring your trust, Lighting your life"
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mainContent" class="mainContent transition-all">
       <!-- Navbar -->
       <nav class="w-full">
         <!-- Parent div -->
@@ -36,7 +46,10 @@
                 alt="Business Logo"
                 class="w-8 lg:w-12"
               />
-              <p class="text-lg lg:text-xl cursor-default" style="color: #27548a">
+              <p
+                class="text-lg lg:text-xl cursor-default"
+                style="color: #27548a"
+              >
                 JUNEJA <br />
                 ELECTRICALS
               </p>
@@ -57,23 +70,44 @@
           <div
             class="hidden md:flex md:w-[70%] gap-6 items-center justify-end pr-8"
           >
-            <div id="toggleSearchNavbar" class="flex items-center justify-center gap-1 cursor-pointer">
+            <div
+              id="toggleSearchNavbar"
+              class="flex items-center justify-center gap-1 cursor-pointer"
+            >
               <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
                 Search by Category
               </p>
-              <i id="iconSearchNavbar" class="fa-solid fa-angle-down" style="color: #27548a"></i>
+              <i
+                id="iconSearchNavbar"
+                class="fa-solid fa-angle-down"
+                style="color: #27548a"
+              ></i>
             </div>
-            <div id="toggleBrandsNavbar" class="flex items-center justify-center gap-1 cursor-pointer">
+            <div
+              id="toggleBrandsNavbar"
+              class="flex items-center justify-center gap-1 cursor-pointer"
+            >
               <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
                 Brands We Sell
               </p>
-              <i id="iconBrandsNavbar" class="fa-solid fa-angle-down" style="color: #27548a"></i>
+              <i
+                id="iconBrandsNavbar"
+                class="fa-solid fa-angle-down"
+                style="color: #27548a"
+              ></i>
             </div>
-            <div id="toggleContactNavbar" class="flex items-center justify-center gap-1 cursor-pointer">
+            <div
+              id="toggleContactNavbar"
+              class="flex items-center justify-center gap-1 cursor-pointer"
+            >
               <p class="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
                 Contact Us
               </p>
-              <i id="iconContactNavbar" class="fa-solid fa-angle-down" style="color: #27548a"></i>
+              <i
+                id="iconContactNavbar"
+                class="fa-solid fa-angle-down"
+                style="color: #27548a"
+              ></i>
             </div>
           </div>
 
@@ -110,7 +144,7 @@
                 id="menuCategory"
               >
                 <li
-                  class="p-1 hover:bg-gray-100  active:bg-gray-100 rounded gap-2 items-center justify-center"
+                  class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded gap-2 items-center justify-center"
                 >
                   Fans
                 </li>
@@ -139,19 +173,36 @@
                 class="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
               >
                 <span>Brands We Sell</span>
-                <i class="fa-solid fa-angle-down fa-sm text-blue-800" id="iconBrands"></i>
+                <i
+                  class="fa-solid fa-angle-down fa-sm text-blue-800"
+                  id="iconBrands"
+                ></i>
               </div>
               <ul
                 class="hidden flex-col gap-2 ml-4 mt-2 text-base text-gray-700"
                 id="menuBrands"
               >
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Usha</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Havells</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Cona</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Tibcon</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Plaza Cables</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Bentex</li>
-                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">Victoria</li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Usha
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Havells
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Cona
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Tibcon
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Plaza Cables
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Bentex
+                </li>
+                <li class="p-1 hover:bg-gray-100 active:bg-gray-100 rounded">
+                  Victoria
+                </li>
               </ul>
             </li>
 
@@ -162,7 +213,10 @@
                 class="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
               >
                 <span>Contact Us</span>
-                <i class="fa-solid fa-angle-down fa-sm text-blue-800" id="iconContact"></i>
+                <i
+                  class="fa-solid fa-angle-down fa-sm text-blue-800"
+                  id="iconContact"
+                ></i>
               </div>
               <ul
                 class="hidden flex-col gap-2 ml-4 mt-2 text-base text-gray-700"
@@ -176,7 +230,10 @@
                   <i class="fa-solid fa-location-dot self-center text-base"></i>
                   <p class="text-base">Locate Our Store</p>
                 </a>
-                <a href="tel:+919027400868" class="flex gap-2 active:bg-gray-100">
+                <a
+                  href="tel:+919027400868"
+                  class="flex gap-2 active:bg-gray-100"
+                >
                   <i class="fa-solid fa-phone self-center text-base"></i>
                   <p class="text-base">Call us</p>
                 </a>
@@ -342,7 +399,8 @@
           style="background-color: #e1d9d9"
         >
           <!-- Card 1: Fans -->
-          <div onclick="window.location.href='./Fans/fans.html'"
+          <div
+            onclick="window.location.href='./Fans/fans.html'"
             class="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl lg:w-[35%]"
           >
             <img
@@ -535,8 +593,8 @@
           <div class="w-full h-2" style="background-color: #27548a"></div>
         </div>
       </div>
-
-      <script src="./index.js"></script>
     </div>
+
+    <script src="./index.js"></script>
   </body>
 </html>

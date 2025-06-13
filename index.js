@@ -2,7 +2,7 @@ const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("navLinks");
 
 hamburger?.addEventListener("click", () => {
-  navLinks.classList.toggle('hidden');
+  navLinks.classList.toggle("hidden");
 });
 
 // Submenu toggles
@@ -34,12 +34,23 @@ toggleContact.addEventListener("click", () => {
 });
 
 // Navbar Toggles
-document.getElementById('toggleSearchNavbar').addEventListener("click", () => {
+document.getElementById("toggleSearchNavbar").addEventListener("click", () => {
   document.getElementById("iconSearchNavbar").classList.toggle("rotate-180");
-})
-document.getElementById('toggleBrandsNavbar').addEventListener("click", () => {
+});
+document.getElementById("toggleBrandsNavbar").addEventListener("click", () => {
   document.getElementById("iconBrandsNavbar").classList.toggle("rotate-180");
-})
-document.getElementById('toggleContactNavbar').addEventListener("click", () => {
+});
+document.getElementById("toggleContactNavbar").addEventListener("click", () => {
   document.getElementById("iconContactNavbar").classList.toggle("rotate-180");
-})
+});
+
+// Pre-loader
+window.addEventListener("load", () => {
+  let preLoad = document.getElementById("pre-loader");
+  setTimeout(() => {
+    preLoad.style.display = "block";
+    preLoad.style.display = "none";
+    document.getElementById("body").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  }, 3000);
+});

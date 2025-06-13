@@ -51,6 +51,9 @@ This project is driven by the need to modernize our family’s electrical applia
     - Designed fans.html, switches-sockets.html, pvc-pipes.html, lightings.html, irons.html, wires.html.
     - Created hamburger menu. Responsive with transitions and toggling effects.
 
+- **Week 3:**
+    - Created Preloader.
+
 ## Future Scope
 - Inventory system can be developed.
 - Order & Billing section can be created before Payment.
