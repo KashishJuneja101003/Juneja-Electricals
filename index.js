@@ -5,6 +5,12 @@ hamburger?.addEventListener("click", () => {
   navLinks.classList.toggle("hidden");
 });
 
+document.addEventListener('click', (e) => {
+  if(!navLinks.contains(e.target) && !hamburger.contains(e.target)){
+    navLinks.classList.add('hidden')
+  }
+})
+
 // Submenu toggles
 document.getElementById("toggleCategory").addEventListener("click", () => {
   document.getElementById("menuCategory").classList.toggle("hidden");
