@@ -83,3 +83,32 @@
     opacity: 0;
   }
 }
+
+.addUnderlineEffect{
+  height: 2px;
+  animation: addUnderlineHover 0.5s forwards;
+}
+
+@keyframes addUnderlineHover{
+  0%{
+    width: 0;
+  }
+  100%{
+    width: 100%;
+  }
+}
+
+.removeUnderlineEffect{
+  height: 2px;
+  animation: removeUnderlineHover 0.5s forwards;
+}
+
+@keyframes removeUnderlineHover{
+  0%{
+    width: 100%;
+  }
+  100%{
+    width: 0;
+    height: 0px;
+  }
+}
