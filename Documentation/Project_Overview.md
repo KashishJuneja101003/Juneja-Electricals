@@ -53,6 +53,10 @@ This project is driven by the need to modernize our family’s electrical applia
 
 - **Week 3:**
     - Created Preloader.
+    - Improvised Hamburger effects.
+    - Rectified code that was disturbed due to preloader implementation.
+    - Navbar underline effect created.
+    - Created Fan Card.
 
 ## Future Scope
 - Inventory system can be developed.
