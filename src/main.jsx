@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     document.getElementById("pre-loader-container").style.display = "none"; // Optional: Hide temp body div
     document.getElementById("root").style.display = "block"; // Show main content
     document.getElementById("footer").style.display = "block"; // Show main content
-  }, 3000);
+  }, 3);
 });
 
 createRoot(document.getElementById("root")).render(

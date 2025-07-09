@@ -42,35 +42,6 @@ This project is driven by the need to modernize our family’s electrical applia
 - **Design 13:** ![PVC-Pipes.html](https://github.com/user-attachments/assets/549cce56-679a-469b-9bcf-ceea74b83edd)
 - **Design 14:** ![Wirings.html](https://github.com/user-attachments/assets/fc7d06a8-37b8-43a3-b182-0e86f5fa0aab)
 
-## Timeline & Progress
-
-**Started on:** May 29th, 2025
-
-**Week 1:**
-
-- Created repository (public) on GitHub.
-- Created home page designs (design 1) using Canva.
-- Created navbar items hovering designs (design 2, 3, 4) using Canva.
-- Created a products section (design 5), owner section (design 6), contact us section (design 7), and footer section (design 8) for the homepage.
-- Created responsive navbar for homepage.
-
-**Week 2:**
-
-- Created Explore our Products section, Meet the Owner section, Contact us Section and Footer Section.
-- Made the sections responsive.
-- Designed fans.html, switches-sockets.html, pvc-pipes.html, lightings.html, irons.html, wires.html.
-- Created hamburger menu. Responsive with transitions and toggling effects.
-
-**Week 3:**
-
-- Created Preloader.
-- Improvised Hamburger effects.
-- Rectified code that was disturbed due to preloader implementation.
-- Navbar underline effect created.
-- Created Fan Card.
-
-* **Week 4:**
-- Converted the whole code in React components.
 
 ## Future Scope
 
