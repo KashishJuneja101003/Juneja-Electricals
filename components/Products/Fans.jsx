@@ -1,13 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
 
+const BASE_URL = "https://juneja-electricals-backend.onrender.com"
+
+const fetchProducts = async () => {
+  const category = "Fans"
+  const res = await fetch(`${BASE_URL}/products/${category}`);
+  const data = await res.json();
+  setProducts(data);
+};
+
 const Fans = () => {
   const [data, setData] = useState([]);
   let [counts, setCounts] = useState({});
 
   async function getData() {
     try {
-      let resp = await axios.get("https://picsum.photos/v2/list");
+      let resp = await axios.get(`${BASE_URL}/products/${category}`);
       setData(resp.data);
     } catch (error) {
       console.error("Error fetching data", error);

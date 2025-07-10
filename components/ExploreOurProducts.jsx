@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-Link
 function ExploreOurProducts() {
   return (
     <div className="my-10">
@@ -15,7 +14,7 @@ function ExploreOurProducts() {
         style={{ backgroundColor: "#e1d9d9" }}
       >
         {/* <!-- Card 1: Fans --> */}
-        <Link to="/Products/Fans" className="lg:w-[35%]">
+        <Link to="/Products/Fans" onClick={()=>fetchProducts("Fans")} className="lg:w-[35%]">
         <div
           className="group flex flex-col bg-white h-full p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl "
         >
