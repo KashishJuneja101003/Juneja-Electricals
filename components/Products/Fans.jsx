@@ -12,6 +12,7 @@ const Fans = () => {
       const category = "Fans";
       const resp = await axios.get(`${BASE_URL}/products/${category}`);
       setData(resp.data);
+      console.log("Data", resp.data);
     } catch (error) {
       console.error("Error fetching data", error);
     }
@@ -80,9 +81,6 @@ const Fans = () => {
             </div>
           </div>
         ))} */}
-        {
-          console.log("Here")
-        }
       </div>
     </div>
   );
