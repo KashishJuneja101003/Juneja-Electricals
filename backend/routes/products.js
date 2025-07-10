@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 
 // POST: Add a product
-router.post("/products", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const product = new Product(req.body);
     const saved = await product.save();
@@ -14,7 +14,7 @@ router.post("/products", async (req, res) => {
 });
 
 // GET: Get all products by category (e.g., Fans)
-router.get("/products/:category", async (req, res) => {
+router.get("/:category", async (req, res) => {
   const category = req.params.category;
   try {
     const products = await Product.find({ category });

@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
   category: { // for filtering like 'Fans', 'Lights'
     type: String,
     required: true,
-    enum: ['Fans', 'Lights', 'Coolers', 'Switches', 'Wires'], // add more as needed
+    enum: ['Fans', 'Lights', 'Switches', 'Wires'], // add more as needed
   },
   price: {
     type: Number,
