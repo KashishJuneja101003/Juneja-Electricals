@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import CeilingFan from "../assets/Ceilng-fan.jpg";
+import Switches from "../assets/Switches.jpg";
+import Irons from "../assets/Irons.jpg";
+import Bulbs from "../assets/Bulbs.webp";
+import Wires from "../assets/Wires.jpg";
+
 
 function ImageCarousel() {
   const sliderRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const images = [
-    "../src/assets/Ceilng-fan.jpg",
-    "../src/assets/Switches.jpg",
-    "../src/assets/Irons.jpg",
-    "../src/assets/Bulbs.webp",
-    "../src/assets/Wires.jpg",
-  ];
+  
+  const images = [CeilingFan, Switches, Irons, Bulbs, Wires];
 
   const totalSlides = images.length;
 

@@ -34,7 +34,7 @@ function Navbar() {
           {/* Logo + Name */}
           <div className="flex items-center gap-3 p-1">
             <img
-              W={businessLogo}
+              src={businessLogo}
               alt="Business Logo"
               className="w-8 lg:w-12"
             />
