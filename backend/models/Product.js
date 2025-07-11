@@ -19,6 +19,10 @@ const productSchema = new mongoose.Schema({
     type: [String], // list of features, can be empty
     default: [],
   },
+  quantity:{
+    type: Number,
+    required: true
+  },
   imageUrl: {
     type: String, // optional image URL for frontend
   },
