@@ -1,4 +1,10 @@
 import { Link } from "react-router-dom";
+import ceilingFan from "../src/assets/Ceiling-fan-2.png";
+import iron from "../src/assets/iron-1.jpeg";
+import Bulbs from "../src/assets/Bulbs-1.jpg";
+import Switch from "../src/assets/Switch-1.jpg";
+import Wires from "../src/assets/Wires-1.jpg";
+import PVCPipes from "../src/assets/PVC Pipes.jpeg";
 
 function ExploreOurProducts() {
   return (
@@ -19,7 +25,7 @@ function ExploreOurProducts() {
           className="group flex flex-col bg-white h-full p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl "
         >
           <img
-            src="./src/assets/Ceiling-fan-2.png"
+            src={ceilingFan}
             alt=""
             className="rounded-2xl group-hover:scale-102"
           />
@@ -38,7 +44,7 @@ function ExploreOurProducts() {
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
               <img
-                src="./src/assets/iron-1.jpeg"
+                src={iron}
                 alt=""
                 className="rounded-2xl group-hover:scale-102"
               />
@@ -52,7 +58,7 @@ function ExploreOurProducts() {
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
               <img
-                src="./src/assets/Bulbs-1.jpg"
+                src= {Bulbs}
                 alt=""
                 className="h-18 rounded-2xl group-hover:scale-102"
               />
@@ -69,7 +75,7 @@ function ExploreOurProducts() {
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
               <img
-                src="./src/assets/Switch-1.jpg"
+                src={Switch}
                 alt=""
                 className="rounded-2xl group-hover:scale-102"
               />
@@ -83,7 +89,7 @@ function ExploreOurProducts() {
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
               <img
-                src="./src/assets/Wires-1.jpg"
+                src={Wires}
                 alt=""
                 className="rounded-2xl group-hover:scale-102"
               />
@@ -99,7 +105,7 @@ function ExploreOurProducts() {
           className="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl lg:w-[35%]"
         >
           <img
-            src="./src/assets/PVC Pipes.jpeg"
+            src={PVCPipes}
             alt=""
             className="h-40 sm:h-72 w-full rounded-2xl group-hover:scale-102"
           />

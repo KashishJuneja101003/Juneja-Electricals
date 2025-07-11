@@ -1,3 +1,5 @@
+import Owner from "../src/assets/Owner Image.jpg";
+
 function MeetTheOwner() {
   return (
     <div className="my-10">
@@ -12,7 +14,7 @@ function MeetTheOwner() {
         {/* Image */}
         <div>
           <img
-            src="./src/assets/Owner Image.jpg"
+            src={Owner}
             alt="Owner - Sanjay Juneja"
             className="rounded-3xl shadow-md shadow-white w-full md:h-[100%]"
           />

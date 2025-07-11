@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import businessLogo from "../src/assets/Business Logo.png"
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ function Navbar() {
           {/* Logo + Name */}
           <div className="flex items-center gap-3 p-1">
             <img
-              src="/src/assets/Business Logo.png"
+              W={businessLogo}
               alt="Business Logo"
               className="w-8 lg:w-12"
             />

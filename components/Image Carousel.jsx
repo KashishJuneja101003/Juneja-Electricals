@@ -5,11 +5,11 @@ function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    "./src/assets/Ceilng-fan.jpg",
-    "./src/assets/Switches.jpg",
-    "./src/assets/Irons.jpg",
-    "./src/assets/Bulbs.webp",
-    "./src/assets/Wires.jpg",
+    "../src/assets/Ceilng-fan.jpg",
+    "../src/assets/Switches.jpg",
+    "../src/assets/Irons.jpg",
+    "../src/assets/Bulbs.webp",
+    "../src/assets/Wires.jpg",
   ];
 
   const totalSlides = images.length;
