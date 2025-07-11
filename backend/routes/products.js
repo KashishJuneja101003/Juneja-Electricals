@@ -6,7 +6,6 @@ const Product = require("../models/Product");
 router.post("/", async (req, res) => {
   try {
     const product = new Product.insertMany(req.body);
-    const saved = await product.save();
     res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ error: err.message });
