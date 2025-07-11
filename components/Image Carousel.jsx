@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import CeilingFan from "../assets/Ceilng-fan.jpg";
-import Switches from "../assets/Switches.jpg";
-import Irons from "../assets/Irons.jpg";
-import Bulbs from "../assets/Bulbs.webp";
-import Wires from "../assets/Wires.jpg";
+import CeilingFan from "../src/assets/Ceilng-fan.jpg";
+import Switches from "../src/assets/Switches.jpg";
+import Irons from "../src/assets/Irons.jpg";
+import Bulbs from "../src/assets/Bulbs.webp";
+import Wires from "../src/assets/Wires.jpg";
 
 
 function ImageCarousel() {
