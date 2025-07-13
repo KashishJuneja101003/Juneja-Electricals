@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
-const Fans = () => {
+const Wires = () => {
   const [data, setData] = useState([]);
   const [counts, setCounts] = useState({});
 
   async function getData() {
     try {
-      const category = "Fans";
+      const category = "Wires";
       const resp = await axios.get(`${BASE_URL}/products/${category}`);
       setData(resp.data);
       console.log("Data", resp.data);
@@ -42,7 +42,7 @@ const Fans = () => {
   return (
     <div className="px-4 py-8">
       <h1 className="text-3xl text-center uppercase mb-4 text-rose-800">
-        Fans
+        Wires
       </h1>
 
       {/* Cards */}
@@ -54,8 +54,8 @@ const Fans = () => {
           >
             <img
               src={elem.imageUrl}
-              alt="Fan-Image"
-              className="rounded-2xl h-40 w-full object-cover"
+              alt="Wire-Image"
+              className="rounded-2xl h-50 w-full object-cover"
             />
             <div className="flex justify-between">
               <div className="space-y-1">
@@ -89,4 +89,4 @@ const Fans = () => {
   );
 };
 
-export default Fans;
+export default Wires;

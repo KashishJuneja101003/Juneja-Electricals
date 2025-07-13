@@ -20,7 +20,7 @@ function ExploreOurProducts() {
         style={{ backgroundColor: "#e1d9d9" }}
       >
         {/* <!-- Card 1: Fans --> */}
-        <Link to="/Products/Fans" onClick={()=>fetchProducts("Fans")} className="lg:w-[35%]">
+        <Link to="/Products/Fans" className="lg:w-[35%]">
         <div
           className="group flex flex-col bg-white h-full p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl "
         >
@@ -40,6 +40,7 @@ function ExploreOurProducts() {
           {/* <!-- Upper Cards --> */}
           <div className="flex justify-between sm:w-[50%] lg:w-[100%] lg:gap-4">
             {/* <!-- Card 2: Irons --> */}
+            <Link to="/Products/Irons" className="lg:w-[35%]">
             <div
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
@@ -52,8 +53,10 @@ function ExploreOurProducts() {
                 Irons
               </p>
             </div>
+            </Link>
 
             {/* <!-- Card 3: Bulbs --> */}
+            <Link to="/Products/Lights">
             <div
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
@@ -66,11 +69,13 @@ function ExploreOurProducts() {
                 Bulbs
               </p>
             </div>
+            </Link>
           </div>
 
           {/* <!-- Lower Cards --> */}
           <div className="flex justify-between sm:w-[50%] lg:w-[100%] lg:gap-4">
             {/* <!-- Card 4: Switches --> */}
+            <Link to="/Products/Switches" className="lg:w-[35%]">
             <div
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
@@ -83,8 +88,11 @@ function ExploreOurProducts() {
                 Switches
               </p>
             </div>
+            </Link>
+            
 
             {/* <!-- Card 5: Wires --> */}
+            <Link to="/Products/Wires">
             <div
               className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
             >
@@ -97,12 +105,14 @@ function ExploreOurProducts() {
                 Wires
               </p>
             </div>
+            </Link>
           </div>
         </div>
 
         {/* <!-- Card 6: PVC Pipes --> */}
+        <Link to="/Products/Pipes" className="lg:w-[35%]">
         <div
-          className="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl lg:w-[35%]"
+          className="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
         >
           <img
             src={PVCPipes}
@@ -113,6 +123,7 @@ function ExploreOurProducts() {
             PVC Pipes
           </p>
         </div>
+        </Link>
       </div>
     </div>
   )

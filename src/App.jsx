@@ -6,6 +6,11 @@ import ContactUs from '../components/ContactUs'
 import { Route, Routes } from "react-router-dom"
 import Fans from "../components/Products/Fans"
 import Footer from "../components/Footer"
+import Irons from "../components/Products/Irons"
+import Switches from "../components/Products/Switches"
+import Lights from "../components/Products/Lights"
+import Pipes from "../components/Products/Pipes"
+import Wires from "../components/Products/Wires"
 
 function HomePage(){
   return (
@@ -26,6 +31,11 @@ function App() {
         <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/Products/Fans" element={<Fans/>} />
+        <Route path="/Products/Irons" element={<Irons/>} />
+        <Route path="/Products/Switches" element={<Switches/>} />
+        <Route path="/Products/Lights" element={<Lights/>} />
+        <Route path="/Products/Pipes" element={<Pipes/>} />
+        <Route path="/Products/Wires" element={<Wires/>} />
       </Routes>
       </div>
       <Footer/>
