@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import businessLogo from "../src/assets/Business Logo.png"
+import LoginBtn from "./LoginBtn";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ function Navbar() {
         style={{ backgroundColor: "rgb(250, 250, 250)" }}
       >
         {/* Left Div */}
-        <div className="flex justify-between w-[50%] md:w-[70%] lg:w-[80%] xl:w-[70%] items-center gap-2">
+        <div className="flex justify-between w-[50%] md:w-[10%] lg:w-[80%] xl:w-[70%] items-center gap-2">
           {/* Logo + Name */}
           <div className="flex items-center gap-3 p-1">
             <img
@@ -46,15 +47,11 @@ function Navbar() {
             </p>
           </div>
 
-          {/* Search Bar */}
-          <div className="hidden md:flex md:w-68 lg:w-73 my-2 mt-3 items-center gap-1.5 border px-2 h-10 rounded-3xl bg-white border-gray-400 cursor-text transition-all">
-            <i className="fa-solid fa-magnifying-glass text-gray-700 md:text-xs xl:text-lg"></i>
-            <p className="text-gray-600 md:text-xs xl:text-lg">Search Products</p>
-          </div>
+          
         </div>
 
         {/* Right Div for desktop */}
-        <div className="hidden md:flex md:w-[70%] gap-6 items-center justify-end pr-8">
+        <div className="hidden md:flex md:w-[100%] gap-6 items-center justify-end pr-8">
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => setCategoryOpen(!categoryOpen)}
@@ -94,6 +91,7 @@ function Navbar() {
               style={{ color: "#27548a" }}
             ></i>
           </div>
+          {<LoginBtn/>}
         </div>
 
         {/* Hamburger for mobile */}
