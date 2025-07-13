@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import LoginBtn from "./LoginBtn";
 import axios from "axios";
+import Register from "./Register";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -57,9 +59,11 @@ const LoginPage = () => {
           <button className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-semibold">
             Login
           </button>
-          <button className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-bold">
+          <Link to="/Register">
+            <button className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-bold">
             Register
           </button>
+          </Link>
         </div>
       </form>
     </div>

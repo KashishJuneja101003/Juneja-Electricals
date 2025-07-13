@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from 'react-router-dom';
 const Register = () => {
   const handleSubmit = () => {};
   return (
@@ -46,12 +46,18 @@ const Register = () => {
         />
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 self-center text-white p-2 rounded-md hover:bg-blue-600"
-        >
-          Register
-        </button>
+        <div className="w-full justify-center flex gap-2">
+          <Link to="/Register">
+                    <button className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-bold">
+                    Register
+                  </button>
+                  </Link>
+        <Link to="/LoginPage">
+            <button className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-bold">
+            Login
+          </button>
+          </Link>
+        </div>
       </form>
     </div>
   );
