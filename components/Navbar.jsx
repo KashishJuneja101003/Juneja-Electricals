@@ -220,6 +220,11 @@ function Navbar() {
               </ul>
             )}
           </li>
+
+          {/* LoginBtn */}
+          <li>
+            <LoginBtn/>
+          </li>
         </ul>
       )}
     </nav>
