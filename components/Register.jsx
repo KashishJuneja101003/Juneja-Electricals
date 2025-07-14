@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 const Register = () => {
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://juneja-electricals-backend.onrender.com/register", formData);
+      await axios.post("https://juneja-electricals-backend.onrender.com/api/auth/register", formData);
       alert("Registered Successfully!");
       navigate("/login");
     } catch (err) {
