@@ -12,7 +12,7 @@ import Lights from "../components/Products/Lights"
 import Pipes from "../components/Products/Pipes"
 import Wires from "../components/Products/Wires"
 import Register from "../components/Register"
-import LoginPage from "../components/LoginPage"
+import Login from "../components/Login"
 
 function HomePage(){
   return (
@@ -38,7 +38,7 @@ function App() {
         <Route path="/Products/Lights" element={<Lights/>} />
         <Route path="/Products/Pipes" element={<Pipes/>} />
         <Route path="/Products/Wires" element={<Wires/>} />
-        <Route path="/LoginPage" element={<LoginPage/>} />
+        <Route path="/Login" element={<Login/>} />
         <Route path="/Register" element={<Register/>} />
       </Routes>
       </div>
