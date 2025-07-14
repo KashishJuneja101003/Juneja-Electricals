@@ -31,8 +31,9 @@ const Register = () => {
     <div className="flex justify-center mt-20">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-start items-start border-1 rounded-4xl w-[30%] p-5 gap-4 bg-blue-100"
+        className="flex flex-col justify-start items-start border-2  rounded-4xl m-3 text-lg p-5 gap-4 bg-cyan-50"
       >
+        <h1 className="text-2xl font-semibold">Register Yourself on Juneja Electricals!</h1>
         {/* Name */}
         <div className="w-full">
           <label className="font-semibold">Enter your name:</label>
