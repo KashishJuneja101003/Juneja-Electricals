@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://juneja-electricals-backend.onrender.com/login",
+        "https://juneja-electricals-backend.onrender.com/api/auth/login",
         formData
       );
 

@@ -76,7 +76,7 @@ const Register = () => {
         </div>
 
         {/* Role Dropdown (Optional for testing) */}
-        <div className="w-full">
+        {/* <div className="w-full">
           <label className="font-semibold">Select Role:</label>
           <select
             name="role"
@@ -87,7 +87,7 @@ const Register = () => {
             <option value="customer">Customer</option>
             <option value="admin">Admin</option>
           </select>
-        </div>
+        </div> */}
 
         <div className="w-full flex justify-center gap-2 mt-4">
           <button
