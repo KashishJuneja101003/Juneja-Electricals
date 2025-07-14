@@ -43,7 +43,7 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-start items-start border-2 rounded-4xl text-lg m-3 p-5 gap-5 bg-cyan-50"
       >
-        <h1 className="text-2xl font-semibold">Welcome Back to Juneja Electricals!</h1>
+        <h1 className="text-2xl text-center text-emerald-900 font-semibold">Welcome Back to Juneja Electricals!</h1>
         
         {/* Email */}
         <div className="w-full">
