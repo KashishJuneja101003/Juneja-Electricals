@@ -53,5 +53,4 @@ This project is driven by the need to modernize our family’s electrical applia
 ## Links & References
 
 - **GitHub Repo link:** https://github.com/KashishJuneja101003/Juneja-Electricals
-- **Deployment link (GitHub):** https://kashishjuneja101003.github.io/Juneja-Electricals/
 - **Deployment link (Netlify):** https://junejaelectricals.netlify.app/

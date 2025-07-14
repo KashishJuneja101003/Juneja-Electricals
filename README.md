@@ -23,7 +23,6 @@ For a detailed overview of the project, including goals, design decisions, and f
 
 ## Links & References
 - **GitHub Repo link:** https://github.com/KashishJuneja101003/Juneja-Electricals
-- **Deployment link (GitHub):** https://kashishjuneja101003.github.io/Juneja-Electricals/
 - **Deployment link (Netlify):** https://junejaelectricals.netlify.app/
 
 ## Contact
