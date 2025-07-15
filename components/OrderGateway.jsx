@@ -1,11 +1,35 @@
 import { useCart } from "./context/CartContext";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
-  const { cart } = useCart();
+  const { cart, deleteItem } = useCart();
+  const [stockInfo, setStockInfo] = useState({});
 
-  // Total item quantity
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  useEffect(() => {
+    const fetchStockStatus = async () => {
+      const result = {};
+      for (const item of cart) {
+        try {
+          const res = await axios.get(`${BASE_URL}/api/products/${item._id}`);
+          result[item._id] = res.data.stock;
+        } catch (err) {
+          console.error("Stock fetch error:", err);
+          result[item._id] = "error";
+        }
+      }
+      setStockInfo(result);
+    };
+
+    if (cart.length > 0) fetchStockStatus();
+  }, [cart]);
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const gst = 0.18 * total;
+  const grandTotal = total + gst;
 
   return (
     <div className="p-4">
@@ -15,36 +39,63 @@ const OrderGateway = () => {
         <p className="text-gray-800 text-center">Your cart is empty.</p>
       ) : (
         <div className="space-y-4">
-          {cart.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-4 bg-gray-200 rounded-lg"
-            >
-              <div>
-                <h2 className="text-lg font-semibold">{item.name}</h2>
-                <p className="text-sm text-gray-600">Brand: {item.brand}</p>
-                <p className="text-sm text-gray-600">
-                  Price: ₹{item.price} × {item.quantity}
-                </p>
+          {cart.map((item, index) => {
+            const stock = stockInfo[item._id];
+            const isAvailable = typeof stock === "number" && stock >= item.quantity;
+
+            return (
+              <div
+                key={index}
+                className="flex items-center justify-between p-4 bg-gray-200 rounded-lg"
+              >
+                <div>
+                  <h2 className="text-lg font-semibold">{item.name}</h2>
+                  <p className="text-sm text-gray-600">Brand: {item.brand}</p>
+                  <p className="text-sm text-gray-600">
+                    Price: ₹{item.price} × {item.quantity}
+                  </p>
+                  {stock === "error" ? (
+                    <p className="text-sm text-red-500">⚠️ Stock check failed</p>
+                  ) : (
+                    <p
+                      className={`text-sm ${
+                        isAvailable ? "text-green-600" : "text-red-600"
+                      }`}
+                    >
+                      {isAvailable
+                        ? `In Stock (${stock} available)`
+                        : `Out of Stock (${stock ?? 0} available)`}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="h-20 w-20 object-cover rounded-lg"
+                  />
+                  <i
+                    className="fa fa-trash cursor-pointer text-red-600 hover:text-red-800"
+                    aria-hidden="true"
+                    onClick={() => deleteItem(index)}
+                  ></i>
+                </div>
               </div>
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                className="h-20 w-20 object-cover rounded-lg"
-              />
-            </div>
-          ))}
+            );
+          })}
 
           <div className="mt-4 text-md w-fit bg-gray-200 p-3 rounded-lg">
-            <div className="font-bold ">Order Details</div>
-            <span className="font-semibold">Total: </span>₹
-            {cart.reduce((total, item) => total + item.price * item.quantity, 0)}
+            <div className="font-bold">Order Details</div>
+            <span className="font-semibold">Total: </span>₹{total}
             <br />
-            <span className="font-semibold">GST:</span> ₹{0.18 * cart.reduce((total, item) => total + item.price * item.quantity, 0)}
+            <span className="font-semibold">GST:</span> ₹{gst.toFixed(2)}
             <br />
-            <span className="font-semibold">Pay:</span> <span className="text-red-600 font-semibold">₹{(0.18 + 1) * cart.reduce((total, item) => total + item.price * item.quantity, 0)}</span>
-          </div> 
-          
+            <span className="font-semibold">Pay:</span>{" "}
+            <span className="text-red-600 font-semibold">
+              ₹{grandTotal.toFixed(2)}
+            </span>
+          </div>
 
           <Link to="/OrderGateway">
             <button className="mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
