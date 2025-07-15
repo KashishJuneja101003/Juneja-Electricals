@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const Fans = () => {
+  const { cart, setCart } = useCart(); // Use cart from context
   const [data, setData] = useState([]);
   const [counts, setCounts] = useState({});
 
@@ -23,27 +25,56 @@ const Fans = () => {
   }, []);
 
   function incrementCount(idx) {
+    const item = data[idx];
+
+    // UI quantity count
     setCounts((prev) => ({
       ...prev,
       [idx]: (prev[idx] || 0) + 1,
     }));
+
+    // Add to cart (context)
+    setCart((prevCart) => {
+      const existing = prevCart.find((p) => p._id === item._id);
+      if (existing) {
+        return prevCart.map((p) =>
+          p._id === item._id ? { ...p, quantity: p.quantity + 1 } : p
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
   }
 
   function decrementCount(idx) {
-    setCounts((prev) => {
-      if (!prev[idx]) return prev; // Don’t decrement below 0
-      return {
-        ...prev,
-        [idx]: prev[idx] - 1,
-      };
+    const item = data[idx];
+
+    if (!counts[idx]) return;
+
+    // UI quantity count
+    setCounts((prev) => ({
+      ...prev,
+      [idx]: prev[idx] - 1,
+    }));
+
+    // Remove/update from cart (context)
+    setCart((prevCart) => {
+      const existing = prevCart.find((p) => p._id === item._id);
+      if (!existing) return prevCart;
+
+      if (existing.quantity === 1) {
+        return prevCart.filter((p) => p._id !== item._id);
+      } else {
+        return prevCart.map((p) =>
+          p._id === item._id ? { ...p, quantity: p.quantity - 1 } : p
+        );
+      }
     });
   }
 
   return (
     <div className="px-4 py-8">
-      <h1 className="text-3xl text-center uppercase mb-4 text-rose-800">
-        Fans
-      </h1>
+      <h1 className="text-3xl text-center uppercase mb-4 text-rose-800">Fans</h1>
 
       {/* Cards */}
       <div className="flex flex-wrap justify-between bg-gray-300 rounded-2xl p-5 pb-0">

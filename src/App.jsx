@@ -13,17 +13,8 @@ import Pipes from "../components/Products/Pipes"
 import Wires from "../components/Products/Wires"
 import Register from "../components/Register"
 import Login from "../components/Login"
-
-function HomePage(){
-  return (
-    <>
-      <ImageCarousel/>
-      <ExploreOurProducts/>
-      <MeetTheOwner/>
-      <ContactUs/>
-    </>
-  )
-}
+import OrderGateway from "../components/OrderGateway"
+import HomePage from '../components/HomePage';
 
 function App() {
   return (
@@ -40,6 +31,7 @@ function App() {
         <Route path="/Products/Wires" element={<Wires/>} />
         <Route path="/Login" element={<Login/>} />
         <Route path="/Register" element={<Register/>} />
+        <Route path="/OrderGateway" element={<OrderGateway/>} />
       </Routes>
       </div>
       <Footer/>

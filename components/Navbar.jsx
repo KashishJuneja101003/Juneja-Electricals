@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import businessLogo from "../src/assets/Business Logo.png"
 import LoginBtn from "./LoginBtn";
+import Cart from "./Cart";
+import {Link} from 'react-router-dom';
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,6 +35,7 @@ function Navbar() {
         {/* Left Div */}
         <div className="flex justify-between w-[50%] md:w-[10%] lg:w-[80%] xl:w-[70%] items-center gap-2">
           {/* Logo + Name */}
+          <Link to="/">
           <div className="flex items-center gap-3 p-1">
             <img
               src={businessLogo}
@@ -46,6 +49,7 @@ function Navbar() {
               JUNEJA <br /> ELECTRICALS
             </p>
           </div>
+          </Link>
 
           
         </div>
@@ -91,6 +95,7 @@ function Navbar() {
               style={{ color: "#27548a" }}
             ></i>
           </div>
+          {<Cart/>}
           {<LoginBtn/>}
         </div>
 

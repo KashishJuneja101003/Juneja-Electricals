@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from "../components/context/CartContext.jsx";
 
 window.addEventListener("load", () => {
   let preLoad = document.getElementById("pre-loader-container");
@@ -16,10 +17,11 @@ window.addEventListener("load", () => {
 });
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </BrowserRouter>
-    
+  <StrictMode>
+    <BrowserRouter>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </BrowserRouter>
+  </StrictMode>
 );
