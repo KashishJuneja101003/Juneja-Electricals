@@ -35,7 +35,7 @@ const OrderGateway = () => {
             </div>
           ))}
 
-          <div className="mt-4 text-lg w-[15%] bg-gray-200 p-3 rounded-lg">
+          <div className="mt-4 text-md w-fit bg-gray-200 p-3 rounded-lg">
             <div className="font-bold ">Order Details</div>
             <span className="font-semibold">Total: </span>₹
             {cart.reduce((total, item) => total + item.price * item.quantity, 0)}
