@@ -226,10 +226,17 @@ function Navbar() {
             )}
           </li>
 
+          <div className="flex items-center justify-between pr-2">
           {/* LoginBtn */}
-          <li>
+          
             <LoginBtn/>
-          </li>
+          
+
+          {/* Cart */}
+          
+            <Cart />
+          
+          </div>
         </ul>
       )}
     </nav>
