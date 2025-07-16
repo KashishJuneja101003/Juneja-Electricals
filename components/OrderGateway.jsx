@@ -7,32 +7,30 @@ const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
   const { cart, deleteItem } = useCart();
-  const [stockInfo, setStockInfo] = useState({});
+  const [quantityInfo, setQuantityInfo] = useState({});
 
   useEffect(() => {
-  const fetchStockStatus = async () => {
-  const newStockData = {};
+    const fetchQuantityStatus = async () => {
+      const newData = {};
 
-  await Promise.all(
-    cart.map(async (item) => {
-      try {
-        const res = await axios.get(`${BASE_URL}/products/id/${item._id}`);
-        newStockData[item._id] = res.data.stock;
-      } catch (error) {
-        console.error(`Error fetching stock for ${item._id}:`, error);
-        newStockData[item._id] = "Error"; // Or null or 0 or keep undefined
-      }
-    })
-  );
+      await Promise.all(
+        cart.map(async (item) => {
+          try {
+            const res = await axios.get(`${BASE_URL}/products/id/${item._id}`);
+            newData[item._id] = res.data.quantity;
+          } catch (error) {
+            console.error(`Error fetching quantity for ${item._id}:`, error);
+            newData[item._id] = "error";
+          }
+        })
+      );
 
-  console.log("Final stock data:", newStockData);
-  setStockInfo(newStockData);
-};
+      console.log("Final quantity data:", newData);
+      setQuantityInfo(newData);
+    };
 
-
-  if (cart.length > 0) fetchStockStatus();
-}, [cart]);
-
+    if (cart.length > 0) fetchQuantityStatus();
+  }, [cart]);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const gst = 0.18 * total;
@@ -47,8 +45,10 @@ const OrderGateway = () => {
       ) : (
         <div className="space-y-4">
           {cart.map((item, index) => {
-            const stock = stockInfo[item._id];
-            const isAvailable = typeof stock === "number" && stock >= item.quantity;
+            const availableQuantity = quantityInfo[item._id];
+            const isAvailable =
+              typeof availableQuantity === "number" &&
+              availableQuantity >= item.quantity;
 
             return (
               <div
@@ -61,8 +61,8 @@ const OrderGateway = () => {
                   <p className="text-sm text-gray-600">
                     Price: ₹{item.price} × {item.quantity}
                   </p>
-                  {stock === "error" ? (
-                    <p className="text-sm text-red-500">⚠️ Stock check failed</p>
+                  {availableQuantity === "error" ? (
+                    <p className="text-sm text-red-500">⚠️ Quantity check failed</p>
                   ) : (
                     <p
                       className={`text-sm ${
@@ -70,8 +70,8 @@ const OrderGateway = () => {
                       }`}
                     >
                       {isAvailable
-                        ? `In Stock (${stock} available)`
-                        : `Out of Stock (${stock ?? 0} available)`}
+                        ? `In Stock (${availableQuantity} available)`
+                        : `Out of Stock (${availableQuantity ?? 0} available)`}
                     </p>
                   )}
                 </div>
