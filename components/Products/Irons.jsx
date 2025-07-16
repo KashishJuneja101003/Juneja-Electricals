@@ -12,7 +12,7 @@ const Irons = () => {
   async function getData() {
     try {
       const category = "Irons";
-      const resp = await axios.get(`${BASE_URL}/products/${category}`);
+      const resp = await axios.get(`${BASE_URL}/products/category/${category}`);
       setData(resp.data);
       console.log("Data", resp.data);
     } catch (error) {

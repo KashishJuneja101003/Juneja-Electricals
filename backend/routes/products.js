@@ -5,15 +5,28 @@ const Product = require("../models/Product");
 // POST: Add a product
 router.post("/", async (req, res) => {
   try {
-    const saved = Product.insertMany(req.body);
+    const saved = await Product.insertMany(req.body);
     res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
 
-// GET: Get all products by category (e.g., Fans)
-router.get("/:category", async (req, res) => {
+// 1. GET product by ID
+router.get("/id/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2. GET all products by category
+router.get("/category/:category", async (req, res) => {
   const category = req.params.category;
   try {
     const products = await Product.find({ category });
@@ -22,5 +35,6 @@ router.get("/:category", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 module.exports = router;

@@ -10,22 +10,29 @@ const OrderGateway = () => {
   const [stockInfo, setStockInfo] = useState({});
 
   useEffect(() => {
-    const fetchStockStatus = async () => {
-      const result = {};
-      for (const item of cart) {
-        try {
-          const res = await axios.get(`${BASE_URL}/api/products/${item._id}`);
-          result[item._id] = res.data.stock;
-        } catch (err) {
-          console.error("Stock fetch error:", err);
-          result[item._id] = "error";
-        }
-      }
-      setStockInfo(result);
-    };
+  const fetchStockStatus = async () => {
+  const newStockData = {};
 
-    if (cart.length > 0) fetchStockStatus();
-  }, [cart]);
+  await Promise.all(
+    cart.map(async (item) => {
+      try {
+        const res = await axios.get(`${BASE_URL}/products/id/${item._id}`);
+        newStockData[item._id] = res.data.stock;
+      } catch (error) {
+        console.error(`Error fetching stock for ${item._id}:`, error);
+        newStockData[item._id] = "Error"; // Or null or 0 or keep undefined
+      }
+    })
+  );
+
+  console.log("Final stock data:", newStockData);
+  setStockInfo(newStockData);
+};
+
+
+  if (cart.length > 0) fetchStockStatus();
+}, [cart]);
+
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const gst = 0.18 * total;
