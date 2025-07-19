@@ -8,12 +8,14 @@ const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
 
 if (!CASHFREE_BASE_URL) {
   console.error("CASHFREE_BASE_URL is not defined in environment variables");
+} else{
+    console.log("CASHFREE_BASE_URL is defined");
 }
 
 router.post("/create-order", async (req, res) => {
   try {
     const { amount } = req.body;
-
+    console.log(req.body);
     const orderId = `order_${Date.now()}`;
 
     const data = {
