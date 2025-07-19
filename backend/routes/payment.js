@@ -27,7 +27,7 @@ router.post("/create-order", async (req, res) => {
       order_id: orderId,
       order_note: "Order payment at Juneja Electricals",
       order_meta: {
-        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${order_id}`,
+        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
       },
     };
 
