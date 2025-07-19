@@ -37,6 +37,7 @@ router.post("/create-order", async (req, res) => {
       "Cashfree Order Creation Error:",
       error.response?.data || error.message
     );
+    console.error("Full Error:", error); // Add this line
     return res.status(500).json({ error: "Failed to create order" });
   }
 });
