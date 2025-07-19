@@ -1,7 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-require("dotenv").config();
 
 const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
   process.env;
@@ -24,7 +24,7 @@ router.post("/create-order", async (req, res) => {
       order_id: orderId,
       order_note: "Order payment at Juneja Electricals",
       order_meta: {
-        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id={order_id}`,
+        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${order_id}`,
       },
     };
 
