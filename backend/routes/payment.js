@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const User = require("../models/User");
-const verifyToken = require("../middlewares/verifyToken");
+const verifyToken = require("../middlewares/authMiddleware");
 
 const {
   CASHFREE_CLIENT_ID,

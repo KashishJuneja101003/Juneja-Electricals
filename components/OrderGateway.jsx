@@ -1,26 +1,46 @@
 import { useCart } from "./context/CartContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
+  const navigate = useNavigate();
   // Cashfree Gateway
   const handlePayment = async () => {
-    const res = await axios.post(`${BASE_URL}/create-order`, {
-      amount: grandTotal, // Total amount from cart
-    });
-     const paymentSessionId = res.data.payment_session_id;
+    const token = localStorage.getItem("token");
 
-    const cashfree = new window.Cashfree({
-      paymentSessionId,
-      redirectTarget: "_self",
-    });
+    if (!token) {
+      alert("Please log in to proceed with payment.");
+      navigate("/login");
+      return;
+    }
 
-    cashfree.mount("#cashfree-dropin-container");
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/create-order`,
+        { amount: grandTotal },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ Auth header added
+          },
+        }
+      );
+
+      const paymentSessionId = res.data.payment_session_id;
+
+      const cashfree = new window.Cashfree({
+        paymentSessionId,
+        redirectTarget: "_self",
+      });
+
+      cashfree.mount("#cashfree-dropin-container");
+    } catch (error) {
+      console.error("Payment initiation failed:", error);
+      alert("Something went wrong during payment. Please try again.");
+    }
   };
-
 
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
