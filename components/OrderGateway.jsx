@@ -6,6 +6,22 @@ import axios from "axios";
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
+  // Cashfree Gateway
+  const handlePayment = async () => {
+    const res = await axios.post(`${BASE_URL}/create-order`, {
+      amount: grandTotal, // Total amount from cart
+    });
+     const paymentSessionId = res.data.payment_session_id;
+
+    const cashfree = new window.Cashfree({
+      paymentSessionId,
+      redirectTarget: "_self",
+    });
+
+    cashfree.mount("#cashfree-dropin-container");
+  };
+
+
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
 
@@ -62,7 +78,9 @@ const OrderGateway = () => {
                     Price: ₹{item.price} × {item.quantity}
                   </p>
                   {availableQuantity === "error" ? (
-                    <p className="text-sm text-red-500">⚠️ Quantity check failed</p>
+                    <p className="text-sm text-red-500">
+                      ⚠️ Quantity check failed
+                    </p>
                   ) : (
                     <p
                       className={`text-sm ${
@@ -104,11 +122,13 @@ const OrderGateway = () => {
             </span>
           </div>
 
-          <Link to="/OrderGateway">
-            <button className="mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
-              Proceed to Checkout
-            </button>
-          </Link>
+          <button
+            className="mt-4 bg-emerald-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
+            onClick={handlePayment}
+          >
+            Proceed to Payment
+          </button>
+          <div id="cashfree-dropin-container" className="mt-6"></div>
         </div>
       )}
     </div>
