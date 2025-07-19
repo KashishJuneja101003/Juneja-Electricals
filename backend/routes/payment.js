@@ -6,6 +6,9 @@ const axios = require("axios");
 const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
   process.env;
 
+console.log("CASHFREE_BASE_URL:", process.env.CASHFREE_BASE_URL);
+
+
 if (!CASHFREE_BASE_URL) {
   console.error("CASHFREE_BASE_URL is not defined in environment variables");
 } else{
