@@ -2,23 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const User = require("../models/User");
+const verifyToken = require("../middlewares/verifyToken");
 
-const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
-  process.env;
+const {
+  CASHFREE_CLIENT_ID,
+  CASHFREE_CLIENT_SECRET,
+  CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg", // fallback (optional)
+} = process.env;
 
-console.log("CASHFREE_BASE_URL:", process.env.CASHFREE_BASE_URL);
-
+// Debug log
+console.log("CASHFREE_BASE_URL:", CASHFREE_BASE_URL);
 
 if (!CASHFREE_BASE_URL) {
-  console.error("CASHFREE_BASE_URL is not defined in environment variables");
-} else{
-    console.log("CASHFREE_BASE_URL is defined");
+  console.error("❌ CASHFREE_BASE_URL is not defined in environment variables");
 }
 
-router.post("/create-order", async (req, res) => {
+router.post("/create-order", verifyToken, async (req, res) => {
   try {
+    const user = await User.findById(req.user._id); // Fetched from token
+    if (!user) {
+      return res.status(404).json({ error: "User Not Found" });
+    }
+
     const { amount } = req.body;
-    console.log(req.body);
     const orderId = `order_${Date.now()}`;
 
     const data = {
@@ -31,8 +38,6 @@ router.post("/create-order", async (req, res) => {
       },
     };
 
-    console.log("Sending request to:", `${CASHFREE_BASE_URL}/orders`);
-
     const response = await axios.post(`${CASHFREE_BASE_URL}/orders`, data, {
       headers: {
         "x-api-version": "2022-09-01",
@@ -44,13 +49,10 @@ router.post("/create-order", async (req, res) => {
 
     return res.json(response.data);
   } catch (error) {
-    console.error(
-      "Cashfree Order Creation Error:",
-      error.response?.data || error.message
-    );
-    console.error("Full Error:", error); // Add this line
+    console.error("Cashfree Order Creation Error:", error.response?.data || error.message);
     return res.status(500).json({ error: "Failed to create order" });
   }
 });
+
 
 module.exports = router;
