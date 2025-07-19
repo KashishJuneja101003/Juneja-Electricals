@@ -6,6 +6,10 @@ require("dotenv").config();
 const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
   process.env;
 
+if (!CASHFREE_BASE_URL) {
+  console.error("CASHFREE_BASE_URL is not defined in environment variables");
+}
+
 router.post("/create-order", async (req, res) => {
   try {
     const { amount } = req.body;
@@ -21,6 +25,8 @@ router.post("/create-order", async (req, res) => {
         return_url: `https://junejaelectricals.netlify.app/payment-success?order_id={order_id}`,
       },
     };
+
+    console.log("Sending request to:", `${CASHFREE_BASE_URL}/orders`);
 
     const response = await axios.post(`${CASHFREE_BASE_URL}/orders`, data, {
       headers: {
