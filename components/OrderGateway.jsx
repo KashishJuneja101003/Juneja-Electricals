@@ -15,7 +15,7 @@ const OrderGateway = () => {
       alert("Please log in to proceed with payment.");
       navigate("/login");
       return;
-    } else{ 
+    } else {
       console.log(token);
     }
 
@@ -32,12 +32,14 @@ const OrderGateway = () => {
 
       const paymentSessionId = res.data.payment_session_id;
 
-      const cashfree = new window.Cashfree({
-        paymentSessionId,
-        redirectTarget: "_self",
-      });
+      // Optional: Initialize the popup if needed
+      Cashfree.initPopup();
 
-      cashfree.mount("#cashfree-dropin-container");
+      // Start the payment
+      Cashfree.checkout({
+        paymentSessionId: paymentSessionId,
+        redirectTarget: "_self", // or "_blank", etc.
+      });
     } catch (error) {
       console.error("Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
