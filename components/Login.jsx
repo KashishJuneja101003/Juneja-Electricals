@@ -17,6 +17,7 @@ const Login = () => {
         formData
       );
 
+      console.log(res.data);
       const { token, role, name } = res.data;
 
       // Store token and role
