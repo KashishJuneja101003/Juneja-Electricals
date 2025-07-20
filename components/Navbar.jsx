@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import businessLogo from "../src/assets/Business Logo.png"
+import businessLogo from "../src/assets/Business Logo.png";
 import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import LogoutBtn from "./Logout";
 
 function Navbar() {
@@ -37,22 +37,20 @@ function Navbar() {
         <div className="flex justify-between w-[50%] md:w-[10%] lg:w-[80%] xl:w-[70%] items-center gap-2">
           {/* Logo + Name */}
           <Link to="/">
-          <div className="flex items-center gap-3 p-1">
-            <img
-              src={businessLogo}
-              alt="Business Logo"
-              className="w-8 lg:w-12"
-            />
-            <p
-              className="text-lg lg:text-xl cursor-default"
-              style={{ color: "#27548a" }}
-            >
-              JUNEJA <br /> ELECTRICALS
-            </p>
-          </div>
+            <div className="flex items-center gap-3 p-1">
+              <img
+                src={businessLogo}
+                alt="Business Logo"
+                className="w-8 lg:w-12"
+              />
+              <p
+                className="text-lg lg:text-xl cursor-default"
+                style={{ color: "#27548a" }}
+              >
+                JUNEJA <br /> ELECTRICALS
+              </p>
+            </div>
           </Link>
-
-          
         </div>
 
         {/* Right Div for desktop */}
@@ -65,8 +63,9 @@ function Navbar() {
               Search by Category
             </p>
             <i
-              className={`fa-solid fa-angle-down transition-transform ${categoryOpen ? "rotate-180" : ""
-                }`}
+              className={`fa-solid fa-angle-down transition-transform ${
+                categoryOpen ? "rotate-180" : ""
+              }`}
               style={{ color: "#27548a" }}
             ></i>
           </div>
@@ -78,8 +77,9 @@ function Navbar() {
               Brands We Sell
             </p>
             <i
-              className={`fa-solid fa-angle-down transition-transform ${brandsOpen ? "rotate-180" : ""
-                }`}
+              className={`fa-solid fa-angle-down transition-transform ${
+                brandsOpen ? "rotate-180" : ""
+              }`}
               style={{ color: "#27548a" }}
             ></i>
           </div>
@@ -91,22 +91,31 @@ function Navbar() {
               Contact Us
             </p>
             <i
-              className={`fa-solid fa-angle-down transition-transform ${contactOpen ? "rotate-180" : ""
-                }`}
+              className={`fa-solid fa-angle-down transition-transform ${
+                contactOpen ? "rotate-180" : ""
+              }`}
               style={{ color: "#27548a" }}
             ></i>
           </div>
-          {<Cart/>}
-          {
-            localStorage.getItem("token") ? 
-              <>
-                <div className="text-blue-800 font-semibold px-4 py-2">
-                  Hi, {userName.split(" ")[0]} 👋
-                </div>
-                <LogoutBtn />
-              </> : 
-              <LoginBtn />
-          }
+          {<Cart />}
+          {(() => {
+            const token = localStorage.getItem("token");
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (token && user?.name) {
+              const userName = user.name.split(" ")[0];
+              return (
+                <>
+                  <div className="text-blue-800 font-semibold px-4 py-2">
+                    Hi, {userName} 👋
+                  </div>
+                  <LogoutBtn />
+                </>
+              );
+            } else {
+              return <LoginBtn />;
+            }
+          })()}
         </div>
 
         {/* Hamburger for mobile */}
@@ -133,22 +142,26 @@ function Navbar() {
             >
               <span>Search By Category</span>
               <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${categoryOpen ? "rotate-180" : ""
-                  }`}
+                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
+                  categoryOpen ? "rotate-180" : ""
+                }`}
               ></i>
             </div>
             {categoryOpen && (
               <ul className="flex flex-col gap-2 ml-4 mt-2 text-base text-gray-700">
-                {["Fans", "Lighting", "Switches & Accessories", "Home Electricals"].map(
-                  (item) => (
-                    <li
-                      key={item}
-                      className="p-1 hover:bg-gray-100 active:bg-gray-100 rounded"
-                    >
-                      {item}
-                    </li>
-                  )
-                )}
+                {[
+                  "Fans",
+                  "Lighting",
+                  "Switches & Accessories",
+                  "Home Electricals",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="p-1 hover:bg-gray-100 active:bg-gray-100 rounded"
+                  >
+                    {item}
+                  </li>
+                ))}
               </ul>
             )}
           </li>
@@ -161,8 +174,9 @@ function Navbar() {
             >
               <span>Brands We Sell</span>
               <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${brandsOpen ? "rotate-180" : ""
-                  }`}
+                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
+                  brandsOpen ? "rotate-180" : ""
+                }`}
               ></i>
             </div>
             {brandsOpen && (
@@ -195,8 +209,9 @@ function Navbar() {
             >
               <span>Contact Us</span>
               <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${contactOpen ? "rotate-180" : ""
-                  }`}
+                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
+                  contactOpen ? "rotate-180" : ""
+                }`}
               ></i>
             </div>
             {contactOpen && (
@@ -210,7 +225,10 @@ function Navbar() {
                   <i className="fa-solid fa-location-dot self-center text-base"></i>
                   <p className="text-base">Locate Our Store</p>
                 </a>
-                <a href="tel:+919027400868" className="flex gap-2 active:bg-gray-100">
+                <a
+                  href="tel:+919027400868"
+                  className="flex gap-2 active:bg-gray-100"
+                >
                   <i className="fa-solid fa-phone self-center text-base"></i>
                   <p className="text-base">Call us</p>
                 </a>
@@ -237,24 +255,30 @@ function Navbar() {
           </li>
 
           <div className="flex items-center justify-between pr-2">
-          {/* LoginBtn */}
-          
-            {
-            localStorage.getItem("token") ? 
-              <>
-                <div className="text-blue-800 font-semibold px-4 py-2">
-                  Hi, {userName.split(" ")[0]} 👋
-                </div>
-                <LogoutBtn />
-              </> : 
-              <LoginBtn />
-          }
-          
+            {/* LoginBtn */}
 
-          {/* Cart */}
-          
+            {(() => {
+              const token = localStorage.getItem("token");
+              const user = JSON.parse(localStorage.getItem("user"));
+
+              if (token && user?.name) {
+                const userName = user.name.split(" ")[0];
+                return (
+                  <>
+                    <div className="text-blue-800 font-semibold px-4 py-2">
+                      Hi, {userName} 👋
+                    </div>
+                    <LogoutBtn />
+                  </>
+                );
+              } else {
+                return <LoginBtn />;
+              }
+            })()}
+
+            {/* Cart */}
+
             <Cart />
-          
           </div>
         </ul>
       )}
