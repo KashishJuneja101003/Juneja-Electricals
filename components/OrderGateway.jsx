@@ -32,14 +32,16 @@ const OrderGateway = () => {
 
       const paymentSessionId = res.data.payment_session_id;
 
-      // Optional: Initialize the popup if needed
-      Cashfree.initPopup();
+      if (window.Cashfree) {
+        window.Cashfree.initPopup();
+        window.Cashfree.checkout({
+          paymentSessionId,
+          redirectTarget: "_self",
+        });
+      } else {
+        console.error("Cashfree SDK not loaded yet.");
+      }
 
-      // Start the payment
-      Cashfree.checkout({
-        paymentSessionId: paymentSessionId,
-        redirectTarget: "_self", // or "_blank", etc.
-      });
     } catch (error) {
       console.error("Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
