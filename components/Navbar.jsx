@@ -3,6 +3,7 @@ import businessLogo from "../src/assets/Business Logo.png"
 import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
 import {Link} from 'react-router-dom';
+import LogoutBtn from "./Logout";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -96,7 +97,16 @@ function Navbar() {
             ></i>
           </div>
           {<Cart/>}
-          {<LoginBtn/>}
+          {
+            localStorage.getItem("token") ? 
+              <>
+                <div className="text-blue-800 font-semibold px-4 py-2">
+                  Hi, {userName.split(" ")[0]} 👋
+                </div>
+                <LogoutBtn />
+              </> : 
+              <LoginBtn />
+          }
         </div>
 
         {/* Hamburger for mobile */}
@@ -229,7 +239,16 @@ function Navbar() {
           <div className="flex items-center justify-between pr-2">
           {/* LoginBtn */}
           
-            <LoginBtn/>
+            {
+            localStorage.getItem("token") ? 
+              <>
+                <div className="text-blue-800 font-semibold px-4 py-2">
+                  Hi, {userName.split(" ")[0]} 👋
+                </div>
+                <LogoutBtn />
+              </> : 
+              <LoginBtn />
+          }
           
 
           {/* Cart */}
