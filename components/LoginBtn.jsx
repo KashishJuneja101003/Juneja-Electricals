@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LogoutBtn from './Logout'
 
 const LoginBtn = () => {
   const [userName, setUserName] = useState(null);
@@ -15,6 +16,7 @@ const LoginBtn = () => {
   return userName ? (
     <div className="text-blue-800 font-semibold px-4 py-2">
       Hi, {userName.split(" ")[0]} 👋
+      <LogoutBtn/>
     </div>
   ) : (
     <Link to="/login">
