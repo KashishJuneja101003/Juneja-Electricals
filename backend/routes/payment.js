@@ -5,18 +5,15 @@ const axios = require("axios");
 const User = require("../models/User");
 const verifyToken = require("../middlewares/authMiddleware");
 
-const {
-  CASHFREE_CLIENT_ID,
-  CASHFREE_CLIENT_SECRET,
-  CASHFREE_BASE_URL
-} = process.env;
+const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
+  process.env;
 
 // Debug log
-if(CASHFREE_BASE_URL)console.log("URL");
+if (CASHFREE_BASE_URL) console.log("URL");
 else console.log("No url");
-if(CASHFREE_CLIENT_ID) console.log("Id");
+if (CASHFREE_CLIENT_ID) console.log("Id");
 else console.log("No id");
-if(CASHFREE_CLIENT_SECRET) console.log("Secret");
+if (CASHFREE_CLIENT_SECRET) console.log("Secret");
 else console.log("No secret");
 
 router.post("/create-order", verifyToken, async (req, res) => {
@@ -37,7 +34,10 @@ router.post("/create-order", verifyToken, async (req, res) => {
 
     // Sanity check: are env vars actually loaded?
     console.log("🔑 CASHFREE_CLIENT_ID:", process.env.CASHFREE_CLIENT_ID);
-    console.log("🔑 CASHFREE_CLIENT_SECRET:", process.env.CASHFREE_CLIENT_SECRET);
+    console.log(
+      "🔑 CASHFREE_CLIENT_SECRET:",
+      process.env.CASHFREE_CLIENT_SECRET
+    );
 
     const { amount } = req.body;
     const orderId = `order_${Date.now()}`;
@@ -47,32 +47,44 @@ router.post("/create-order", verifyToken, async (req, res) => {
       order_currency: "INR",
       order_id: orderId,
       order_note: "Order payment at Juneja Electricals",
+      customer_details: {
+        customer_id: req.user.userId, // required
+        customer_email: user.email || "demo@email.com", // required
+        customer_name: user.name || "Customer", // required
+        customer_phone: user.phone || "9999999999", // optional
+      },
       order_meta: {
         return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
       },
     };
 
     // 💥 Cashfree request
-    const response = await axios.post(`${process.env.CASHFREE_BASE_URL}/orders`, data, {
-      headers: {
-        "x-api-version": "2022-09-01",
-        "x-client-id": process.env.CASHFREE_CLIENT_ID,
-        "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      `${process.env.CASHFREE_BASE_URL}/orders`,
+      data,
+      {
+        headers: {
+          "x-api-version": "2022-09-01",
+          "x-client-id": process.env.CASHFREE_CLIENT_ID,
+          "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     console.log("✅ Cashfree order created:", response.data);
 
     return res.json(response.data);
   } catch (error) {
     // 👇 this is the key log!
-    console.error("❌ Cashfree Order Creation Error:", error.response?.status, error.response?.data || error.message);
+    console.error(
+      "❌ Cashfree Order Creation Error:",
+      error.response?.status,
+      error.response?.data || error.message
+    );
 
     return res.status(500).json({ error: "Failed to create order" });
   }
 });
-
-
 
 module.exports = router;
