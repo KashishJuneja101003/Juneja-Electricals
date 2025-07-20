@@ -21,10 +21,21 @@ else console.log("No secret");
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id); // Fetched from token
+    console.log("🧪 Received /create-order request");
+    console.log("🧾 Token user:", req.user);
+    console.log("💰 Amount received:", req.body.amount);
+
+    const user = await User.findById(req.user._id);
     if (!user) {
+      console.log("❌ User not found");
       return res.status(404).json({ error: "User Not Found" });
     }
+
+    console.log("✅ User found:", user.email);
+
+    // Sanity check: are env vars actually loaded?
+    console.log("🔑 CASHFREE_CLIENT_ID:", process.env.CASHFREE_CLIENT_ID);
+    console.log("🔑 CASHFREE_CLIENT_SECRET:", process.env.CASHFREE_CLIENT_SECRET);
 
     const { amount } = req.body;
     const orderId = `order_${Date.now()}`;
@@ -39,21 +50,27 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
-    const response = await axios.post(`${CASHFREE_BASE_URL}/orders`, data, {
+    // 💥 Cashfree request
+    const response = await axios.post(`${process.env.CASHFREE_BASE_URL}/orders`, data, {
       headers: {
         "x-api-version": "2022-09-01",
-        "x-client-id": CASHFREE_CLIENT_ID,
-        "x-client-secret": CASHFREE_CLIENT_SECRET,
+        "x-client-id": process.env.CASHFREE_CLIENT_ID,
+        "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
         "Content-Type": "application/json",
       },
     });
 
+    console.log("✅ Cashfree order created:", response.data);
+
     return res.json(response.data);
   } catch (error) {
-    console.error("Cashfree Order Creation Error:", error.response?.data || error.message);
+    // 👇 this is the key log!
+    console.error("❌ Cashfree Order Creation Error:", error.response?.status, error.response?.data || error.message);
+
     return res.status(500).json({ error: "Failed to create order" });
   }
 });
+
 
 
 module.exports = router;
