@@ -4,6 +4,7 @@ import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 import LogoutBtn from "./Logout";
+import useAuth from "./context/AuthContext"
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -101,8 +102,7 @@ function Navbar() {
           
           {/* login - logout */}
           {(() => {
-            const token = localStorage.getItem("token");
-            const user = JSON.parse(localStorage.getItem("user"));
+            const {token , user} = useAuth();
 
             if (token && user?.name) {
               const userName = user.name.split(" ")[0];

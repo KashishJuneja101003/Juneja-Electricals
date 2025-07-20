@@ -1,8 +1,4 @@
-import ExploreOurProducts from "../components/ExploreOurProducts"
-import ImageCarousel from "../components/Image Carousel"
 import Navbar from "../components/Navbar"
-import MeetTheOwner from '../components/MeetTheOwner'
-import ContactUs from '../components/ContactUs'
 import { Route, Routes } from "react-router-dom"
 import Fans from "../components/Products/Fans"
 import Footer from "../components/Footer"

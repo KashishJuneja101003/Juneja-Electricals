@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "../components/context/CartContext.jsx";
+import { AuthProvider } from "../components/context/AuthContext.jsx";
 
 window.addEventListener("load", () => {
   let preLoad = document.getElementById("pre-loader-container");
@@ -20,7 +21,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <CartProvider>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </CartProvider>
     </BrowserRouter>
   </StrictMode>

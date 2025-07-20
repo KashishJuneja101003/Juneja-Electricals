@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,6 +9,8 @@ const Login = () => {
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const { login } = useAuth(); // get login function from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,14 +20,11 @@ const Login = () => {
         formData
       );
 
-      console.log(res.data);
-      const { token, user} = res.data;
-      const { name, role} = user;
+      const { token, user } = res.data;
+      const { name, role } = user;
 
-      // Store token and role
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("user", JSON.stringify({ name }));
+      // ✅ Call context login to update state
+      login({ name, role }, token);
 
       alert("Login Successful!");
       console.log(name, "logged in!");
@@ -47,8 +47,10 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-start items-start border-2 rounded-4xl text-lg m-3 p-5 gap-5 bg-cyan-50"
       >
-        <h1 className="text-2xl text-center text-emerald-900 font-semibold">Welcome Back to Juneja Electricals!</h1>
-        
+        <h1 className="text-2xl text-center text-emerald-900 font-semibold">
+          Welcome Back to Juneja Electricals!
+        </h1>
+
         {/* Email */}
         <div className="w-full">
           <label className="font-semibold">Enter your email:</label>
