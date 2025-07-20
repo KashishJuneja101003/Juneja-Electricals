@@ -8,15 +8,16 @@ const verifyToken = require("../middlewares/authMiddleware");
 const {
   CASHFREE_CLIENT_ID,
   CASHFREE_CLIENT_SECRET,
-  CASHFREE_BASE_URL = "https://sandbox.cashfree.com/pg", // fallback (optional)
+  CASHFREE_BASE_URL
 } = process.env;
 
 // Debug log
-console.log("CASHFREE_BASE_URL:", CASHFREE_BASE_URL);
-
-if (!CASHFREE_BASE_URL) {
-  console.error("❌ CASHFREE_BASE_URL is not defined in environment variables");
-}
+if(CASHFREE_BASE_URL)console.log("URL");
+else console.log("No url");
+if(CASHFREE_CLIENT_ID) console.log("Id");
+else console.log("No id");
+if(CASHFREE_CLIENT_SECRET) console.log("Secret");
+else console.log("No secret");
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
