@@ -4,7 +4,7 @@ import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 import LogoutBtn from "./Logout";
-import useAuth from "./context/AuthContext"
+import {useAuth} from "./context/AuthContext"
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
