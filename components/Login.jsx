@@ -18,7 +18,8 @@ const Login = () => {
       );
 
       console.log(res.data);
-      const { token, role, name } = res.data;
+      const { token, user} = res.data;
+      const { name, role} = user;
 
       // Store token and role
       localStorage.setItem("token", token);
