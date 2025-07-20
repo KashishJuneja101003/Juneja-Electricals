@@ -34,7 +34,7 @@ function Navbar() {
         style={{ backgroundColor: "rgb(250, 250, 250)" }}
       >
         {/* Left Div */}
-        <div className="flex justify-between w-[50%] md:w-[10%] lg:w-[80%] xl:w-[70%] items-center gap-2">
+        <div className="flex justify-between items-center gap-2">
           {/* Logo + Name */}
           <Link to="/">
             <div className="flex items-center gap-3 p-1">
@@ -54,7 +54,7 @@ function Navbar() {
         </div>
 
         {/* Right Div for desktop */}
-        <div className="hidden md:flex md:w-[100%] gap-6 items-center justify-end pr-8">
+        <div className="hidden bord md:flex gap-6 items-center justify-end pr-8">
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => setCategoryOpen(!categoryOpen)}
@@ -98,6 +98,8 @@ function Navbar() {
             ></i>
           </div>
           {<Cart />}
+          
+          {/* login - logout */}
           {(() => {
             const token = localStorage.getItem("token");
             const user = JSON.parse(localStorage.getItem("user"));
