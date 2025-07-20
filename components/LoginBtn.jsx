@@ -14,7 +14,7 @@ const LoginBtn = () => {
   }, []);
 
   return userName ? (
-    <div className="text-blue-800 font-semibold px-4 py-2">
+    <div className="flex gap-3 text-blue-800 font-semibold px-4 py-2">
       Hi, {userName.split(" ")[0]} 👋
       <LogoutBtn/>
     </div>
