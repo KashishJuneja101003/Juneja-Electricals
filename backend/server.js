@@ -8,11 +8,12 @@ const authRoutes = require("./routes/auth");
 const paymentRoutes = require("./routes/payment")
 
 const app = express();
-app.options("*", cors({
-  origin: "https://junejaelectricals.netlify.app",
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: "https://junejaelectricals.netlify.app", // frontend domain
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/products", productRoutes);
