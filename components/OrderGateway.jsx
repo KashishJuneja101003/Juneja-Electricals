@@ -36,13 +36,13 @@ const OrderGateway = () => {
 
       const paymentSessionId = res.data.payment_session_id;
 
-      if (window.Cashfree) {
+      if (window.Cashfree && typeof window.Cashfree.checkout === "function") {
         window.Cashfree.checkout({
           paymentSessionId,
           redirectTarget: "_self",
         });
       } else {
-        console.error("Cashfree SDK not loaded yet.");
+        console.error("Cashfree SDK not ready yet.");
       }
     } catch (error) {
       console.error("Payment initiation failed:", error);

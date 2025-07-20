@@ -51,7 +51,6 @@ router.post("/create-order", verifyToken, async (req, res) => {
         customer_id: req.user.userId, // required
         customer_email: user.email || "demo@email.com", // required
         customer_name: user.name || "Customer", // required
-        customer_phone: user.phone || "9999999999", // optional
       },
       order_meta: {
         return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
