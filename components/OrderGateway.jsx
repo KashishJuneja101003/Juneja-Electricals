@@ -15,6 +15,8 @@ const OrderGateway = () => {
       alert("Please log in to proceed with payment.");
       navigate("/login");
       return;
+    } else{
+      console.log(token);
     }
 
     try {
