@@ -17,13 +17,15 @@ const Login = () => {
         formData
       );
 
-      const { token, role } = res.data;
+      const { token, role, name } = res.data;
 
       // Store token and role
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
+      localStorage.setItem("user", JSON.stringify({ name }));
 
       alert("Login Successful!");
+      console.log(name, "logged in!");
 
       // Role-based redirection
       if (role === "admin") {

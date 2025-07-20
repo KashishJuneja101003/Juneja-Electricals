@@ -5,7 +5,6 @@ const LoginBtn = () => {
   const [userName, setUserName] = useState(null);
 
   useEffect(() => {
-    // Example: assuming you store user info like this after login
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.name) {
