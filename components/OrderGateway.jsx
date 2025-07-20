@@ -17,7 +17,7 @@ const OrderGateway = () => {
       navigate("/login");
       return;
     } else {
-      console.log(token);
+      console.log("Got Token");
     }
 
     try {
@@ -37,7 +37,6 @@ const OrderGateway = () => {
       const paymentSessionId = res.data.payment_session_id;
 
       if (window.Cashfree) {
-        window.Cashfree.initPopup();
         window.Cashfree.checkout({
           paymentSessionId,
           redirectTarget: "_self",
