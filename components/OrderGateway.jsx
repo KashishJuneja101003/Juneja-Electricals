@@ -2,6 +2,7 @@ import { useCart } from "./context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { loadCashfreeSDK } from "../src/utils/loadCashFree";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -20,6 +21,9 @@ const OrderGateway = () => {
     }
 
     try {
+      // ✅ Load SDK before anything else
+      await loadCashfreeSDK();
+
       const res = await axios.post(
         `${BASE_URL}/create-order`,
         { amount: grandTotal },
@@ -41,7 +45,6 @@ const OrderGateway = () => {
       } else {
         console.error("Cashfree SDK not loaded yet.");
       }
-
     } catch (error) {
       console.error("Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
