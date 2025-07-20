@@ -25,7 +25,9 @@ router.post("/create-order", verifyToken, async (req, res) => {
     console.log("🧾 Token user:", req.user);
     console.log("💰 Amount received:", req.body.amount);
 
-    const user = await User.findById(req.user._id);
+    console.log("🔎 Looking up user with ID:", req.user.userId);
+
+    const user = await User.findById(req.user.userId);
     if (!user) {
       console.log("❌ User not found");
       return res.status(404).json({ error: "User Not Found" });
