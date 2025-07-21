@@ -60,6 +60,7 @@ const OrderGateway = () => {
           paymentSessionId,
           container: "cashfree-dropin-container",
           redirectTarget: "_self",
+          mode: production
         });
       } else {
         console.error("❌ SDK still not available after loading.");

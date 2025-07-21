@@ -1,8 +1,8 @@
 export const loadCashfreeSDK = () => {
   return new Promise((resolve, reject) => {
-    if (window.Cashfree && typeof window.Cashfree.load === "function") {
+    if (window.Cashfree && typeof window.Cashfree === "object") {
       console.log("✅ Cashfree SDK already loaded.");
-      return resolve();
+      return resolve(window.Cashfree);
     }
 
     const script = document.createElement("script");
@@ -12,24 +12,25 @@ export const loadCashfreeSDK = () => {
     script.type = "text/javascript";
 
     script.onload = () => {
-      console.log("✅ Script tag loaded, checking for Cashfree object...");
-      
-      // Retry mechanism
-      let retries = 10;
-      const checkInterval = setInterval(() => {
-        if (window.Cashfree && typeof window.Cashfree.load === "function") {
-          clearInterval(checkInterval);
-          console.log("✅ Cashfree SDK is ready.");
-          resolve();
+      console.log("✅ Script tag loaded, waiting for Cashfree object...");
+
+      const maxAttempts = 500;
+      let attempts = 0;
+
+      const checkSDK = () => {
+        if (window.Cashfree && typeof window.Cashfree === "object") {
+          console.log("✅ Cashfree SDK is now available.");
+          resolve(window.Cashfree);
+        } else if (attempts < maxAttempts) {
+          attempts++;
+          setTimeout(checkSDK, 200);
         } else {
-          retries--;
-          console.warn(`⏳ Waiting for Cashfree... (${10 - retries}/10)`);
-          if (retries === 0) {
-            clearInterval(checkInterval);
-            reject(new Error("Cashfree SDK not initialized in time."));
-          }
+          console.error("❌ Cashfree object still undefined after script load.");
+          reject(new Error("Cashfree SDK not initialized in time."));
         }
-      }, 200); // 200ms x 10 = 2s max wait
+      };
+
+      checkSDK();
     };
 
     script.onerror = () => {
