@@ -3,14 +3,19 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const verifyToken = require("../middlewares/verifyToken");
-const { Cashfree } = require("cashfree-pg");
 
-// ✅ Step 1: Init Cashfree instance
+// ✅ NEW: Import `Cashfree`, and explicitly import `orders` module
+const { Cashfree, Orders } = require("cashfree-pg");
+
+// ✅ Step 1: Initialize Cashfree
 const cf = new Cashfree({
-  env: "PRODUCTION", // or "SANDBOX"
   clientId: process.env.CASHFREE_CLIENT_ID,
   clientSecret: process.env.CASHFREE_CLIENT_SECRET,
+  env: "PRODUCTION", // or "SANDBOX"
 });
+
+// ✅ Step 2: Attach the `Orders` module
+cf.orders = new Orders(cf);
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
@@ -20,10 +25,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    // ✅ Step 2: Load the orders module
-    await cf.orders.use();
-
-    // ✅ Step 3: Create order
+    // ✅ Step 3: Call createOrder now that cf.orders is properly initialized
     const response = await cf.orders.createOrder({
       order_id: orderId,
       order_amount: amount,
