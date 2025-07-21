@@ -34,6 +34,7 @@ const OrderGateway = () => {
         }
       );
 
+      console.log("🧾 Backend Response:", res.data);
       const paymentSessionId = res.data.payment_session_id;
 
       if (window.Cashfree && typeof window.Cashfree.checkout === "function") {
