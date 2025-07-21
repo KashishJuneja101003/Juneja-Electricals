@@ -8,6 +8,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    phone: "",
     role: "customer", // default role
   });
 
@@ -18,7 +19,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://juneja-electricals-backend.onrender.com/api/auth/register", formData);
+      await axios.post(
+        "https://juneja-electricals-backend.onrender.com/api/auth/register",
+        formData
+      );
       alert("Registered Successfully!");
       navigate("/login");
     } catch (err) {
@@ -33,7 +37,9 @@ const Register = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-start items-start border-2  rounded-4xl m-3 text-lg p-5 gap-4 bg-cyan-50"
       >
-        <h1 className="text-2xl text-center text-emerald-900 font-semibold">Register Yourself on Juneja Electricals!</h1>
+        <h1 className="text-2xl text-center text-emerald-900 font-semibold">
+          Register Yourself on Juneja Electricals!
+        </h1>
         {/* Name */}
         <div className="w-full">
           <label className="font-semibold">Enter your name:</label>
@@ -76,6 +82,20 @@ const Register = () => {
           />
         </div>
 
+        {/* Phone */}
+        <div className="w-full">
+          <label className="font-semibold">Enter phone number:</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Enter phone number"
+            className="border border-black-300 w-full p-2 rounded-md"
+            required
+          />
+        </div>
+
         {/* Role Dropdown (Optional for testing) */}
         {/* <div className="w-full">
           <label className="font-semibold">Select Role:</label>
@@ -88,7 +108,7 @@ const Register = () => {
             <option value="customer">Customer</option>
             <option value="admin">Admin</option>
           </select>
-        </div> */} 
+        </div> */}
 
         <div className="w-full flex justify-center gap-2 mt-4">
           <button
