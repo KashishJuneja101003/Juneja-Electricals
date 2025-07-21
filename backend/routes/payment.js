@@ -19,6 +19,7 @@ else console.log("No secret");
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
     console.log("🧪 Received /create-order request");
+    console.log("🔐 Received token:", req.headers.authorization);
     console.log("🧾 Token user:", req.user);
     console.log("💰 Amount received:", req.body.amount);
 
