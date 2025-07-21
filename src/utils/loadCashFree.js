@@ -5,13 +5,13 @@ export const loadCashfreeSDK = () => {
       return resolve();
     }
 
-    const existingScript = document.getElementById("cashfree-sdk");
-    if (existingScript) {
-      console.log("⚠️ SDK script already in DOM, waiting for it to load...");
-      existingScript.addEventListener("load", resolve);
-      existingScript.addEventListener("error", reject);
-      return;
-    }
+    // const existingScript = document.getElementById("cashfree-sdk");
+    // if (existingScript) {
+    //   console.log("⚠️ SDK script already in DOM, waiting for it to load...");
+    //   existingScript.addEventListener("load", resolve);
+    //   existingScript.addEventListener("error", reject);
+    //   return;
+    // }
 
     const script = document.createElement("script");
     script.id = "cashfree-sdk";
