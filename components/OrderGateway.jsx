@@ -28,9 +28,6 @@ const OrderGateway = () => {
     }
 
     try {
-      // ✅ Load SDK before anything else
-      await loadCashfreeSDK();
-
       console.log("🧪 Sending token:", token);
 
       console.log(
@@ -55,15 +52,17 @@ const OrderGateway = () => {
       console.log("🧾 Backend Response:", res.data);
       const paymentSessionId = res.data.payment_session_id;
 
-      if (window.Cashfree?.load) {
-        console.log("✅ SDK ready — loading drop-in...");
+      await loadCashfreeSDK();
+
+      if (window.Cashfree && typeof window.Cashfree.load === "function") {
+        console.log("✅ SDK ready — calling Cashfree.load()");
         window.Cashfree.load({
           paymentSessionId,
           container: "cashfree-dropin-container",
           redirectTarget: "_self",
         });
       } else {
-        console.error("❌ SDK loaded but Cashfree.load is missing");
+        console.error("❌ SDK still not available after loading.");
       }
     } catch (error) {
       console.error("Payment initiation failed:", error);
