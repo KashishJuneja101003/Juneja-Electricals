@@ -15,7 +15,7 @@ export const loadCashfreeSDK = () => {
 
     const script = document.createElement("script");
     script.id = "cashfree-sdk";
-    script.src = "https://sdk.cashfree.com/js/ui/2.0.0/dropin.min.js";
+    script.src = "https://cdn.jsdelivr.net/npm/cashfree-sdk@0.1.1/index.min.js";
     script.async = true;
     script.onload = () => {
       console.log("✅ Cashfree SDK loaded via script tag.");
