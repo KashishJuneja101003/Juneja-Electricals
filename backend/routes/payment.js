@@ -4,13 +4,13 @@ const router = express.Router();
 const axios = require("axios");
 const User = require("../models/User");
 const verifyToken = require("../middlewares/verifyToken");
-const { Cashfree } = require("cashfree-pg");
+const { CashfreePG } = require("cashfree-pg");
 
 const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
   process.env;
 
-var cashfree = new Cashfree(
-  Cashfree.SANDBOX,
+const cashfree = new CashfreePG.Cashfree(
+  CashfreePG.Cashfree.SANDBOX,
   CASHFREE_CLIENT_ID,
   CASHFREE_CLIENT_SECRET
 );
@@ -62,7 +62,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
-    // ✅ FIXED: use correct method with await
+    // ✅ use method with await
     const response = await cashfree.PG.createOrder(data);
 
     console.log("✅ Cashfree order created:", response.data);
