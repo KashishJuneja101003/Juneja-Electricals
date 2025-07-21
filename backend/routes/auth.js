@@ -47,6 +47,8 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
+    console.log("🔑 [LOGIN] JWT_SECRET:", process.env.JWT_SECRET);
+
     // Create JWT token
     const token = jwt.sign(
       { userId: user._id, role: user.role },
