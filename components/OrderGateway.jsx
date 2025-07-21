@@ -24,6 +24,8 @@ const OrderGateway = () => {
       // ✅ Load SDK before anything else
       await loadCashfreeSDK();
 
+      console.log("🧪 Sending token:", token);
+
       const res = await axios.post(
         `${BASE_URL}/create-order`,
         { amount: grandTotal },
