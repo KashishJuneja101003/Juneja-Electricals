@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const User = require("../models/User");
-const verifyToken = require("../middlewares/authMiddleware");
+const verifyToken = require("../middlewares/verifyToken");
 
 const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
   process.env;
@@ -74,6 +74,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
     );
 
     console.log("✅ Cashfree order created:", response.data);
+    res.status(200).json({ message: "Order created!" });
 
     return res.json(response.data);
   } catch (error) {

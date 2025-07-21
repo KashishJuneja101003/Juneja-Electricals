@@ -1,33 +1,26 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  console.log("🛡️ [VERIFY] JWT_SECRET:", process.env.JWT_SECRET);
-
-  const authHeader = req.headers.authorization;
-  console.log("🛡️ Auth header received:", authHeader);
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.log("❌ Token missing or invalid format");
-    return res.status(403).json({ message: "No token provided" });
-  }
-
-  if (!process.env.JWT_SECRET) {
-    console.error("❌ JWT_SECRET is not defined in environment!");
-    return res.status(500).json({ message: "Server misconfiguration" });
-  }
-
-  const token = authHeader.split(" ")[1];
   try {
+    console.log("🛡️ [VERIFY] JWT_SECRET:", process.env.JWT_SECRET);
+    const authHeader = req.headers.authorization;
+    console.log("🛡️ Auth header received:", authHeader);
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      console.log("❌ Token missing or invalid format");
+      return res.status(403).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+
     console.log("✅ Token verified:", decoded);
+    req.user = decoded;
     next();
+
   } catch (err) {
     console.log("❌ Token verification failed:", err.message);
-    return res.status(403).json({
-      message: "Invalid token",
-      error: err.message, // 👈 Add this
-    });
+    res.status(403).json({ message: "Invalid token", error: err.message });
   }
 };
 
