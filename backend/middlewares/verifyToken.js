@@ -11,6 +11,11 @@ const verifyToken = (req, res, next) => {
     return res.status(403).json({ message: "No token provided" });
   }
 
+  if (!process.env.JWT_SECRET) {
+    console.error("❌ JWT_SECRET is not defined in environment!");
+    return res.status(500).json({ message: "Server misconfiguration" });
+  }
+
   const token = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
