@@ -44,15 +44,16 @@ const OrderGateway = () => {
 
       // Poll until SDK is ready
       const waitForCashfree = () => {
-        if (window.Cashfree && typeof window.Cashfree.checkout === "function") {
+        if (window.Cashfree && typeof window.Cashfree.load === "function") {
           console.log("✅ Cashfree SDK is ready.");
-          window.Cashfree.checkout({
+          window.Cashfree.load({
             paymentSessionId,
+            container: "cashfree-dropin-container",
             redirectTarget: "_self",
           });
         } else {
           console.log("⏳ Waiting for Cashfree SDK...");
-          setTimeout(waitForCashfree, 200); // Poll every 200ms
+          setTimeout(waitForCashfree, 500); // Poll every 500ms
         }
       };
 
