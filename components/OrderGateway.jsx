@@ -55,22 +55,16 @@ const OrderGateway = () => {
       console.log("🧾 Backend Response:", res.data);
       const paymentSessionId = res.data.payment_session_id;
 
-      // Poll until SDK is ready
-      const waitForCashfree = () => {
-        if (window.Cashfree && typeof window.Cashfree.load === "function") {
-          console.log("✅ Cashfree SDK is ready.");
-          window.Cashfree.load({
-            paymentSessionId,
-            container: "cashfree-dropin-container",
-            redirectTarget: "_self",
-          });
-        } else {
-          console.log("⏳ Waiting for Cashfree SDK...");
-          setTimeout(waitForCashfree, 1000); // Poll every 1000ms
-        }
-      };
-
-      waitForCashfree();
+      if (window.Cashfree?.load) {
+        console.log("✅ SDK ready — loading drop-in...");
+        window.Cashfree.load({
+          paymentSessionId,
+          container: "cashfree-dropin-container",
+          redirectTarget: "_self",
+        });
+      } else {
+        console.error("❌ SDK loaded but Cashfree.load is missing");
+      }
     } catch (error) {
       console.error("Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
