@@ -4,10 +4,14 @@
   const axios = require("axios");
   const User = require("../models/User");
   const verifyToken = require("../middlewares/verifyToken");
-
+  import { Cashfree } from "cashfree-pg";
+  
+  
   const { CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET, CASHFREE_BASE_URL } =
-    process.env;
-
+  process.env;
+  
+  var cashfree = new Cashfree(Cashfree.SANDBOX, CASHFREE_CLIENT_ID, CASHFREE_CLIENT_SECRET)
+  
   // Debug log
   if (CASHFREE_BASE_URL) console.log("URL");
   else console.log("No url");
@@ -59,19 +63,25 @@
         },
       };
 
+      Cashfree.PGCreateOrder(data).then((response) => {
+        console.log("Order Created Successfully:", response.data);
+      }).catch((error) => {
+        console.log('Error:', error.response.data.message);
+      })
+
       // 💥 Cashfree request
-      const response = await axios.post(
-        `${process.env.CASHFREE_BASE_URL}/orders`,
-        data,
-        {
-          headers: {
-            "x-api-version": "2022-09-01",
-            "x-client-id": process.env.CASHFREE_CLIENT_ID,
-            "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const response = await axios.post(
+      //   `${process.env.CASHFREE_BASE_URL}/orders`,
+      //   data,
+      //   {
+      //     headers: {
+      //       "x-api-version": "2022-09-01",
+      //       "x-client-id": process.env.CASHFREE_CLIENT_ID,
+      //       "x-client-secret": process.env.CASHFREE_CLIENT_SECRET,
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
       console.log("✅ Cashfree order created:", response.data);
 

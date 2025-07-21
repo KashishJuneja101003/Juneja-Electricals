@@ -1,4 +1,4 @@
-export const loadCashfreeSDK = () => {
+export const loadCashfreeSDK = () => {  
   return new Promise((resolve, reject) => {
     if (window.Cashfree && typeof window.Cashfree === "object") {
       console.log("✅ Cashfree SDK already loaded.");
