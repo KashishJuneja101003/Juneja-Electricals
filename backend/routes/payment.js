@@ -5,8 +5,9 @@ const User = require("../models/User");
 const verifyToken = require("../middlewares/verifyToken");
 const { Cashfree } = require("cashfree-pg");
 
+// ✅ Step 1: Init Cashfree instance
 const cf = new Cashfree({
-  env: "PRODUCTION",
+  env: "PRODUCTION", // or "SANDBOX"
   clientId: process.env.CASHFREE_CLIENT_ID,
   clientSecret: process.env.CASHFREE_CLIENT_SECRET,
 });
@@ -19,30 +20,29 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    const orderData = {
+    // ✅ Step 2: Load the orders module
+    await cf.orders.use();
+
+    // ✅ Step 3: Create order
+    const response = await cf.orders.createOrder({
       order_id: orderId,
       order_amount: amount,
       order_currency: "INR",
       customer_details: {
         customer_id: req.user.userId,
-        customer_email: user.email || "demo@email.com",
-        customer_name: user.name || "Customer",
-        customer_phone: user.phone || "9999999999",
+        customer_email: user.email,
+        customer_phone: user.phone,
+        customer_name: user.name,
       },
       order_meta: {
         return_url: `https://junejaelectricals.netlify.app/payment-success?order_id={order_id}`,
       },
-    };
-
-    const response = await cf.orders.createOrder(orderData);
+    });
 
     console.log("✅ Order created:", response);
     res.status(200).json(response);
   } catch (error) {
-    console.error(
-      "❌ Order creation failed:",
-      error.response?.data || error.message
-    );
+    console.error("❌ Order creation failed:", error.response?.data || error.message);
     res.status(500).json({ error: "Failed to create order" });
   }
 });
