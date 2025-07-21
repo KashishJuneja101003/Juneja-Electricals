@@ -26,6 +26,9 @@ const OrderGateway = () => {
 
       console.log("🧪 Sending token:", token);
 
+      console.log("🧪 Cashfree Client ID:", process.env.CASHFREE_CLIENT_ID);
+      console.log("🧪 Cashfree Base URL:", process.env.CASHFREE_BASE_URL);
+
       const res = await axios.post(
         `${BASE_URL}/create-order`,
         { amount: grandTotal },
