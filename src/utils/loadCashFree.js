@@ -1,7 +1,7 @@
 export const loadCashfreeSDK = () => {
   return new Promise((resolve, reject) => {
-    if (window.Cashfree && typeof window.Cashfree.checkout === "function") {
-      resolve();
+    if (window.Cashfree) {
+      resolve(window.Cashfree);
       return;
     }
 
@@ -9,14 +9,10 @@ export const loadCashfreeSDK = () => {
     script.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
     script.async = true;
     script.onload = () => {
-      console.log("✅ Cashfree SDK loaded");
-      resolve();
+      if (window.Cashfree) resolve(window.Cashfree);
+      else reject("❌ Cashfree SDK failed to initialize");
     };
-    script.onerror = (e) => {
-      console.error("❌ SDK failed to load", e);
-      reject("Cashfree SDK failed to load");
-    };
-
+    script.onerror = () => reject("❌ Failed to load Cashfree SDK");
     document.body.appendChild(script);
   });
 };
