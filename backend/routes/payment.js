@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({path: "../.env"});
 const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
@@ -10,6 +10,7 @@ const cf = new Cashfree(Cashfree.SANDBOX,
   process.env.CASHFREE_CLIENT_SECRET
 );
 
+console.log(process.env.CASHFREE_CLIENT_ID, process.env.CASHFREE_CLIENT_SECRET);
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
     const { amount } = req.body;
