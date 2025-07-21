@@ -53,7 +53,7 @@ const OrderGateway = () => {
           });
         } else {
           console.log("⏳ Waiting for Cashfree SDK...");
-          setTimeout(waitForCashfree, 500); // Poll every 500ms
+          setTimeout(waitForCashfree, 1000); // Poll every 1000ms
         }
       };
 
