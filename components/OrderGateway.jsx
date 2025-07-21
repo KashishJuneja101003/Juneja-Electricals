@@ -7,6 +7,13 @@ import { loadCashfreeSDK } from "../src/utils/loadCashFree";
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
+  useEffect(() => {
+    loadCashfreeSDK().then(() => {
+      console.log("✅ SDK loaded", window.Cashfree);
+      // ...initialize payment
+    });
+  }, []);
+
   const navigate = useNavigate();
   // Cashfree Gateway
   const handlePayment = async () => {
@@ -26,8 +33,14 @@ const OrderGateway = () => {
 
       console.log("🧪 Sending token:", token);
 
-      console.log("🧪 VITE Cashfree Client ID:", import.meta.env.VITE_CASHFREE_CLIENT_ID);
-      console.log("🧪 VITE Cashfree Base URL:", import.meta.env.VITE_CASHFREE_BASE_URL);
+      console.log(
+        "🧪 VITE Cashfree Client ID:",
+        import.meta.env.VITE_CASHFREE_CLIENT_ID
+      );
+      console.log(
+        "🧪 VITE Cashfree Base URL:",
+        import.meta.env.VITE_CASHFREE_BASE_URL
+      );
 
       const res = await axios.post(
         `${BASE_URL}/create-order`,
