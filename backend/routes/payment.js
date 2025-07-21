@@ -5,11 +5,10 @@ const verifyToken = require("../middlewares/verifyToken");
 const User = require("../models/User");
 const { Cashfree } = require("cashfree-pg");
 
-const cf = new Cashfree({
-  clientId: process.env.CASHFREE_CLIENT_ID,
-  clientSecret: process.env.CASHFREE_CLIENT_SECRET,
-  env: "PRODUCTION", // or "SANDBOX"
-});
+const cf = new Cashfree(Cashfree.SANDBOX, 
+  process.env.CASHFREE_CLIENT_ID, 
+  process.env.CASHFREE_CLIENT_SECRET
+);
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
