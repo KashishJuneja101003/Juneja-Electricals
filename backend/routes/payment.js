@@ -35,7 +35,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       order_meta: {
         return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
       },
-      payment_modes: {
+      payment_methods: {
         card: {},
         upi: { flow: "intent" }, // or "collect" / "qrcode"
         netbanking: {},

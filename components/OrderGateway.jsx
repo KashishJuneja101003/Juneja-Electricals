@@ -82,26 +82,38 @@ const OrderGateway = () => {
       //   },
       // });
 
-      const cashfree = await window.Cashfree();
+      // const cashfree = await window.Cashfree();
 
-      await cashfree.drop({
-        paymentSessionId: sessionId,
-        container: "#drop_in_container",
-        components: ["card", "upi", "upi-qrcode", "netbanking"],
-        style: {
-          theme: "light",
-          backgroundColor: "#f3f4f6",
-          color: "#111827",
-        },
-        onSuccess: (data) => {
-          console.log("✅ Payment Successful:", data);
-          alert("Payment Successful!");
-        },
-        onFailure: (data) => {
-          console.error("❌ Payment Failed:", data);
-          alert("Payment Failed.");
-        },
-      });
+      // await cashfree.drop({
+      //   paymentSessionId: sessionId,
+      //   container: "#drop_in_container",
+      //   components: ["card", "upi", "upi-qrcode", "netbanking"],
+      //   style: {
+      //     theme: "light",
+      //     backgroundColor: "#f3f4f6",
+      //     color: "#111827",
+      //   },
+      //   onSuccess: (data) => {
+      //     console.log("✅ Payment Successful:", data);
+      //     alert("Payment Successful!");
+      //     navigate("/thank-you");
+      //   },
+      //   onFailure: (data) => {
+      //     console.error("❌ Payment Failed:", data);
+      //     alert("Payment Failed.");
+      //   },
+      // });
+
+      const options = {
+        method: 'POST',
+        headers: {'x-api-version': '2023-08-01', 'Content-Type': 'application/json'},
+        body: `{"payment_session_id": ${sessionId},"payment_method":{"upi":{"channel":"collect"}}}`
+      };
+
+      fetch('https://api.cashfree.com/pg/orders/sessions', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
