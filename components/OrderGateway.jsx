@@ -57,14 +57,21 @@ const OrderGateway = () => {
       );
       console.log("🔑 Received sessionId:", res.data);
 
-      const sessionId = res.data.payment_session_id;
+      const sessionId = res.data.session_id;
       console.log("📤 Passing orderToken to Drop-in:", sessionId);
+
+      if (!sessionId) {
+        console.error("❌ Invalid session ID");
+        alert("Payment setup failed.");
+        return;
+      }
 
       // Initialize drop-in using your custom Cashfree class
       const cashfreeInstance = new window.Cashfree();
 
-      cashfreeInstance.initialiseDropin(dropinContainerRef.current, {
-        orderToken: sessionId,
+      cashfreeInstance.initialiseDropin({
+        orderToken: sessionId, // ✅ correct
+        container: dropinContainerRef.current, // ✅ move here
         components: ["card", "upi", "upi-qrcode", "netbanking"],
         style: {
           theme: "light",
