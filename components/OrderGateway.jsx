@@ -71,7 +71,6 @@ const OrderGateway = () => {
 
       cashfreeInstance.initialiseDropin(dropinContainerRef.current,{
         paymentSessionId: sessionId, // ✅ correct
-        orderToken: sessionId,
         components: ["card", "upi", "upi-qrcode", "netbanking"],
         style: {
           theme: "light",
