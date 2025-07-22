@@ -35,7 +35,13 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
-    const response = await Cashfree.PGCreateOrder(data);
+    const cf = new Cashfree.PG({
+      env: "PROD",
+      clientId: process.env.CASHFREE_CLIENT_ID,
+      clientSecret: process.env.CASHFREE_CLIENT_SECRET,
+    })
+
+    const response = await cf.orders.create(data);
     console.log("✅ Order created:", response.data);
 
     const paymentSessionId = response.data.order_token;
