@@ -41,20 +41,13 @@ const OrderGateway = () => {
       const sessionId = res.data.payment_session_id;
       setPaymentSessionId(sessionId);
 
-      await load({
+      const cashfree =  await load({
+        mode: "PROD", // or "SANDBOX"
+      });
+
+      cashfree.checkout({
         paymentSessionId: sessionId,
         redirectTarget: "_self",
-        container: "#cashfree-dropin-container",
-        onSuccess: (data) => {
-          console.log("✅ Payment Success:", data);
-          alert("Payment successful!");
-          navigate("/orders");
-        },
-        onFailure: (error) => {
-          console.error("❌ Payment Failed:", error);
-          alert("Payment failed. Try again.");
-        },
-        mode: "PROD", // or "SANDBOX"
       });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
