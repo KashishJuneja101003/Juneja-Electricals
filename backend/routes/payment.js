@@ -3,14 +3,9 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const User = require("../models/User");
-const { Cashfree } = require("cashfree-pg");
+const cashfree = require("cashfree-pg");
 
-Cashfree.XClientId = process.env.CASHFREE_CLIENT_ID;
-Cashfree.XClientSecret = process.env.CASHFREE_CLIENT_SECRET;
-Cashfree.XEnvironment = Cashfree.PRODUCTION;
-
-console.log("🛡️ CASHFREE_CLIENT_ID:", process.env.CASHFREE_CLIENT_ID);
-console.log("🛡️ CASHFREE_CLIENT_SECRET:", process.env.CASHFREE_CLIENT_SECRET);
+const PG = cashfree.PG;
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
@@ -20,7 +15,13 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    const data = {
+    const pgInstance = new PG({
+      env: "PROD", // or "SANDBOX" during testing
+      clientId: process.env.CASHFREE_CLIENT_ID,
+      clientSecret: process.env.CASHFREE_CLIENT_SECRET,
+    });
+
+    const orderPayload = {
       order_id: orderId,
       order_amount: amount,
       order_currency: "INR",
@@ -35,18 +36,13 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
-    const cf = new Cashfree.PG({
-      env: "PROD",
-      clientId: process.env.CASHFREE_CLIENT_ID,
-      clientSecret: process.env.CASHFREE_CLIENT_SECRET,
-    })
+    const response = await pgInstance.orders.create(orderPayload);
 
-    const response = await cf.orders.create(data);
     console.log("✅ Order created:", response.data);
 
-    const paymentSessionId = response.data.order_token;
-
-    res.status(200).json({ payment_session_id: paymentSessionId });
+    res.status(200).json({
+      payment_session_id: response.data.order_token,
+    });
   } catch (error) {
     console.error("❌ Order creation failed:", error.response?.data || error.message);
     res.status(500).json({ error: "Failed to create order" });
