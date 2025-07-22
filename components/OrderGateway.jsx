@@ -41,12 +41,10 @@ const OrderGateway = () => {
       const sessionId = res.data.payment_session_id;
       setPaymentSessionId(sessionId);
 
-      const cashfree = await load({ mode: "PROD" }); // Use "SANDBOX" for testing
-
-      await cashfree.createDropin({
+      await load({
         paymentSessionId: sessionId,
-        container: "#cashfree-dropin-container",
         redirectTarget: "_self",
+        container: "#cashfree-dropin-container",
         onSuccess: (data) => {
           console.log("✅ Payment Success:", data);
           alert("Payment successful!");
@@ -56,6 +54,7 @@ const OrderGateway = () => {
           console.error("❌ Payment Failed:", error);
           alert("Payment failed. Try again.");
         },
+        mode: "PROD", // or "SANDBOX"
       });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
@@ -152,7 +151,7 @@ const OrderGateway = () => {
           </div>
 
           <button
-            className="mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
+            className="mt-4 bg-emerald-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
             onClick={handlePayment}
           >
             Proceed to Payment
