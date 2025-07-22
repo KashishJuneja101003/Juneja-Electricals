@@ -42,7 +42,7 @@ const OrderGateway = () => {
     }
 
     try {
-      // Clear previous Drop-in if any
+      // Clear dropin container
       if (dropinContainerRef.current) {
         dropinContainerRef.current.innerHTML = "";
       }
@@ -58,14 +58,12 @@ const OrderGateway = () => {
 
       const sessionId = res.data.payment_session_id;
 
-      await window.Cashfree.init({
-        paymentSessionId: sessionId,
-        redirectTarget: "_self",
-      });
+      // Initialize drop-in using your custom Cashfree class
+      const cashfreeInstance = new window.Cashfree();
 
-      console.log("Loaded");
-
-      window.Cashfree.pay("#cashfree-dropin-container", {
+      cashfreeInstance.initialiseDropin(dropinContainerRef.current, {
+        orderToken: sessionId,
+        components: ["card", "upi-qrcode", "netbanking"],
         onSuccess: (data) => {
           console.log("✅ Payment Successful:", data);
           alert("Payment Successful!");
@@ -75,12 +73,8 @@ const OrderGateway = () => {
           console.error("❌ Payment Failed:", data);
           alert("Payment Failed.");
         },
-        onPending: (data) => {
-          console.warn("⏳ Payment Pending:", data);
-          alert("Payment is Pending.");
-        },
       });
-      console.log("Checked out");
+
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
