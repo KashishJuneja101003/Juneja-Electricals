@@ -51,6 +51,19 @@ const OrderGateway = () => {
     } else {
       console.error("Cashfree SDK not available.");
     }
+
+    if (window.Cashfree && window.Cashfree.PG) {
+      const cashfree = new window.Cashfree.PG();
+      await cashfree.init({
+        paymentSessionId,
+        redirectTarget: "_self"
+      })
+
+      cashfree.pay();
+    } else{
+      console.log("window.Cashfree or window.Cashfree.PG showing error");
+    }
+
   } catch (error) {
     console.error("Payment initiation failed:", error);
     alert("Something went wrong during payment. Please try again.");
