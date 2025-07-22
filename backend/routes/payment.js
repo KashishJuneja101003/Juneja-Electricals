@@ -48,7 +48,8 @@ router.post("/create-order", verifyToken, async (req, res) => {
 
     // Send payment session ID to frontend
     res.status(200).json({
-      payment_session_id: response.data.payment_session_id,
+      payment_session_id:
+        response.data.payment_session_id || response.data.payment_session, // backup fallback
     });
   } catch (err) {
     console.error("❌ Order creation failed:", {
