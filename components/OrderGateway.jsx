@@ -25,6 +25,37 @@ const OrderGateway = () => {
       return;
     }
 
+    {
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if (window.Cashfree) {
+            console.log(
+              "✅ Cashfree SDK loaded successfully:",
+              window.Cashfree
+            );
+            clearInterval(interval);
+          } else {
+            console.log("⏳ Waiting for Cashfree SDK to load...");
+          }
+        }, 500);
+
+        return () => clearInterval(interval);
+      }, []);
+
+      const cashfree = await window.Cashfree.load({
+        mode: "PROD", // or "SANDBOX"
+      });
+      console.log("✅ Cashfree loaded instance:", cashfree);
+
+      if (!window.Cashfree) {
+        console.error(
+          "❌ Cashfree SDK is not available. Check if the script is added in index.html"
+        );
+        alert("Payment system failed to load. Please try refreshing the page.");
+        return;
+      }
+    }
+
     try {
       if (dropinContainerRef.current) {
         dropinContainerRef.current.innerHTML = "";
@@ -41,7 +72,7 @@ const OrderGateway = () => {
       const sessionId = res.data.payment_session_id;
       setPaymentSessionId(sessionId);
 
-      const cashfree =  await load({
+      const cashfree = await load({
         mode: "PROD", // or "SANDBOX"
       });
 

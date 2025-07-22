@@ -15,6 +15,11 @@ window.addEventListener("load", () => {
     document.getElementById("root").style.display = "block"; // Show main content
     document.getElementById("footer").style.display = "block"; // Show main content
   }, 3);
+  if (window.Cashfree) {
+    console.log("✅ Cashfree SDK is ready");
+  } else {
+    console.log("❌ Cashfree SDK not found");
+  }
 });
 
 createRoot(document.getElementById("root")).render(
