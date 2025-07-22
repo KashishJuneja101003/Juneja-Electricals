@@ -9,7 +9,7 @@ const OrderGateway = () => {
   const navigate = useNavigate();
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
-  
+
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const gst = 0.18 * total;
   const grandTotal = total + gst;
@@ -105,15 +105,25 @@ const OrderGateway = () => {
       // });
 
       const options = {
-        method: 'POST',
-        headers: {'x-api-version': '2023-08-01', 'Content-Type': 'application/json'},
-        body: `{"payment_session_id": ${sessionId},"payment_method":{"upi":{"channel":"collect"}}}`
+        method: "POST",
+        headers: {
+          "x-api-version": "2023-08-01",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          payment_session_id: sessionId,
+          payment_method: {
+            upi: {
+              channel: "collect",
+            },
+          },
+        }),
       };
 
-      fetch('https://api.cashfree.com/pg/orders/sessions', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+      fetch("https://api.cashfree.com/pg/orders/sessions", options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
@@ -215,9 +225,7 @@ const OrderGateway = () => {
             Proceed to Payment
           </button>
 
-          <div
-            id="drop_in_container"
-          ></div>
+          <div id="drop_in_container"></div>
         </div>
       )}
     </div>
