@@ -9,8 +9,7 @@ const OrderGateway = () => {
   const navigate = useNavigate();
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
-  const dropinContainerRef = useRef(null);
-
+  
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const gst = 0.18 * total;
   const grandTotal = total + gst;
@@ -42,11 +41,6 @@ const OrderGateway = () => {
     }
 
     try {
-      // Clear dropin container
-      if (dropinContainerRef.current) {
-        dropinContainerRef.current.innerHTML = "";
-      }
-
       // Create order on server
       const res = await axios.post(
         `${BASE_URL}/create-order`,
@@ -88,15 +82,25 @@ const OrderGateway = () => {
       //   },
       // });
 
-      // Initialize Cashfree v3 SDK
-      window.Cashfree.init({
+      window.Cashfree.initDropin({
         paymentSessionId: sessionId,
-        redirectTarget: "_self", // Optional: use "_blank" or a returnUrl
+        target: "#drop_in_container",
+        components: ["card", "upi", "upi-qrcode", "netbanking"],
+        style: {
+          theme: "light",
+          backgroundColor: "#f3f4f6",
+          color: "#111827",
+        },
+        onSuccess: (data) => {
+          console.log("✅ Payment Successful:", data);
+          alert("Payment Successful!");
+          navigate("/thank-you");
+        },
+        onFailure: (data) => {
+          console.error("❌ Payment Failed:", data);
+          alert("Payment Failed.");
+        },
       });
-
-      // Trigger the payment popup/page
-      window.Cashfree.pay();
-      
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
@@ -199,9 +203,7 @@ const OrderGateway = () => {
           </button>
 
           <div
-            id="cashfree-dropin-container"
-            ref={dropinContainerRef}
-            className="mt-6 border-1 rounded-2xl p-3"
+            id="drop_in_container"
           ></div>
         </div>
       )}
