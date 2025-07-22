@@ -59,7 +59,6 @@ const OrderGateway = () => {
       const sessionId = res.data.payment_session_id;
 
       // Load Cashfree SDK if not loaded already
-      await load({ mode: "PROD" });
       console.log("✅ Cashfree SDK loaded");
 
       // Initialize Drop-in
