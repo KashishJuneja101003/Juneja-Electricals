@@ -55,8 +55,10 @@ const OrderGateway = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      console.log("🔑 Received sessionId:", res.data)
 
       const sessionId = res.data.payment_session_id;
+      console.log("📤 Passing orderToken to Drop-in:", sessionId);
 
       // Initialize drop-in using your custom Cashfree class
       const cashfreeInstance = new window.Cashfree();
@@ -184,7 +186,7 @@ const OrderGateway = () => {
           <div
             id="cashfree-dropin-container"
             ref={dropinContainerRef}
-            className="mt-6 border-2 p-3"
+            className="mt-6 border-1 rounded-2xl p-3"
           ></div>
         </div>
       )}
