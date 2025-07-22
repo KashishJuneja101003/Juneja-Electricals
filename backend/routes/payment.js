@@ -29,7 +29,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       customer_details: {
         customer_id: req.user.userId,
         customer_email: user.email,
-        customer_phone: user.phone,
+        customer_phone: `+91${user.phone}`,
         customer_name: user.name,
       },
       order_meta: {
@@ -37,7 +37,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
       payment_modes: {
         card: {},
-        upi: { flow: "qrcode" }, // or "collect" / "intent"
+        upi: { flow: "intent" }, // or "collect" / "qrcode"
         netbanking: {},
       },
     };
@@ -51,10 +51,12 @@ router.post("/create-order", verifyToken, async (req, res) => {
       payment_session_id: response.data.payment_session_id,
     });
   } catch (err) {
-    console.error(
-      "❌ Order creation failed:",
-      err.response?.data || err.message
-    );
+    console.error("❌ Order creation failed:", {
+      message: err.message,
+      response: err.response?.data,
+      status: err.response?.status,
+    });
+
     res.status(500).json({ error: "Failed to create order" });
   }
 });
