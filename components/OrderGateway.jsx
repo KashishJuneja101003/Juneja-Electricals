@@ -35,7 +35,7 @@ const OrderGateway = () => {
       const paymentSessionId = res.data.payment_session_id;
 
       const cashfree = await load({ mode: "PROD" }); // ✅ PROD or SANDBOX
-      await cashfree.initialiseDropin({
+      await cashfree.initDropin({
         paymentSessionId,
         redirectTarget: "_self",
         container: document.getElementById("cashfree-dropin-container"),
