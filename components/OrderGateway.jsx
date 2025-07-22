@@ -58,34 +58,29 @@ const OrderGateway = () => {
 
       const sessionId = res.data.payment_session_id;
 
-      // Load Cashfree SDK if not loaded already
-      console.log("✅ Cashfree SDK loaded");
-
-      // Initialize Drop-in
-      window.Cashfree.checkout({
+      await window.Cashfree.init({
         paymentSessionId: sessionId,
-        redirect: false,
-        container: "#cashfree-dropin-container",
-        style: {
-          // Optional: customize the look
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          padding: "20px",
-        },
+        redirectTarget: "_self",
+      });
+
+      console.log("Loaded");
+
+      window.Cashfree.pay("#cashfree-dropin-container", {
         onSuccess: (data) => {
-          console.log("✅ Payment Success", data);
+          console.log("✅ Payment Successful:", data);
           alert("Payment Successful!");
-          navigate("/"); // or thank-you page
+          navigate("/thank-you");
         },
         onFailure: (data) => {
-          console.error("❌ Payment Failed", data);
-          alert("Payment failed. Please try again.");
+          console.error("❌ Payment Failed:", data);
+          alert("Payment Failed.");
         },
         onPending: (data) => {
-          console.warn("⏳ Payment Pending", data);
-          alert("Payment is pending. Please wait.");
+          console.warn("⏳ Payment Pending:", data);
+          alert("Payment is Pending.");
         },
       });
+      console.log("Checked out");
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
