@@ -59,12 +59,16 @@ const OrderGateway = () => {
 
       const sessionId = res.data.payment_session_id;
 
-      const cashfree = await load({ mode: "PROD" });
+      await load({ mode: "PROD" });
 
-      await cashfree.checkout({
+      console.log("Loaded");
+
+      await window.Cashfree.checkout({
         paymentSessionId: sessionId,
         redirectTarget: "_self",
       });
+
+      console.log("Checked out");
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
