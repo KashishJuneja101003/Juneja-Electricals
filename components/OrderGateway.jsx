@@ -26,7 +26,6 @@ const OrderGateway = () => {
     }
 
     try {
-      // Clear existing dropin container content
       if (dropinContainerRef.current) {
         dropinContainerRef.current.innerHTML = "";
       }
@@ -39,33 +38,41 @@ const OrderGateway = () => {
         }
       );
 
-      setPaymentSessionId(res.data.payment_session_id); // trigger dropin rendering
-
+      setPaymentSessionId(res.data.payment_session_id);
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
     }
   };
 
-  // 👇 Renders Dropin after session ID is set and container exists
   useEffect(() => {
     const renderDropin = async () => {
       if (!paymentSessionId || !dropinContainerRef.current) return;
 
       try {
-        const cashfree = await load({ mode: "PROD" }); // or SANDBOX
-        await cashfree.initDropin({
+        const cashfree = await load({ mode: "PROD" }); // Use "SANDBOX" for testing
+
+        await cashfree.createDropin({
           paymentSessionId,
+          container: "#cashfree-dropin-container",
           redirectTarget: "_self",
-          container: dropinContainerRef.current,
+          onSuccess: (data) => {
+            console.log("✅ Payment Success:", data);
+            alert("Payment successful!");
+            navigate("/orders"); // or any success route
+          },
+          onFailure: (error) => {
+            console.error("❌ Payment Failed:", error);
+            alert("Payment failed. Try again.");
+          },
         });
       } catch (error) {
-        console.error("❌ Dropin initialization failed:", error);
+        console.error("❌ Dropin creation failed:", error);
       }
     };
 
     renderDropin();
-  }, [paymentSessionId]);
+  }, [paymentSessionId, navigate]);
 
   useEffect(() => {
     const fetchQuantityStatus = async () => {
@@ -162,7 +169,6 @@ const OrderGateway = () => {
             Proceed to Payment
           </button>
 
-          {/* ✅ Container for Cashfree Dropin */}
           <div
             id="cashfree-dropin-container"
             ref={dropinContainerRef}
