@@ -55,7 +55,7 @@ const OrderGateway = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log("🔑 Received sessionId:", res.data)
+      console.log("🔑 Received sessionId:", res.data);
 
       const sessionId = res.data.payment_session_id;
       console.log("📤 Passing orderToken to Drop-in:", sessionId);
@@ -63,11 +63,11 @@ const OrderGateway = () => {
       // Initialize drop-in using your custom Cashfree class
       const cashfreeInstance = new window.Cashfree();
 
-      cashfreeInstance.initialiseDropin(dropinContainerRef.current, {
+      cashfreeInstance.initialiseDropin({
         paymentSessionId: sessionId,
+        container: dropinContainerRef.current, // ✅ this should go inside config!
         components: ["card", "upi", "upi-qrcode", "netbanking"],
         style: {
-          // optional styling
           theme: "light",
           backgroundColor: "#f3f4f6",
           color: "#111827",
