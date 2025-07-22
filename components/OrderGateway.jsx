@@ -62,7 +62,7 @@ const OrderGateway = () => {
       console.log("✅ Cashfree SDK loaded");
 
       // Initialize Drop-in
-      window.Cashfree.initializeDropin({
+      window.Cashfree.checkout({
         paymentSessionId: sessionId,
         redirect: false,
         container: "#cashfree-dropin-container",
