@@ -48,7 +48,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
 
     // Send payment session ID to frontend
     res.status(200).json({
-      sessionId: response.data.payment_session_id, // ✅ exact key expected by Drop-in
+      payment_session_id: response.data.payment_session_id, // ✅ exact key expected by Drop-in
     });
   } catch (err) {
     console.error("❌ Order creation failed:", {

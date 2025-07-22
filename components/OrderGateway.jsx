@@ -57,7 +57,7 @@ const OrderGateway = () => {
       );
       console.log("🔑 Received sessionId:", res.data);
 
-      const {sessionId} = res.data;
+      const sessionId = res.data.payment_session_id;
       console.log("📤 Passing orderToken to Drop-in:", sessionId);
 
       if (!sessionId) {
@@ -70,7 +70,7 @@ const OrderGateway = () => {
       const cashfreeInstance = new window.Cashfree();
 
       cashfreeInstance.initialiseDropin(dropinContainerRef.current,{
-        Payment_session_id: sessionId, // ✅ correct
+        payment_session_id: sessionId, // ✅ correct
         orderToken: sessionId,
         components: ["card", "upi", "upi-qrcode", "netbanking"],
         style: {
