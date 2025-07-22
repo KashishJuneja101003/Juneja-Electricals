@@ -1,8 +1,8 @@
 import { useCart } from "./context/CartContext";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { load } from "@cashfreepayments/cashfree-js"; // ✅ Only use this
+import { load } from "@cashfreepayments/cashfree-js";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -10,6 +10,8 @@ const OrderGateway = () => {
   const navigate = useNavigate();
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
+  const [paymentSessionId, setPaymentSessionId] = useState(null);
+  const dropinContainerRef = useRef(null);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const gst = 0.18 * total;
@@ -24,6 +26,11 @@ const OrderGateway = () => {
     }
 
     try {
+      // Clear existing dropin container content
+      if (dropinContainerRef.current) {
+        dropinContainerRef.current.innerHTML = "";
+      }
+
       const res = await axios.post(
         `${BASE_URL}/create-order`,
         { amount: grandTotal },
@@ -32,27 +39,37 @@ const OrderGateway = () => {
         }
       );
 
-      const paymentSessionId = res.data.payment_session_id;
-
-      const cashfree = await load({ mode: "PROD" }); // ✅ PROD or SANDBOX
-      await cashfree.initDropin({
-        paymentSessionId,
-        redirectTarget: "_self",
-        container: document.getElementById("cashfree-dropin-container"),
-      }).catch((e) => {
-        console.log("❌ Dropin initialization failed:", e);
-      });
+      setPaymentSessionId(res.data.payment_session_id); // trigger dropin rendering
 
     } catch (error) {
-      console.error("Payment initiation failed:", error);
+      console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
     }
   };
 
+  // 👇 Renders Dropin after session ID is set and container exists
+  useEffect(() => {
+    const renderDropin = async () => {
+      if (!paymentSessionId || !dropinContainerRef.current) return;
+
+      try {
+        const cashfree = await load({ mode: "PROD" }); // or SANDBOX
+        await cashfree.initDropin({
+          paymentSessionId,
+          redirectTarget: "_self",
+          container: dropinContainerRef.current,
+        });
+      } catch (error) {
+        console.error("❌ Dropin initialization failed:", error);
+      }
+    };
+
+    renderDropin();
+  }, [paymentSessionId]);
+
   useEffect(() => {
     const fetchQuantityStatus = async () => {
       const newData = {};
-
       await Promise.all(
         cart.map(async (item) => {
           try {
@@ -145,7 +162,12 @@ const OrderGateway = () => {
             Proceed to Payment
           </button>
 
-          <div id="cashfree-dropin-container" className="mt-6 border-2 p-3">Container</div>
+          {/* ✅ Container for Cashfree Dropin */}
+          <div
+            id="cashfree-dropin-container"
+            ref={dropinContainerRef}
+            className="mt-6 border-2 p-3"
+          ></div>
         </div>
       )}
     </div>

@@ -10,15 +10,18 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const { amount } = req.body;
     const orderId = `order_${Date.now()}`;
 
+    // Find user from DB
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
+    // Setup Cashfree client
     const cf = new Cashfree(
-      CFEnvironment.PRODUCTION,  // switch to SANDBOX for tests
+      CFEnvironment.PRODUCTION, // Use CFEnvironment.SANDBOX for test mode
       process.env.CASHFREE_CLIENT_ID,
       process.env.CASHFREE_CLIENT_SECRET
     );
 
+    // Prepare payload
     const orderPayload = {
       order_id: orderId,
       order_amount: amount,
@@ -34,14 +37,19 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
+    // Create order
     const response = await cf.PGCreateOrder(orderPayload);
     console.log("✅ Order created:", response.data);
 
+    // Send payment session ID to frontend
     res.status(200).json({
       payment_session_id: response.data.payment_session_id,
     });
   } catch (err) {
-    console.error("❌ Order creation failed:", err.response?.data || err.message);
+    console.error(
+      "❌ Order creation failed:",
+      err.response?.data || err.message
+    );
     res.status(500).json({ error: "Failed to create order" });
   }
 });
