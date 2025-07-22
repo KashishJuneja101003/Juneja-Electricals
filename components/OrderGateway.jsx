@@ -63,7 +63,13 @@ const OrderGateway = () => {
 
       cashfreeInstance.initialiseDropin(dropinContainerRef.current, {
         orderToken: sessionId,
-        components: ["card", "upi-qrcode", "netbanking"],
+        components: ["card", "upi", "upi-qrcode", "netbanking"],
+        style: {
+          // optional styling
+          theme: "light",
+          backgroundColor: "#f3f4f6",
+          color: "#111827",
+        },
         onSuccess: (data) => {
           console.log("✅ Payment Successful:", data);
           alert("Payment Successful!");
@@ -74,7 +80,6 @@ const OrderGateway = () => {
           alert("Payment Failed.");
         },
       });
-
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
