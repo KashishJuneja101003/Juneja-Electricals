@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { loadCashfreeSDK } from "../src/utils/loadCashFree";
+import {load} from "@cashfreepayments/cashfree-js"
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -17,59 +18,45 @@ const OrderGateway = () => {
   const navigate = useNavigate();
   // Cashfree Gateway
   const handlePayment = async () => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      alert("Please log in to proceed with payment.");
-      navigate("/login");
-      return;
-    } else {
-      console.log("Got Token");
-    }
+  if (!token) {
+    alert("Please log in to proceed with payment.");
+    navigate("/login");
+    return;
+  }
 
-    try {
-      console.log("🧪 Sending token:", token);
-
-      console.log(
-        "🧪 VITE Cashfree Client ID:",
-        import.meta.env.VITE_CASHFREE_CLIENT_ID
-      );
-      console.log(
-        "🧪 VITE Cashfree Base URL:",
-        import.meta.env.VITE_CASHFREE_BASE_URL
-      );
-
-      const res = await axios.post(
-        `${BASE_URL}/create-order`,
-        { amount: grandTotal },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // ✅ Auth header added
-          },
-        }
-      );
-
-      console.log("🧾 Backend Response:", res.data);
-      const paymentSessionId = res.data.payment_session_id;
-
-      await loadCashfreeSDK();
-
-      if (window.Cashfree && typeof window.Cashfree.load === "function") {
-        console.log("✅ SDK ready — calling Cashfree.load()");
-        window.Cashfree.load({
-          paymentSessionId,
-          container: "cashfree-dropin-container",
-          redirectTarget: "_self",
-          mode: production
-        });
-      } else {
-        console.error("❌ SDK still not available after loading.");
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/create-order`,
+      { amount: grandTotal },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    } catch (error) {
-      console.error("Payment initiation failed:", error);
-      alert("Something went wrong during payment. Please try again.");
+    );
+
+    const paymentSessionId = res.data.payment_session_id;
+
+    await loadCashfreeSDK();
+
+    if (window.Cashfree && typeof window.Cashfree.load === "function") {
+      window.Cashfree.load({
+        paymentSessionId,
+        container: "cashfree-dropin-container",
+        redirectTarget: "_self",
+        mode: "PROD",
+      });
+    } else {
+      console.error("Cashfree SDK not available.");
     }
-  };
+  } catch (error) {
+    console.error("Payment initiation failed:", error);
+    alert("Something went wrong during payment. Please try again.");
+  }
+};
+
 
   const { cart, deleteItem } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
