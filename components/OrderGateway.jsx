@@ -67,26 +67,36 @@ const OrderGateway = () => {
       }
 
       // Initialize drop-in using your custom Cashfree class
-      const cashfreeInstance = new window.Cashfree();
+      // const cashfreeInstance = new window.Cashfree();
 
-      cashfreeInstance.initialiseDropin(dropinContainerRef.current,{
-        orderToken: sessionId, // ✅ correct
-        components: ["card", "upi", "upi-qrcode", "netbanking"],
-        style: {
-          theme: "light",
-          backgroundColor: "#f3f4f6",
-          color: "#111827",
-        },
-        onSuccess: (data) => {
-          console.log("✅ Payment Successful:", data);
-          alert("Payment Successful!");
-          navigate("/thank-you");
-        },
-        onFailure: (data) => {
-          console.error("❌ Payment Failed:", data);
-          alert("Payment Failed.");
-        },
+      // cashfreeInstance.initialiseDropin(dropinContainerRef.current,{
+      //   orderToken : sessionId, // ✅ correct
+      //   components: ["card", "upi", "upi-qrcode", "netbanking"],
+      //   style: {
+      //     theme: "light",
+      //     backgroundColor: "#f3f4f6",
+      //     color: "#111827",
+      //   },
+      //   onSuccess: (data) => {
+      //     console.log("✅ Payment Successful:", data);
+      //     alert("Payment Successful!");
+      //     navigate("/thank-you");
+      //   },
+      //   onFailure: (data) => {
+      //     console.error("❌ Payment Failed:", data);
+      //     alert("Payment Failed.");
+      //   },
+      // });
+
+      // Initialize Cashfree v3 SDK
+      window.Cashfree.init({
+        paymentSessionId: sessionId,
+        redirectTarget: "_self", // Optional: use "_blank" or a returnUrl
       });
+
+      // Trigger the payment popup/page
+      window.Cashfree.pay();
+      
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
