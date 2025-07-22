@@ -57,7 +57,7 @@ const OrderGateway = () => {
       );
       console.log("🔑 Received sessionId:", res.data);
 
-      const sessionId = res.data.session_id;
+      const {sessionId} = res.data;
       console.log("📤 Passing orderToken to Drop-in:", sessionId);
 
       if (!sessionId) {
