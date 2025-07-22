@@ -82,9 +82,11 @@ const OrderGateway = () => {
       //   },
       // });
 
-      window.Cashfree.initDropin({
+      const cashfree = await window.Cashfree();
+
+      await cashfree.drop({
         paymentSessionId: sessionId,
-        target: "#drop_in_container",
+        container: "#drop_in_container",
         components: ["card", "upi", "upi-qrcode", "netbanking"],
         style: {
           theme: "light",
@@ -94,7 +96,6 @@ const OrderGateway = () => {
         onSuccess: (data) => {
           console.log("✅ Payment Successful:", data);
           alert("Payment Successful!");
-          navigate("/thank-you");
         },
         onFailure: (data) => {
           console.error("❌ Payment Failed:", data);
