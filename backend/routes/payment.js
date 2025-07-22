@@ -3,9 +3,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const User = require("../models/User");
-const cashfree = require("cashfree-pg");
-
-const PG = cashfree.PG;
+const { Cashfree, CFEnvironment } = require("cashfree-pg");
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
@@ -15,11 +13,11 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const user = await User.findById(req.user.userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    const pgInstance = new PG({
-      env: "PROD", // or "SANDBOX" during testing
-      clientId: process.env.CASHFREE_CLIENT_ID,
-      clientSecret: process.env.CASHFREE_CLIENT_SECRET,
-    });
+    const cf = new Cashfree(
+      CFEnvironment.PRODUCTION,  // switch to SANDBOX for tests
+      process.env.CASHFREE_CLIENT_ID,
+      process.env.CASHFREE_CLIENT_SECRET
+    );
 
     const orderPayload = {
       order_id: orderId,
@@ -36,15 +34,14 @@ router.post("/create-order", verifyToken, async (req, res) => {
       },
     };
 
-    const response = await pgInstance.orders.create(orderPayload);
-
+    const response = await cf.PGCreateOrder(orderPayload);
     console.log("✅ Order created:", response.data);
 
     res.status(200).json({
-      payment_session_id: response.data.order_token,
+      payment_session_id: response.data.payment_session_id,
     });
-  } catch (error) {
-    console.error("❌ Order creation failed:", error.response?.data || error.message);
+  } catch (err) {
+    console.error("❌ Order creation failed:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to create order" });
   }
 });
