@@ -38,41 +38,30 @@ const OrderGateway = () => {
         }
       );
 
-      setPaymentSessionId(res.data.payment_session_id);
+      const sessionId = res.data.payment_session_id;
+      setPaymentSessionId(sessionId);
+
+      const cashfree = await load({ mode: "PROD" }); // Use "SANDBOX" for testing
+
+      await cashfree.createDropin({
+        paymentSessionId: sessionId,
+        container: "#cashfree-dropin-container",
+        redirectTarget: "_self",
+        onSuccess: (data) => {
+          console.log("✅ Payment Success:", data);
+          alert("Payment successful!");
+          navigate("/orders");
+        },
+        onFailure: (error) => {
+          console.error("❌ Payment Failed:", error);
+          alert("Payment failed. Try again.");
+        },
+      });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
     }
   };
-
-  useEffect(() => {
-    const renderDropin = async () => {
-      if (!paymentSessionId || !dropinContainerRef.current) return;
-
-      try {
-        const cashfree = await load({ mode: "PROD" }); // Use "SANDBOX" for testing
-
-        await cashfree.createDropin({
-          paymentSessionId,
-          container: "#cashfree-dropin-container",
-          redirectTarget: "_self",
-          onSuccess: (data) => {
-            console.log("✅ Payment Success:", data);
-            alert("Payment successful!");
-            navigate("/orders"); // or any success route
-          },
-          onFailure: (error) => {
-            console.error("❌ Payment Failed:", error);
-            alert("Payment failed. Try again.");
-          },
-        });
-      } catch (error) {
-        console.error("❌ Dropin creation failed:", error);
-      }
-    };
-
-    renderDropin();
-  }, [paymentSessionId, navigate]);
 
   useEffect(() => {
     const fetchQuantityStatus = async () => {
