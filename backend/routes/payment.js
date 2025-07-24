@@ -5,6 +5,15 @@ const verifyToken = require("../middlewares/verifyToken");
 const User = require("../models/User");
 const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_ADMIN,
+    pass: process.env.PASS_ADMIN,
+  },
+});
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
@@ -95,7 +104,39 @@ router.post("/verify-payment", verifyToken, async (req, res) => {
       await bill.save();
       console.log("✅ Bill saved after successful payment");
 
-      // Optionally: trigger email here
+      // Activate transporter
+      transporter.verify((error, success) => {
+        if (error) {
+          console.error("❌ Email transporter failed:", error);
+        } else {
+          console.log("✅ Ready to send emails");
+        }
+      });
+      
+      // Triggering email here
+      const mailOptions = {
+        from: process.env.EMAIL_ADMIN,
+        to: [user.email, process.env.EMAIL_ADMIN], // customer + admin
+        subject: "🧾 Payment Successful - Bill Confirmation",
+        html: `
+    <h2>Thank you for your order!</h2>
+    <p><strong>Order ID:</strong> ${orderId}</p>
+    <p><strong>Payment ID:</strong> ${orderData.payment_id}</p>
+    <p><strong>Amount:</strong> ₹${orderData.order_amount}</p>
+    <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+    <hr/>
+    <p>We've received your payment successfully. Your bill is stored in our records.</p>
+    <p>For any queries, contact support@juneja.com</p>
+  `,
+      };
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          console.error("❌ Error sending email:", err);
+        } else {
+          console.log("✅ Email sent:", info.response);
+        }
+      });
 
       return res.status(200).json({
         message: "Payment verified and bill created",

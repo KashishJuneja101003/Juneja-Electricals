@@ -11,7 +11,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const verifyPayment = async () => {
       try {
-        const token = localStorage.getItem("token"); 
+        const token = localStorage.getItem("token");
         const res = await axios.post(
           `${BASE_URL}/verify-payment`,
           { orderId },
@@ -35,8 +35,13 @@ const PaymentSuccess = () => {
 
   return (
     <div className="text-center mt-10">
-      <h1 className="text-2xl font-bold text-green-600">🎉 Payment Successful!</h1>
-      <p className="mt-4">We’re verifying your payment and generating your invoice...</p>
+      <h1 className="text-2xl font-bold text-green-600">
+        🎉 Payment Successful!
+      </h1>
+      <p className="mt-4">
+        We’re verifying your payment and generating your invoice...
+      </p>
+      <p className="mt-2">Kindly check your email-id for bill...</p>
     </div>
   );
 };
