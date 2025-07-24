@@ -66,7 +66,7 @@ const OrderGateway = () => {
 
       await cashfree.checkout({
         payment_session_id: sessionId,
-        redirectTarget: "#drop_in_container",
+        redirectTarget: "#_blank",
       });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
