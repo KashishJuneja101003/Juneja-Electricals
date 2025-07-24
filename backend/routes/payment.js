@@ -34,7 +34,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
         customer_name: user.name,
       },
       order_meta: {
-        // return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
+        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
         // notify_url: `https://junejaelectricals.netlify.app/payment/webhook`,
         payment_methods: "cc,dc,upi",
       },
@@ -43,19 +43,6 @@ router.post("/create-order", verifyToken, async (req, res) => {
     // Create order
     const response = await cf.PGCreateOrder(orderPayload);
     console.log("✅ Order created:", response.data);
-
-    // Creating bill
-    const bill = new Bill({
-      orderId: orderId,
-      customerId: req.user.userId,
-      customerEmail: user.email,
-      orderDateTime: new Date(),
-      paymentId: Date.now(),
-      amount,
-    });
-
-    await bill.save();
-    console.log("✅ Bill Generated:", bill);
 
     // Send response to frontend
     if (response.data.payment_session_id) {
@@ -77,6 +64,49 @@ router.post("/create-order", verifyToken, async (req, res) => {
     });
 
     res.status(500).json({ error: "Failed to create order" });
+  }
+});
+
+router.post("/verify-payment", verifyToken, async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    const cf = new Cashfree(
+      CFEnvironment.PRODUCTION,
+      process.env.CASHFREE_CLIENT_ID,
+      process.env.CASHFREE_CLIENT_SECRET
+    );
+
+    const { data: orderData } = await cf.PGFetchOrder(orderId);
+
+    if (orderData.order_status === "PAID") {
+      const user = await User.findById(req.user.userId);
+
+      // Save bill in DB
+      const bill = new Bill({
+        orderId: orderId,
+        customerId: user._id,
+        customerEmail: user.email,
+        orderDateTime: new Date(),
+        paymentId: orderData.payment_id,
+        amount: orderData.order_amount,
+      });
+
+      await bill.save();
+      console.log("✅ Bill saved after successful payment");
+
+      // Optionally: trigger email here
+
+      return res.status(200).json({
+        message: "Payment verified and bill created",
+        bill,
+      });
+    } else {
+      return res.status(400).json({ message: "Payment not completed" });
+    }
+  } catch (err) {
+    console.error("❌ Payment verification failed", err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
