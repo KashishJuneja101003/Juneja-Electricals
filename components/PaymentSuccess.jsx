@@ -55,7 +55,7 @@ const PaymentSuccess = () => {
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-dotted border-[#27548a]"></div>
       </div>
       <p className="text-sm text-gray-500 mt-4">
-        Redirecting to home in 5 seconds...
+        Redirecting you to homepage...
       </p>  
     </div>
   );
