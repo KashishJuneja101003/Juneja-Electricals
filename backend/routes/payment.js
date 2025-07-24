@@ -50,7 +50,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       customerId: req.user.userId,
       customerEmail: user.email,
       orderDateTime: new Date(),
-      paymentId: new Date.now(),
+      paymentId: Date.now(),
       amount,
     });
 
