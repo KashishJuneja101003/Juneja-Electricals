@@ -66,7 +66,7 @@ const OrderGateway = () => {
 
       try {
         const chkout = await cashfree.checkout({
-          payment_session_id: sessionId,
+          paymentSessionId: sessionId,
           redirectTarget: "_blank",
         });
 
