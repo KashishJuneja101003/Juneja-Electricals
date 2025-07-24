@@ -24,6 +24,7 @@ function ContactUs() {
         </a>
 
         <div className="bg-white p-2 rounded-2xl flex flex-col gap-1 shadow-lg md:text-xl lg:gap-3 h-fit self-center">
+          <h2 className="text-center font-semibold text-[#27548a] text-shadow-gray-300 text-shadow-2xs">Juneja Electricals</h2>
           <a
             href="https://www.google.com/maps?ll=29.450816,77.319164&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=511390419161759350"
             target="_blank"
