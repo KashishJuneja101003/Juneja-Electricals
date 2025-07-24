@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
       try {
         const token = localStorage.getItem("token"); 
         const res = await axios.post(
-          `${BASE_URL}/payment/verify-payment`,
+          `${BASE_URL}/verify-payment`,
           { orderId },
           {
             headers: {
