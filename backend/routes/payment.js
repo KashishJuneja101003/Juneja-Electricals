@@ -97,7 +97,6 @@ router.post("/verify-payment", verifyToken, async (req, res) => {
         customerId: user._id,
         customerEmail: user.email,
         orderDateTime: new Date(),
-        paymentId: orderData.payment_id,
         amount: orderData.order_amount,
       });
 
@@ -121,14 +120,13 @@ router.post("/verify-payment", verifyToken, async (req, res) => {
         html: `
     <h2>Thank you for your order!</h2>
     <p><strong>Order ID:</strong> ${orderId}</p>
-    <p><strong>Payment ID:</strong> ${orderData.payment_id}</p>
     <p><strong>Amount:</strong> ₹${orderData.order_amount}</p>
     <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
     <hr/>
     <p>We've received your payment successfully. Your bill is stored in our records.</p>
-    <p>For any queries, contact support@juneja.com</p>
+    <p>For any queries, contact junejaelectricals100@gmail.com</p>
   `,
-      };
+      };  
 
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {

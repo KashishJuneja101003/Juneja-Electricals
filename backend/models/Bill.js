@@ -18,10 +18,6 @@ const billSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    paymentId:{
-        type: String, 
-        default: null
-    },
     amount:{
         type: Number,
         required: true
