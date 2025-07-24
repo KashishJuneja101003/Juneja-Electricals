@@ -62,10 +62,11 @@ const OrderGateway = () => {
 
       // ✅ Load SDK and initialize payment
       const cashfree = await load({ mode: "production" });
+      console.log("Cashfree object loaded:", cashfree);
 
       await cashfree.checkout({
         payment_session_id: sessionId,
-        redirectTarget: "_self",
+        redirectTarget: "#drop_in_container",
       });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
