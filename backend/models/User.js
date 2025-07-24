@@ -7,6 +7,12 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
+    set: (value) =>{
+      if(!value.startsWith("+91")){
+        return `+91${value}`
+      }
+      return value
+    }
   },
   role: {
     type: String,
