@@ -46,7 +46,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
 
     // Creating bill
     const bill = new Bill({
-      orderId: order_id,
+      order_id: orderId,
       customerId: customer_id || req.user.userId,
       customerEmail: customer_email || user.email,
       orderDateTime: new Date(),
