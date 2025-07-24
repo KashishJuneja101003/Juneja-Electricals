@@ -4,6 +4,7 @@ const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const User = require("../models/User");
 const { Cashfree, CFEnvironment } = require("cashfree-pg");
+const Bill = require("../models/Bill");
 
 router.post("/create-order", verifyToken, async (req, res) => {
   try {
@@ -33,12 +34,9 @@ router.post("/create-order", verifyToken, async (req, res) => {
         customer_name: user.name,
       },
       order_meta: {
-        return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
-      },
-      payment_methods: {
-        card: {},
-        upi: { flow: "intent" }, // or "collect" / "qrcode"
-        netbanking: {},
+        // return_url: `https://junejaelectricals.netlify.app/payment-success?order_id=${orderId}`,
+        // notify_url: `https://junejaelectricals.netlify.app/payment/webhook`,
+        payment_methods: "cc,dc,upi",
       },
     };
 
@@ -46,10 +44,32 @@ router.post("/create-order", verifyToken, async (req, res) => {
     const response = await cf.PGCreateOrder(orderPayload);
     console.log("✅ Order created:", response.data);
 
-    // Send payment session ID to frontend
-    res.status(200).json({
-      payment_session_id: response.data.payment_session_id, // ✅ exact key expected by Drop-in
+    // Creating bill
+    const bill = new Bill({
+      orderId: order_id,
+      customerId: customer_id || req.user.userId,
+      customerEmail: customer_email || user.email,
+      orderDateTime: new Date(),
+      paymentId: payment_id || "N/A",
+      paymentMethod: payment_method || "Not Provided",
+      amount,
     });
+
+    await bill.save();
+    console.log("✅ Bill Generated:");
+
+    // Send response to frontend
+    if (response.data.payment_session_id) {
+      res.status(200).json({
+        success: true,
+        message: "Order created successfully",
+        order_id: response.data.order_id,
+        paymentUrl: response.data.payment_link,
+        payment_session_id: response.data.payment_session_id,
+      });
+    } else {
+      throw new Error("Failed to create payment_session_id");
+    }
   } catch (err) {
     console.error("❌ Order creation failed:", {
       message: err.message,

@@ -1,7 +1,8 @@
 import { useCart } from "./context/CartContext";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { load } from '@cashfreepayments/cashfree-js'
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -49,60 +50,21 @@ const OrderGateway = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log("🔑 Received sessionId:", res.data);
-
+      
+      // Handling payment
       const sessionId = res.data.payment_session_id;
-      console.log("📤 Passing orderToken to Drop-in:", sessionId);
-
-      if (!sessionId) {
-        console.error("❌ Invalid session ID");
+      const orderId = res.data.order_id;
+      if (!sessionId || !orderId) {
+        console.error("❌ Invalid session ID or order ID");
         alert("Payment setup failed.");
         return;
+      } else{
+        initializePayment();
       }
 
-      // Initialize drop-in using your custom Cashfree class
-      // const cashfreeInstance = new window.Cashfree();
+      console.log("🔑 Received sessionId:", sessionId);
+      console.log("🔑 Received order_id:", orderId);
 
-      // cashfreeInstance.initialiseDropin(dropinContainerRef.current,{
-      //   orderToken : sessionId, // ✅ correct
-      //   components: ["card", "upi", "upi-qrcode", "netbanking"],
-      //   style: {
-      //     theme: "light",
-      //     backgroundColor: "#f3f4f6",
-      //     color: "#111827",
-      //   },
-      //   onSuccess: (data) => {
-      //     console.log("✅ Payment Successful:", data);
-      //     alert("Payment Successful!");
-      //     navigate("/thank-you");
-      //   },
-      //   onFailure: (data) => {
-      //     console.error("❌ Payment Failed:", data);
-      //     alert("Payment Failed.");
-      //   },
-      // });
-
-      // const cashfree = await window.Cashfree();
-
-      // await cashfree.drop({
-      //   paymentSessionId: sessionId,
-      //   container: "#drop_in_container",
-      //   components: ["card", "upi", "upi-qrcode", "netbanking"],
-      //   style: {
-      //     theme: "light",
-      //     backgroundColor: "#f3f4f6",
-      //     color: "#111827",
-      //   },
-      //   onSuccess: (data) => {
-      //     console.log("✅ Payment Successful:", data);
-      //     alert("Payment Successful!");
-      //     navigate("/thank-you");
-      //   },
-      //   onFailure: (data) => {
-      //     console.error("❌ Payment Failed:", data);
-      //     alert("Payment Failed.");
-      //   },
-      // });
 
       const options = {
         method: "POST",
@@ -120,10 +82,20 @@ const OrderGateway = () => {
         }),
       };
 
-      fetch("https://api.cashfree.com/pg/orders/sessions", options)
-        .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
+      const initializePayment = async () =>{
+        try {
+          const cashfree = await load({mode: "production"});
+
+          const checkoutOptions = {
+            payment_session_id: sessionId,
+            redirectTarget: '_self'
+          }
+
+          await cashfree.checkout(checkoutOptions);
+        } catch (error) {
+          console.error('Payment error:', err);
+        }
+      }      
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
