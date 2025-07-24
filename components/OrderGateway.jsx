@@ -68,6 +68,8 @@ const OrderGateway = () => {
         payment_session_id: sessionId,
         redirectTarget: "_blank",
       });
+
+      await cashfree.pay();
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
