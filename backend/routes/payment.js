@@ -46,9 +46,9 @@ router.post("/create-order", verifyToken, async (req, res) => {
 
     // Creating bill
     const bill = new Bill({
-      order_id: orderId,
-      customerId: customer_id || req.user.userId,
-      customerEmail: customer_email || user.email,
+      orderId: orderId,
+      customerId: req.user.userId,
+      customerEmail: user.email,
       orderDateTime: new Date(),
       paymentId: payment_id || "N/A",
       paymentMethod: payment_method || "Not Provided",
@@ -56,7 +56,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
     });
 
     await bill.save();
-    console.log("✅ Bill Generated:");
+    console.log("✅ Bill Generated:", bill);
 
     // Send response to frontend
     if (response.data.payment_session_id) {
