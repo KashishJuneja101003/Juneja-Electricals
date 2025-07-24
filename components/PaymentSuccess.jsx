@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const PaymentSuccess = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("order_id");
 
@@ -33,6 +34,14 @@ const PaymentSuccess = () => {
     if (orderId) verifyPayment();
   }, [orderId]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/");
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div className="text-center mt-10">
       <h1 className="text-2xl font-bold text-green-600">
@@ -42,6 +51,12 @@ const PaymentSuccess = () => {
         We’re verifying your payment and generating your invoice...
       </p>
       <p className="mt-2">Kindly check your email-id for bill...</p>
+      <div className="mt-6 flex justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-dotted border-[#27548a]"></div>
+      </div>
+      <p className="text-sm text-gray-500 mt-4">
+        Redirecting to home in 5 seconds...
+      </p>  
     </div>
   );
 };
