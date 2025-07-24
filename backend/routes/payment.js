@@ -39,7 +39,7 @@ router.post("/create-order", verifyToken, async (req, res) => {
       customer_details: {
         customer_id: req.user.userId,
         customer_email: user.email,
-        customer_phone: `+91${user.phone}`,
+        customer_phone: user.phone,
         customer_name: user.name,
       },
       order_meta: {
@@ -112,7 +112,7 @@ router.post("/verify-payment", verifyToken, async (req, res) => {
           console.log("✅ Ready to send emails");
         }
       });
-      
+
       // Triggering email here
       const mailOptions = {
         from: process.env.EMAIL_ADMIN,
