@@ -2,7 +2,7 @@ import { useCart } from "./context/CartContext";
 import { redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { load } from '@cashfreepayments/cashfree-js'
+import { load } from "@cashfreepayments/cashfree-js";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -42,60 +42,31 @@ const OrderGateway = () => {
     }
 
     try {
-      // Create order on server
       const res = await axios.post(
         `${BASE_URL}/create-order`,
         { amount: grandTotal },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-      
-      // Handling payment
+
       const sessionId = res.data.payment_session_id;
       const orderId = res.data.order_id;
+
       if (!sessionId || !orderId) {
         console.error("❌ Invalid session ID or order ID");
         alert("Payment setup failed.");
         return;
-      } else{
-        initializePayment();
       }
 
       console.log("🔑 Received sessionId:", sessionId);
       console.log("🔑 Received order_id:", orderId);
 
+      // ✅ Load SDK and initialize payment
+      const cashfree = await load({ mode: "production" });
 
-      const options = {
-        method: "POST",
-        headers: {
-          "x-api-version": "2023-08-01",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          payment_session_id: sessionId,
-          payment_method: {
-            upi: {
-              channel: "collect",
-            },
-          },
-        }),
-      };
-
-      const initializePayment = async () =>{
-        try {
-          const cashfree = await load({mode: "production"});
-
-          const checkoutOptions = {
-            payment_session_id: sessionId,
-            redirectTarget: '_self'
-          }
-
-          await cashfree.checkout(checkoutOptions);
-        } catch (error) {
-          console.error('Payment error:', err);
-        }
-      }      
+      await cashfree.checkout({
+        payment_session_id: sessionId,
+        redirectTarget: "_self",
+      });
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
