@@ -70,6 +70,8 @@ const OrderGateway = () => {
       });
 
       await cashfree.pay();
+
+      console.log("✅ Payment Successful!");
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
