@@ -4,6 +4,7 @@ const billSchema = new mongoose.Schema({
     orderId: {
         type: String,
         required: true,
+        unique: true
     },
     customerId: {
         type: String,
@@ -11,7 +12,7 @@ const billSchema = new mongoose.Schema({
     },
     customerEmail: {
         type: String, 
-        unique: true,
+        required: true,
     },
     orderDateTime:{
         type: Date,
