@@ -21,10 +21,6 @@ const billSchema = new mongoose.Schema({
         type: String, 
         default: null
     },
-    paymentMethod:{
-        type: String, 
-        default: null
-    },
     amount:{
         type: Number,
         required: true
