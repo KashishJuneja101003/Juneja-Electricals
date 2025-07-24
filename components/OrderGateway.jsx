@@ -169,7 +169,10 @@ const OrderGateway = () => {
             Proceed to Payment
           </button>
 
-          <div id="drop_in_container"></div>
+          <div
+            id="drop_in_container"
+            className="mt-4 w-full min-h-[400px] bg-white shadow-lg rounded-lg"
+          ></div>
         </div>
       )}
     </div>
