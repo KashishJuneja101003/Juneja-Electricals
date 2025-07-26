@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
+const {updateProductStock} = require("../controllers/productController")
 
 // POST: Add a product
 router.post("/", async (req, res) => {
@@ -35,6 +36,9 @@ router.get("/category/:category", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// routes/productRoutes.js
+router.post('/update-stock', updateProductStock);
 
 
 module.exports = router;

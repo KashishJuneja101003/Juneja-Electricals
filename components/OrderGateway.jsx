@@ -8,7 +8,7 @@ const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
   const navigate = useNavigate();
-  const { cart, deleteItem } = useCart();
+  const { cart, deleteItem,  clearCart} = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -42,44 +42,70 @@ const OrderGateway = () => {
     //   alert("Cashfree SDK not loaded yet. Try again.");
     //   return;
     // }
+    // try {
+    //   const res = await axios.post(
+    //     `${BASE_URL}/create-order`,
+    //     { amount: grandTotal },
+    //     { headers: { Authorization: `Bearer ${token}` } }
+    //   );
+
+    //   // const sessionId = res.data.payment_session_id;
+    //   // const orderId = res.data.order_id;
+
+    //   // if (!sessionId || !orderId) {
+    //   //   console.error("❌ Invalid session ID or order ID");
+    //   //   alert("Payment setup failed.");
+    //   //   return;
+    //   // }
+
+    //   // console.log("🔑 Received sessionId:", sessionId);
+    //   // console.log("🔑 Received order_id:", orderId);
+
+    //   // ✅ Load SDK and initialize payment
+    //   {// const cashfree = await load({ mode: "production" });
+    //   // console.log("Cashfree object loaded:", cashfree);
+    //   // try {
+    //   //   const chkout = await cashfree.checkout({
+    //   //     paymentSessionId: sessionId,
+    //   //     redirectTarget: "_blank",
+    //   //   });
+
+    //   //   console.log("Payment Initiated:", chkout);
+    //   // } catch (error) {
+    //   //   console.log("Payment Error:", error);
+    //   // }
+    //   }
+
+    // } catch (error) {
+    //   console.error("❌ Payment initiation failed:", error);
+    //   alert("Something went wrong during payment. Please try again.");
+    // }
+
+    const confirm = window.confirm(
+      "Are you sure you want to proceed with payment?"
+    );
+    if (!confirm) return;
 
     try {
-      const res = await axios.post(
+      // Create Order
+      const order = axios.post(
         `${BASE_URL}/create-order`,
-        { amount: grandTotal },
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          cart,
+          amount: grandTotal,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
-      const sessionId = res.data.payment_session_id;
-      const orderId = res.data.order_id;
-
-      if (!sessionId || !orderId) {
-        console.error("❌ Invalid session ID or order ID");
-        alert("Payment setup failed.");
-        return;
-      }
-
-      console.log("🔑 Received sessionId:", sessionId);
-      console.log("🔑 Received order_id:", orderId);
-
-      // ✅ Load SDK and initialize payment
-      {// const cashfree = await load({ mode: "production" });
-      // console.log("Cashfree object loaded:", cashfree);
-      // try {
-      //   const chkout = await cashfree.checkout({
-      //     paymentSessionId: sessionId,
-      //     redirectTarget: "_blank",
-      //   });
-
-      //   console.log("Payment Initiated:", chkout);
-      // } catch (error) {
-      //   console.log("Payment Error:", error);
-      // }
-      }
-      
+      console.log("Order Created Successfully");
+      navigate("/order-success");
     } catch (error) {
-      console.error("❌ Payment initiation failed:", error);
-      alert("Something went wrong during payment. Please try again.");
+      console.error("Order failed:", error);
+      alert("❌ Failed to place order. Try again later.");
     }
   };
 

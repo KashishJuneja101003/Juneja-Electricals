@@ -1,7 +1,7 @@
 require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("../middlewares/verifyToken");
+const authMiddleware = require("../middlewares/authMiddleware");
 const User = require("../models/User");
 // const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
@@ -127,7 +127,7 @@ const transporter = nodemailer.createTransport({
 //     <p>We've received your payment successfully. Your bill is stored in our records.</p>
 //     <p>For any queries, contact junejaelectricals100@gmail.com</p>
 //   `,
-//       };  
+//       };
 
 //       transporter.sendMail(mailOptions, (err, info) => {
 //         if (err) {
@@ -149,5 +149,39 @@ const transporter = nodemailer.createTransport({
 //     return res.status(500).json({ error: "Internal server error" });
 //   }
 // });}
+
+router.post("/create-order", authMiddleware, async (req, res) => {
+  try {
+    const { cart, grandTotal } = req.body;
+    const user = req.user;
+
+    console.log("Here");
+
+    // Save order to DB
+    const bill = new Bill({
+      user: user._id,
+      items: cart,
+      grandTotal,
+      paid: true, // simulate payment success
+      createdAt: new Date(),
+    });
+    await bill.save();
+
+    // Send email (optional step here)
+    const mailOptions = {
+      from: process.env.EMAIL_ADMIN,
+      to: [email, process.env.EMAIL_ADMIN],
+      subject: "Order Confirmation - Juneja Electricals",
+      html: `<h2>Order Placed</h2><p>Total: ₹${order.grandTotal}</p><p>Items: ${order.items.length}</p>`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(201).json({ success: true, message: "Order saved!" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Something went wrong." });
+  }
+});
 
 module.exports = router;

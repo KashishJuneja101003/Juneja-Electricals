@@ -12,6 +12,7 @@ import Login from "../components/Login";
 import OrderGateway from "../components/OrderGateway";
 import HomePage from "../components/HomePage";
 import PaymentSuccess from "../components/PaymentSuccess";
+import OrderSuccess from "../components/OrderSuccess";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/OrderGateway" element={<OrderGateway />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
+
         </Routes>
       </div>
       <Footer />
