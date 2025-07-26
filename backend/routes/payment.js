@@ -1,7 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
 const User = require("../models/User");
 // const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
@@ -150,7 +149,7 @@ const transporter = nodemailer.createTransport({
 //   }
 // });}
 
-router.post("/create-order", authMiddleware, async (req, res) => {
+router.post("/create-order", async (req, res) => {
   try {
     const { cart, grandTotal } = req.body;
     const user = req.user;
