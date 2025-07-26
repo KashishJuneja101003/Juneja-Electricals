@@ -5,6 +5,7 @@ const User = require("../models/User");
 // const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
 const nodemailer = require("nodemailer");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -149,12 +150,12 @@ const transporter = nodemailer.createTransport({
 //   }
 // });}
 
-router.post("/create-order", async (req, res) => {
+router.post("/create-order", authMiddleware, async (req, res) => {
   try {
     const { cart, grandTotal } = req.body;
-    const user = req.user;
+    const user = await User.findById(req.user._id);
 
-    console.log("Here");
+    console.log("User Id:", user.userId);
 
     // Save order to DB
     const bill = new Bill({
@@ -170,7 +171,7 @@ router.post("/create-order", async (req, res) => {
     // Send email (optional step here)
     const mailOptions = {
       from: process.env.EMAIL_ADMIN,
-      to: [email, process.env.EMAIL_ADMIN],
+      to: [user.email, process.env.EMAIL_ADMIN],
       subject: "Order Confirmation - Juneja Electricals",
       html: `<h2>Order Placed</h2><p>Total: ₹${order.grandTotal}</p><p>Items: ${order.items.length}</p>`,
     };
