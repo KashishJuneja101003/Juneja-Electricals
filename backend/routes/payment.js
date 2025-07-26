@@ -158,11 +158,12 @@ router.post("/create-order", async (req, res) => {
 
     // Save order to DB
     const bill = new Bill({
-      user: user._id,
+      orderId: Date.now(),
+      customerId: user._id,
+      customerEmail: user.email,
+      orderDateTime: new Date(),
+      amount: grandTotal,
       items: cart,
-      grandTotal,
-      paid: true, // simulate payment success
-      createdAt: new Date(),
     });
     await bill.save();
 

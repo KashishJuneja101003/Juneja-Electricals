@@ -21,6 +21,10 @@ const billSchema = new mongoose.Schema({
     amount:{
         type: Number,
         required: true
+    },
+    items:{
+        type: Array,
+        required: true
     }
 })
 
