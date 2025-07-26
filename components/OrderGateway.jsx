@@ -2,7 +2,7 @@ import { useCart } from "./context/CartContext";
 import { redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { load } from "@cashfreepayments/cashfree-js";
+// import { load } from "@cashfreepayments/cashfree-js";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -15,18 +15,19 @@ const OrderGateway = () => {
   const gst = 0.18 * total;
   const grandTotal = total + gst;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (window.Cashfree) {
-        console.log("✅ Cashfree SDK loaded successfully:", window.Cashfree);
-        clearInterval(interval);
-      } else {
-        console.log("⏳ Waiting for Cashfree SDK to load...");
-      }
-    }, 500);
+  // To load Cashfree payment gateway
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (window.Cashfree) {
+  //       console.log("✅ Cashfree SDK loaded successfully:", window.Cashfree);
+  //       clearInterval(interval);
+  //     } else {
+  //       console.log("⏳ Waiting for Cashfree SDK to load...");
+  //     }
+  //   }, 500);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const handlePayment = async () => {
     const token = localStorage.getItem("token");
@@ -36,10 +37,11 @@ const OrderGateway = () => {
       return;
     }
 
-    if (!window.Cashfree) {
-      alert("Cashfree SDK not loaded yet. Try again.");
-      return;
-    }
+    // Cashfree loading check
+    // if (!window.Cashfree) {
+    //   alert("Cashfree SDK not loaded yet. Try again.");
+    //   return;
+    // }
 
     try {
       const res = await axios.post(
@@ -61,19 +63,20 @@ const OrderGateway = () => {
       console.log("🔑 Received order_id:", orderId);
 
       // ✅ Load SDK and initialize payment
-      const cashfree = await load({ mode: "production" });
-      console.log("Cashfree object loaded:", cashfree);
+      {// const cashfree = await load({ mode: "production" });
+      // console.log("Cashfree object loaded:", cashfree);
+      // try {
+      //   const chkout = await cashfree.checkout({
+      //     paymentSessionId: sessionId,
+      //     redirectTarget: "_blank",
+      //   });
 
-      try {
-        const chkout = await cashfree.checkout({
-          paymentSessionId: sessionId,
-          redirectTarget: "_blank",
-        });
-
-        console.log("Payment Initiated:", chkout);
-      } catch (error) {
-        console.log("Payment Error:", error);
+      //   console.log("Payment Initiated:", chkout);
+      // } catch (error) {
+      //   console.log("Payment Error:", error);
+      // }
       }
+      
     } catch (error) {
       console.error("❌ Payment initiation failed:", error);
       alert("Something went wrong during payment. Please try again.");
