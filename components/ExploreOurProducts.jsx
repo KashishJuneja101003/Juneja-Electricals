@@ -8,7 +8,7 @@ import PVCPipes from "../src/assets/PVC Pipes.jpeg";
 
 function ExploreOurProducts() {
   return (
-    <div className="my-10">
+    <div id="explore-our-products" className="my-10">
       {/* <!-- Upper Div --> */}
       <div className="text-2xl font-semibold mb-2 md:text-3xl">
         Explore Our Products

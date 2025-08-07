@@ -3,6 +3,7 @@ import ExploreOurProducts from './ExploreOurProducts';
 import MeetTheOwner from './MeetTheOwner';
 import ContactUs from './ContactUs';
 import Legal from './Legal';
+import BrandsWeSell from './BrandsWeSell.jsx';
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
       <ImageCarousel/>
       <ExploreOurProducts/>
       <MeetTheOwner/>
+      <BrandsWeSell/>
       <ContactUs/>
       <Legal/>
     </>

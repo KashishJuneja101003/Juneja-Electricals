@@ -1,6 +1,6 @@
 function ContactUs() {
   return (
-    <div className="my-10">
+    <div id="contact-us" className="my-10">
       <div className="text-2xl font-semibold mb-2 md:text-3xl">Contact Us</div>
 
       <div

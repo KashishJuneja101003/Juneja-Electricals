@@ -93,3 +93,7 @@
   background-color: transparent;
   transition: width 0.3s ease;
 }
+
+.logo{
+  width: 150px;
+}

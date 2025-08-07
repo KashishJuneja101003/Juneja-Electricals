@@ -4,7 +4,7 @@ import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 import LogoutBtn from "./Logout";
-import {useAuth} from "./context/AuthContext"
+import { useAuth } from "./context/AuthContext";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -58,51 +58,45 @@ function Navbar() {
         <div className="hidden bord md:flex gap-6 items-center justify-end pr-8">
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => setCategoryOpen(!categoryOpen)}
+            onClick={() => {
+              setCategoryOpen(!categoryOpen);
+              const eop = document.getElementById("explore-our-products");
+              eop.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Search by Category
             </p>
-            <i
-              className={`fa-solid fa-angle-down transition-transform ${
-                categoryOpen ? "rotate-180" : ""
-              }`}
-              style={{ color: "#27548a" }}
-            ></i>
           </div>
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => setBrandsOpen(!brandsOpen)}
+            onClick={() => {
+              setBrandsOpen(!brandsOpen);
+              const bws = document.getElementById("brands-we-sell");
+              bws.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Brands We Sell
             </p>
-            <i
-              className={`fa-solid fa-angle-down transition-transform ${
-                brandsOpen ? "rotate-180" : ""
-              }`}
-              style={{ color: "#27548a" }}
-            ></i>
           </div>
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => setContactOpen(!contactOpen)}
+            onClick={() => {
+              setContactOpen(!contactOpen);
+              const cu = document.getElementById("contact-us");
+              cu.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Contact Us
             </p>
-            <i
-              className={`fa-solid fa-angle-down transition-transform ${
-                contactOpen ? "rotate-180" : ""
-              }`}
-              style={{ color: "#27548a" }}
-            ></i>
           </div>
           {<Cart />}
-          
+
           {/* login - logout */}
           {(() => {
-            const {token , user} = useAuth();
+            const { token, user } = useAuth();
 
             if (token && user?.name) {
               const userName = user.name.split(" ")[0];
@@ -139,121 +133,43 @@ function Navbar() {
           {/* Category */}
           <li>
             <div
-              onClick={() => setCategoryOpen(!categoryOpen)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                const eop = document.getElementById("explore-our-products");
+                eop.scrollIntoView({ behavior: "smooth" });
+              }}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Search By Category</span>
-              <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
-                  categoryOpen ? "rotate-180" : ""
-                }`}
-              ></i>
             </div>
-            {categoryOpen && (
-              <ul className="flex flex-col gap-2 ml-4 mt-2 text-base text-gray-700">
-                {[
-                  "Fans",
-                  "Lighting",
-                  "Switches & Accessories",
-                  "Home Electricals",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="p-1 hover:bg-gray-100 active:bg-gray-100 rounded"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
           </li>
 
           {/* Brands */}
           <li>
             <div
-              onClick={() => setBrandsOpen(!brandsOpen)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                const bws = document.getElementById("brands-we-sell");
+                bws.scrollIntoView({ behavior: "smooth" });
+              }}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Brands We Sell</span>
-              <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
-                  brandsOpen ? "rotate-180" : ""
-                }`}
-              ></i>
             </div>
-            {brandsOpen && (
-              <ul className="flex flex-col gap-2 ml-4 mt-2 text-base text-gray-700">
-                {[
-                  "Usha",
-                  "Havells",
-                  "Cona",
-                  "Tibcon",
-                  "Plaza Cables",
-                  "Bentex",
-                  "Victoria",
-                ].map((brand) => (
-                  <li
-                    key={brand}
-                    className="p-1 hover:bg-gray-100 active:bg-gray-100 rounded"
-                  >
-                    {brand}
-                  </li>
-                ))}
-              </ul>
-            )}
           </li>
 
           {/* Contact */}
           <li>
             <div
-              onClick={() => setContactOpen(!contactOpen)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                const cus = document.getElementById("contact-us");
+                cus.scrollIntoView({ behavior: "smooth" });
+              }}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Contact Us</span>
-              <i
-                className={`fa-solid fa-angle-down fa-sm text-blue-800 transition-transform ${
-                  contactOpen ? "rotate-180" : ""
-                }`}
-              ></i>
             </div>
-            {contactOpen && (
-              <ul className="flex flex-col gap-2 ml-4 mt-2 text-base text-gray-700">
-                <a
-                  href="https://www.google.com/maps?ll=29.450816,77.319164&z=15&t=m&hl=en&gl=IN&mapclient=embed&cid=511390419161759350"
-                  target="_blank"
-                  className="flex gap-2 active:bg-gray-100"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-solid fa-location-dot self-center text-base"></i>
-                  <p className="text-base">Locate Our Store</p>
-                </a>
-                <a
-                  href="tel:+919027400868"
-                  className="flex gap-2 active:bg-gray-100"
-                >
-                  <i className="fa-solid fa-phone self-center text-base"></i>
-                  <p className="text-base">Call us</p>
-                </a>
-                <a
-                  href="https://wa.me/919027400868"
-                  target="_blank"
-                  className="flex gap-2 active:bg-gray-100"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-brands fa-whatsapp self-center text-base"></i>
-                  <p className="text-base">Text on WhatsApp</p>
-                </a>
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=junejaelectricals100@gmail.com"
-                  target="_blank"
-                  className="flex gap-2 active:bg-gray-100"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fa-solid fa-envelope self-center text-base"></i>
-                  <p className="text-base">Mail us</p>
-                </a>
-              </ul>
-            )}
           </li>
 
           <div className="flex items-center justify-between pr-2">
