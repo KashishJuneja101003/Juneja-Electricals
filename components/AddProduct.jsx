@@ -8,7 +8,7 @@ const AddProduct = () => {
     name: "",
     price: "",
     category: "",
-    image: "",
+    imageUrl: "",
     brand: "",
     features: "",
     quantity: "",
@@ -21,7 +21,7 @@ const AddProduct = () => {
   };
 
   const handleAddProduct = async () => {
-    const { name, price, category, image, brand } = newProduct;
+    const { name, price, category, imageUrl, brand } = newProduct;
     if (!name) {
       alert("Please add name");
       return;
@@ -34,8 +34,8 @@ const AddProduct = () => {
       alert("Please add price");
       return;
     }
-    if (!image) {
-      alert("Please add image");
+    if (!imageUrl) {
+      alert("Please add imageUrl");
       return;
     }
 
@@ -50,7 +50,7 @@ const AddProduct = () => {
         name: "",
         price: "",
         category: "",
-        image: "",
+        imageUrl: "",
         brand: "",
         features: "",
         quantity: "",
@@ -163,7 +163,7 @@ const AddProduct = () => {
               name="image"
               type="url"
               placeholder="Image URL"
-              value={newProduct.image}
+              value={newProduct.imageUrl}
               onChange={handleChange}
             />
           </div>
