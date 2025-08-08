@@ -8,7 +8,7 @@ const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const OrderGateway = () => {
   const navigate = useNavigate();
-  const { cart, deleteItem,  clearCart} = useCart();
+  const { cart, deleteItem, clearCart } = useCart();
   const [quantityInfo, setQuantityInfo] = useState({});
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -30,6 +30,21 @@ const OrderGateway = () => {
   // }, []);
 
   const handlePayment = async () => {
+    // 🔻 Check if any item is out of stock
+    const isOutOfStock = (item) => {
+      const availableQty = quantityInfo[item._id];
+      return availableQty == null || availableQty < item.quantity;
+    };
+
+    const outOfStockItem = cart.find(isOutOfStock);
+
+    if (outOfStockItem) {
+      toast.error(
+        `"${outOfStockItem.name}" is out of stock or insufficient quantity`
+      );
+      return;
+    }
+
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in to proceed with payment.");
