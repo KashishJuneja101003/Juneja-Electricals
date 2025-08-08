@@ -1,4 +1,4 @@
-require("dotenv").config({path: "../.env"})
+require("dotenv").config({ path: "../.env" });
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
@@ -12,9 +12,13 @@ const authMiddleware = (req, res, next) => {
     req.user = decoded; // { userId, role }
     next();
   } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      return res
+        .status(401)
+        .json({ error: "Token expired. Please log in again." });
+    }
     res.status(403).json({ message: "Invalid token" });
   }
-
 };
 
 module.exports = authMiddleware;
