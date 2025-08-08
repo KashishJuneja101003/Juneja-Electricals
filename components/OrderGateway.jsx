@@ -102,6 +102,7 @@ const OrderGateway = () => {
       );
 
       console.log("Order Created Successfully");
+      clearCart();
       navigate("/order-success");
     } catch (error) {
       console.error("Order failed:", error);

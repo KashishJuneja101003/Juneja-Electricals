@@ -2,6 +2,7 @@ require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const Product = require("../models/Product")
 // const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
 const nodemailer = require("nodemailer");
@@ -157,7 +158,23 @@ router.post("/create-order", authMiddleware, async (req, res) => {
 
     console.log("User Id:", user.userId);
 
-    // Save order to DB
+    // 🔻 Reduce product quantity
+    for (const item of cart) {
+      const product = await Product.findById(item._id);
+
+      if (!product) {
+        return res.status(404).json({ error: `Product ${item.name} not found` });
+      }
+
+      if (product.quantity < item.quantity) {
+        return res.status(400).json({ error: `Insufficient stock for ${item.name}` });
+      }
+
+      product.quantity -= item.quantity;
+      await product.save();
+    }
+
+    // ✅ Save bill
     const bill = new Bill({
       orderId: Date.now(),
       customerId: user._id,
@@ -168,17 +185,18 @@ router.post("/create-order", authMiddleware, async (req, res) => {
     });
     await bill.save();
 
-    // Send email (optional step here)
+    // ✅ Send email
     const mailOptions = {
       from: process.env.EMAIL_ADMIN,
       to: [user.email, process.env.EMAIL_ADMIN],
       subject: "Order Confirmation - Juneja Electricals",
-      html: `<h2>Order Placed</h2><p>Total: ₹${order.grandTotal}</p><p>Items: ${order.items.length}</p>`,
+      html: `<h2>Order Placed</h2><p>Total: ₹${grandTotal}</p><p>Items: ${cart.length}</p>`,
     };
 
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({ success: true, message: "Order saved!" });
+
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Something went wrong." });
