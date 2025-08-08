@@ -9,8 +9,13 @@ const ViewProducts = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const res = await axios.get(`${BASE_URL}/products`);
-      setProducts(res.data.products);
+      try {
+        const res = await axios.get(`${BASE_URL}/products`);
+        console.log("Fetched products response from ProductList.jsx:", res.data);
+        setProducts(res.data.products);
+      } catch (err) {
+        console.error("Error fetching products from ProductList.jsx:", err);
+      }
     };
     fetch();
   }, []);
@@ -19,11 +24,12 @@ const ViewProducts = () => {
     <div>
       <h3>View All Products</h3>
       <ul>
-        {products.map((p) => (
-          <li key={p._id}>
-            <strong>{p.name}</strong> - ₹{p.price} ({p.category})
-          </li>
-        ))}
+        {Array.isArray(products) &&
+          products.map((p) => (
+            <li key={p._id}>
+              <strong>{p.name}</strong> - ₹{p.price} ({p.category})
+            </li>
+          ))}
       </ul>
     </div>
   );

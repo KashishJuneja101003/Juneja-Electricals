@@ -16,17 +16,20 @@ const UpdateProduct = () => {
   });
 
   const fetchProducts = async () => {
+    try {
       const res = await axios.get(`${BASE_URL}/products`);
-    setProducts(res.data.products);
+      console.log("Fetched products response from UpdateProduct.jsx:", res.data);
+      setProducts(res.data.products);
+    } catch (err) {
+      console.error("Error fetching products from UpdateProduct.jsx:", err);
+    }
   };
 
   const updateProduct = async () => {
     try {
-      await axios.put(
-        `${BASE_URL}/products/${selectedId}`,
-        updatedProduct,
-        { withCredentials: true }
-      );
+      await axios.put(`${BASE_URL}/products/${selectedId}`, updatedProduct, {
+        withCredentials: true,
+      });
       fetchProducts();
       alert("Product updated successfully!");
     } catch (err) {
@@ -42,20 +45,52 @@ const UpdateProduct = () => {
   return (
     <div>
       <h3>Update Product</h3>
-      <select onChange={(e) => setSelectedId(e.target.value)} value={selectedId}>
+      <select
+        onChange={(e) => setSelectedId(e.target.value)}
+        value={selectedId}
+      >
         <option value="">Select a product</option>
-        {products.map((p) => (
-          <option key={p._id} value={p._id}>
-            {p.name}
-          </option>
-        ))}
+        <ul>
+          {Array.isArray(products) &&
+            products.map((p) => (
+              <li key={p._id}>
+                {p.name} - ₹{p.price}
+                <button onClick={() => deleteProduct(p._id)}>Delete</button>
+              </li>
+            ))}
+        </ul>
       </select>
 
-      <input placeholder="Name" onChange={(e) => setUpdatedProduct({ ...updatedProduct, name: e.target.value })} />
-      <input placeholder="Price" onChange={(e) => setUpdatedProduct({ ...updatedProduct, price: e.target.value })} />
-      <input placeholder="Category" onChange={(e) => setUpdatedProduct({ ...updatedProduct, category: e.target.value })} />
-      <input placeholder="Image URL" onChange={(e) => setUpdatedProduct({ ...updatedProduct, image: e.target.value })} />
-      <input placeholder="Brand" onChange={(e) => setUpdatedProduct({ ...updatedProduct, brand: e.target.value })} />
+      <input
+        placeholder="Name"
+        onChange={(e) =>
+          setUpdatedProduct({ ...updatedProduct, name: e.target.value })
+        }
+      />
+      <input
+        placeholder="Price"
+        onChange={(e) =>
+          setUpdatedProduct({ ...updatedProduct, price: e.target.value })
+        }
+      />
+      <input
+        placeholder="Category"
+        onChange={(e) =>
+          setUpdatedProduct({ ...updatedProduct, category: e.target.value })
+        }
+      />
+      <input
+        placeholder="Image URL"
+        onChange={(e) =>
+          setUpdatedProduct({ ...updatedProduct, image: e.target.value })
+        }
+      />
+      <input
+        placeholder="Brand"
+        onChange={(e) =>
+          setUpdatedProduct({ ...updatedProduct, brand: e.target.value })
+        }
+      />
       <button onClick={updateProduct}>Update Product</button>
     </div>
   );

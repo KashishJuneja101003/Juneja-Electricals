@@ -8,8 +8,13 @@ const RemoveProduct = () => {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
+    try {
       const res = await axios.get(`${BASE_URL}/products`);
-    setProducts(res.data.products);
+      console.log("Fetched products response from RemoveProduct.jsx:", res.data);
+      setProducts(res.data.products);
+    } catch (err) {
+      console.error("Error fetching products from RemoveProduct.jsx:", err);
+    }
   };
 
   const deleteProduct = async (id) => {
@@ -31,12 +36,13 @@ const RemoveProduct = () => {
     <div>
       <h3>Remove Product</h3>
       <ul>
-        {products.map((p) => (
-          <li key={p._id}>
-            {p.name} - ₹{p.price}
-            <button onClick={() => deleteProduct(p._id)}>Delete</button>
-          </li>
-        ))}
+        {Array.isArray(products) &&
+          products.map((p) => (
+            <li key={p._id}>
+              {p.name} - ₹{p.price}
+              <button onClick={() => deleteProduct(p._id)}>Delete</button>
+            </li>
+          ))}
       </ul>
     </div>
   );
