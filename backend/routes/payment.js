@@ -179,6 +179,30 @@ router.post("/create-order", authMiddleware, async (req, res) => {
       }
 
       product.quantity -= item.quantity;
+
+      // If quantity is 0, mail the admin
+      if (product.quantity === 0) {
+        const mailOptions = {
+          from: process.env.EMAIL_ADMIN,
+          to: process.env.EMAIL_ADMIN, // Send to self (admin)
+          subject: `Out of Stock Alert: ${product.name}`,
+          text: `
+            The product "${product.name}" is now out of stock.
+            Product Id: ${product._id}.
+            Category: ${product.category}.
+            Brand: ${product.brand}
+          `,
+        };
+
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+            console.error("Failed to send stock alert:", err);
+          } else {
+            console.log("Stock alert sent:", info.response);
+          }
+        });
+      }
+
       await product.save();
     }
 
@@ -198,7 +222,13 @@ router.post("/create-order", authMiddleware, async (req, res) => {
       from: process.env.EMAIL_ADMIN,
       to: [user.email, process.env.EMAIL_ADMIN],
       subject: "Order Confirmation - Juneja Electricals",
-      html: `<h2>Order Placed</h2><p>Total: ₹${amount}</p><p>Items: ${cart.length}</p>`,
+      html: `<h2>Order Placed</h2>
+        <ul>
+          ${cart.map((item) => `<li>${item.name} x ${item.quantity}</li>`).join("")}
+        </ul>
+        <p>
+        <strong>Total:</strong> ₹${amount}</p>
+      `,
     };
 
     await transporter.sendMail(mailOptions);
