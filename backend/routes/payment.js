@@ -2,7 +2,7 @@ require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const Product = require("../models/Product")
+const Product = require("../models/Product");
 // const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
 const nodemailer = require("nodemailer");
@@ -154,8 +154,12 @@ const transporter = nodemailer.createTransport({
 router.post("/create-order", authMiddleware, async (req, res) => {
   try {
     const { cart, grandTotal } = req.body;
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user?._id);
 
+    if (!user) {
+      return res.status(401).json({ error: "User not found or invalid token" });
+    }
+    
     console.log("User Id:", user._id);
 
     // 🔻 Reduce product quantity
@@ -163,11 +167,15 @@ router.post("/create-order", authMiddleware, async (req, res) => {
       const product = await Product.findById(item._id);
 
       if (!product) {
-        return res.status(404).json({ error: `Product ${item.name} not found` });
+        return res
+          .status(404)
+          .json({ error: `Product ${item.name} not found` });
       }
 
       if (product.quantity < item.quantity) {
-        return res.status(400).json({ error: `Insufficient stock for ${item.name}` });
+        return res
+          .status(400)
+          .json({ error: `Insufficient stock for ${item.name}` });
       }
 
       product.quantity -= item.quantity;
@@ -196,7 +204,6 @@ router.post("/create-order", authMiddleware, async (req, res) => {
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({ success: true, message: "Order saved!" });
-
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Something went wrong." });
