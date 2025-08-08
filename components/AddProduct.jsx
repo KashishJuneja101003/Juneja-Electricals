@@ -160,7 +160,7 @@ const AddProduct = () => {
             </label>
             <input
               className="p-1 outline-1 bg-white rounded-xl"
-              name="image"
+              name="imageUrl"
               type="url"
               placeholder="Image URL"
               value={newProduct.imageUrl}
