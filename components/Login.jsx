@@ -82,14 +82,14 @@ const Login = () => {
         <div className="flex justify-center gap-3 w-full mt-4">
           <button
             type="submit"
-            className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-semibold"
+            className="bg-emerald-500 active:scale-95 p-2 rounded-2xl cursor-pointer font-semibold"
           >
             Login
           </button>
           <Link to="/Register">
             <button
               type="button"
-              className="bg-emerald-500 p-2 rounded-2xl cursor-pointer font-bold"
+              className="bg-emerald-500 active:scale-95 p-2 rounded-2xl cursor-pointer font-bold"
             >
               Register
             </button>

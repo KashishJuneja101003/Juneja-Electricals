@@ -13,6 +13,7 @@ import OrderGateway from "../components/OrderGateway";
 import HomePage from "../components/HomePage";
 import PaymentSuccess from "../components/PaymentSuccess";
 import OrderSuccess from "../components/OrderSuccess";
+import AdminDashboard from "../components/AdminDashboard"
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/OrderGateway" element={<OrderGateway />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/admin" element={<AdminDashboard />} />
 
         </Routes>
       </div>

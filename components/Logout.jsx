@@ -13,7 +13,7 @@ const LogoutBtn = () => {
   return (
     <button
       onClick={logoutHandler}
-      className="bg-emerald-400 p-2 rounded-2xl cursor-pointer text-gray-700 font-semibold"
+      className="bg-emerald-400 active:scale-95 p-2 rounded-2xl cursor-pointer text-gray-700 font-semibold"
     >
       Logout
     </button>

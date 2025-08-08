@@ -12,7 +12,8 @@ router.post("/register", async (req, res) => {
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,7 +29,6 @@ router.post("/register", async (req, res) => {
 
     await newUser.save();
     res.status(201).json({ message: "User registered successfully" });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error during registration" });
@@ -42,11 +42,19 @@ router.post("/login", async (req, res) => {
 
     // Check if user exists
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid email or password" });
+    if (!user) {
+      alert(
+        `${email} does not exist in our database. Check your email or register again.`
+      );
+      return res.status(400).json({ message: "Invalid email" });
+    }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
+    if (!isMatch) {
+      alert(`You've entered incorrect password.`);
+      return res.status(400).json({ message: "Wrong password" });
+    }
 
     console.log("🔑 [LOGIN] JWT_SECRET:", process.env.JWT_SECRET);
 
@@ -66,9 +74,8 @@ router.post("/login", async (req, res) => {
         email: user.email,
         role: user.role,
         phone: user.phone,
-      }
+      },
     });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error during login" });
