@@ -156,7 +156,7 @@ router.post("/create-order", authMiddleware, async (req, res) => {
     const { cart, grandTotal } = req.body;
     const user = await User.findById(req.user._id);
 
-    console.log("User Id:", user.userId);
+    console.log("User Id:", user._id);
 
     // 🔻 Reduce product quantity
     for (const item of cart) {
