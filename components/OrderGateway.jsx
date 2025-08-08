@@ -39,7 +39,7 @@ const OrderGateway = () => {
     const outOfStockItem = cart.find(isOutOfStock);
 
     if (outOfStockItem) {
-      toast.error(
+      alert(
         `"${outOfStockItem.name}" is out of stock or insufficient quantity`
       );
       return;
