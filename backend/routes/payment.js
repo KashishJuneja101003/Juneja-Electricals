@@ -223,11 +223,11 @@ router.post("/create-order", authMiddleware, async (req, res) => {
       to: [user.email, process.env.EMAIL_ADMIN],
       subject: "Order Confirmation - Juneja Electricals",
       html: `<h2>Order Placed</h2>
-        <ul>
-          ${cart.map((item) => `<li>${item.name} x ${item.quantity}</li>`).join("")}
-        </ul>
-        <p>
-        <strong>Total:</strong> ₹${amount}</p>
+      <ul>
+      ${cart.map((item) => `<li>${item.name} x ${item.quantity}</li>`).join("")}
+      </ul>
+      <p>
+      <strong>Total:</strong> ₹${amount}</p>
       `,
     };
 
