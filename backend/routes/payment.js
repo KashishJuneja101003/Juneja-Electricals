@@ -198,7 +198,7 @@ router.post("/create-order", authMiddleware, async (req, res) => {
       from: process.env.EMAIL_ADMIN,
       to: [user.email, process.env.EMAIL_ADMIN],
       subject: "Order Confirmation - Juneja Electricals",
-      html: `<h2>Order Placed</h2><p>Total: ₹${grandTotal}</p><p>Items: ${cart.length}</p>`,
+      html: `<h2>Order Placed</h2><p>Total: ₹${amount}</p><p>Items: ${cart.length}</p>`,
     };
 
     await transporter.sendMail(mailOptions);
