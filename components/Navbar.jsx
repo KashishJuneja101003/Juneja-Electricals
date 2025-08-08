@@ -2,31 +2,47 @@ import { useState, useEffect, useRef } from "react";
 import businessLogo from "../src/assets/Business Logo.png";
 import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import LogoutBtn from "./Logout";
 import { useAuth } from "./context/AuthContext";
 
 function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const [brandsOpen, setBrandsOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-
   const navRef = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Close all menus when clicked outside
+  // Close hamburger menu when clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setMobileMenuOpen(false);
-        setCategoryOpen(false);
-        setBrandsOpen(false);
-        setContactOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleNavClick = (id) => {
+    setMobileMenuOpen(false);
+
+    // Already on homepage, scroll directly
+    if (location.pathname === "/") {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Navigate to home, then scroll after DOM mounts
+      navigate("/");
+      setTimeout(() => {
+        const section = document.getElementById(id);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    }
+  };
 
   return (
     <nav className="w-full" ref={navRef}>
@@ -58,11 +74,7 @@ function Navbar() {
         <div className="hidden bord md:flex gap-6 items-center justify-end pr-8">
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => {
-              setCategoryOpen(!categoryOpen);
-              const eop = document.getElementById("explore-our-products");
-              eop.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => handleNavClick("explore-our-products")}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Search by Category
@@ -70,11 +82,7 @@ function Navbar() {
           </div>
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => {
-              setBrandsOpen(!brandsOpen);
-              const bws = document.getElementById("brands-we-sell");
-              bws.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => handleNavClick("brands-we-sell")}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Brands We Sell
@@ -82,11 +90,7 @@ function Navbar() {
           </div>
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
-            onClick={() => {
-              setContactOpen(!contactOpen);
-              const cu = document.getElementById("contact-us");
-              cu.scrollIntoView({ behavior: "smooth" });
-            }}
+            onClick={() => handleNavClick("contact-us")}
           >
             <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
               Contact Us
@@ -133,11 +137,7 @@ function Navbar() {
           {/* Category */}
           <li>
             <div
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const eop = document.getElementById("explore-our-products");
-                eop.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={() => handleNavClick("explore-our-products")}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Search By Category</span>
@@ -147,11 +147,7 @@ function Navbar() {
           {/* Brands */}
           <li>
             <div
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const bws = document.getElementById("brands-we-sell");
-                bws.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={() => handleNavClick("brands-we-sell")}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Brands We Sell</span>
@@ -161,11 +157,7 @@ function Navbar() {
           {/* Contact */}
           <li>
             <div
-              onClick={() => {
-                setMobileMenuOpen(false);
-                const cus = document.getElementById("contact-us");
-                cus.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={() => handleNavClick("contact-us")}
               className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg"
             >
               <span>Contact Us</span>
