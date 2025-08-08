@@ -154,13 +154,13 @@ const transporter = nodemailer.createTransport({
 router.post("/create-order", authMiddleware, async (req, res) => {
   try {
     const { cart, grandTotal } = req.body;
-    const user = await User.findById(req.user?._id);
+    const user = await User.findById(req.user.userId);
 
     if (!user) {
       return res.status(401).json({ error: "User not found or invalid token" });
     }
-    
-    console.log("User Id:", user._id);
+
+    console.log("User Id:", user.userId);
 
     // 🔻 Reduce product quantity
     for (const item of cart) {
