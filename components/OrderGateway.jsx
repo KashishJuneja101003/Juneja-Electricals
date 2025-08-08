@@ -40,7 +40,10 @@ const OrderGateway = () => {
 
     if (outOfStockItem) {
       alert(
-        `"${outOfStockItem.name}" is out of stock or insufficient quantity`
+        `
+          "${outOfStockItem.name}" is out of stock.
+          Kindly remove it from the cart.
+        `
       );
       return;
     }
