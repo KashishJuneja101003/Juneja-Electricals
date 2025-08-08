@@ -1,4 +1,11 @@
 import React from "react";
+import BentexLogo from "../src/assets/BentexLogo.webp"
+import HavellsLogo from "../src/assets/HavellsLogo.png"
+import PlazaCablesLogo from "../src/assets/PlazaCablesLogo.png"
+import TibconLogo from "../src/assets/TibconLogo.png"
+import UshaLogo from "../src/assets/UshaLogo.png"
+import VictoriaLogo from "../src/assets/VictoriaLogo.png"
+import ConaLogo from "../src/assets/ConaLogo.png"
 
 const BrandsWeSell = () => {
   return (
@@ -12,13 +19,13 @@ const BrandsWeSell = () => {
         style={{ backgroundColor: "#e1d9d9" }}
       >
         <div className="grid grid-cols-3 w-full md:grid-cols-7 justify-between items-center">
-            <img className="logo" src="./src/assets/BentexLogo.webp" alt="" />
-            <img className="logo" src="./src/assets/ConaLogo.png" alt="" />
-            <img className="logo" src="./src/assets/HavellsLogo.png" alt="" />
-            <img className="logo" src="./src/assets/PlazaCablesLogo.png" alt="" />
-            <img className="logo" src="./src/assets/TibconLogo.png" alt="" />
-            <img className="logo" src="./src/assets/UshaLogo.png" alt="" />
-            <img className="logo" src="./src/assets/VictoriaLogo.png" alt="" />
+            <img className="logo" src={BentexLogo} alt="" />
+            <img className="logo" src={HavellsLogo} alt="" />
+            <img className="logo" src={PlazaCablesLogo} alt="" />
+            <img className="logo" src={TibconLogo} alt="" />
+            <img className="logo" src={UshaLogo} alt="" />
+            <img className="logo" src={VictoriaLogo} alt="" />
+            <img className="logo" src={ConaLogo} alt="" />
         </div>
       </div>
     </div>
