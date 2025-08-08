@@ -1,4 +1,3 @@
-// AddProduct.jsx
 import { useState } from "react";
 import axios from "axios";
 
@@ -11,29 +10,200 @@ const AddProduct = () => {
     category: "",
     image: "",
     brand: "",
+    features: "",
+    quantity: "",
+    description: "",
   });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleAddProduct = async () => {
+    const { name, price, category, image, brand } = newProduct;
+    if (!name) {
+      alert("Please add name");
+      return;
+    }
+    if (!category) {
+      alert("Please add category");
+      return;
+    }
+    if (!price) {
+      alert("Please add price");
+      return;
+    }
+    if (!image) {
+      alert("Please add image");
+      return;
+    }
+
     try {
       await axios.post(`${BASE_URL}/products`, newProduct, {
         withCredentials: true,
       });
       alert("Product added successfully!");
+
+      // Reset form
+      setNewProduct({
+        name: "",
+        price: "",
+        category: "",
+        image: "",
+        brand: "",
+        features: "",
+        quantity: "",
+        description: "",
+      });
     } catch (err) {
-      console.error(err);
+      console.error("Error adding product:", err);
       alert("Failed to add product.");
     }
   };
 
   return (
-    <div>
-      <h3>Add New Product</h3>
-      <input placeholder="Name" onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })} />
-      <input placeholder="Price" onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })} />
-      <input placeholder="Category" onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })} />
-      <input placeholder="Image URL" onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })} />
-      <input placeholder="Brand" onChange={(e) => setNewProduct({ ...newProduct, brand: e.target.value })} />
-      <button onClick={handleAddProduct}>Add Product</button>
+    <div className="flex justify-center text-green-800">
+      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-fit bg-sky-200">
+        <h3 className="text-3xl font-semibold text-center">Add New Product</h3>
+        <hr className="text-sky-300" />
+
+
+        <div className="flex flex-col text-xl gap-2 p-2">
+          {/* Name */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold " htmlFor="name">
+              <pre>Name           :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl "
+              name="name"
+              placeholder="Item Name"
+              value={newProduct.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+
+          {/* Category */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="category">
+              <pre>Category     :</pre>
+            </label>
+            <select
+              name="category"
+              className="p-1.5 bg-white outline-1 rounded-xl"
+              value={newProduct.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Category</option>
+              <option value="Fans">Fans</option>
+              <option value="Lights">Lights</option>
+              <option value="Switches">Switches</option>
+              <option value="Wires">Wires</option>
+              <option value="Irons">Irons</option>
+              <option value="Pipes">Pipes</option>
+            </select>
+          </div>
+
+          {/* Price */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="price">
+              <pre>Price            :</pre>{" "}
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="price"
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Features */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="features">
+              <pre>Features      :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="features"
+              placeholder="Features"
+              value={newProduct.features}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Quantity */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="quantity">
+              <pre>Quantity     :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="quantity"
+              placeholder="Quantity"
+              value={newProduct.quantity}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Image URL */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="image">
+              <pre>Image          :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="image"
+              type="url"
+              placeholder="Image URL"
+              value={newProduct.image}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Description */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="description">
+              <pre>Description :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="description"
+              placeholder="Description"
+              value={newProduct.description}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Brands */}
+          <div className="flex items-center gap-3">
+            <label className="font-semibold" htmlFor="brand">
+              <pre>Brand          :</pre>
+            </label>
+            <input
+              className="p-1 outline-1 bg-white rounded-xl"
+              name="brand"
+              placeholder="Brand"
+              value={newProduct.brand}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <button
+          className="p-1.5 mt-3 w-50 cursor-pointer active:scale-90 bg-emerald-600 text-white rounded-2xl"
+          onClick={handleAddProduct}
+        >
+          Add Product
+        </button>
+      </div>
     </div>
   );
 };

@@ -24,17 +24,14 @@ const productSchema = new mongoose.Schema({
     required: true
   },
   imageUrl: {
-    type: String, // optional image URL for frontend
+    type: String,
+    required: true
   },
   description: {
     type: String,
   },
   brand: {
     type: String,
-  },
-  inStock: {
-    type: Boolean,
-    default: true,
   },
 }, { timestamps: true });
 
