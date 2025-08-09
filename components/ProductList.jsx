@@ -61,7 +61,7 @@ const ViewProducts = () => {
                   <p className="text-green-600 font-bold text-lg">₹{p.price}</p>
                   <p className="text-md text-gray-500">{p.category}</p>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 items-end">
                   <img src={p.imageUrl} className="w-30" alt="" />
                   <p className="text-sm flex"><b><pre>In Stock: </pre></b>{p.quantity}</p>
                 </div>
