@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
-const categories = ["Fans", "Lights", "Switches", "Pipes", "Irons", "Wires"];
+const categories = ["Fans", "Lights", "Switches","Wires", "Irons", "Pipes"];
 
 const RemoveProduct = () => {
   const [products, setProducts] = useState([]);
@@ -12,9 +12,10 @@ const RemoveProduct = () => {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/products`);
+      console.log("Fetched products response from RemoveProduct.jsx:", res.data);
       setProducts(res.data.products || []);
     } catch (err) {
-      console.error("Error fetching products:", err);
+      console.error("Error fetching products from RemoveProduct.jsx:", err);
     }
   };
 
@@ -64,7 +65,7 @@ const RemoveProduct = () => {
 
           {/* Step 2: Choose product from selected category */}
           {category && (
-            <div className="bg-white rounded-xl p-2 border">
+            <div className="bg-white rounded-xl p-1 border">
               {filteredProducts.length === 0 ? (
                 <p className="text-gray-500">No products in this category</p>
               ) : (

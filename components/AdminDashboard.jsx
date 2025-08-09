@@ -29,11 +29,11 @@ const AdminDashboard = () => {
       <h1 className="text-center text-3xl font-semibold mb-10">Admin Dashboard</h1>
 
       {/* Nav Buttons */}
-      <div className="mb-20 flex justify-between" >
-        <button className="bg-amber-300 p-2 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("add")}>➕ Add Product</button>
-        <button className="bg-amber-300 p-2 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("remove")}>❌ Remove Product</button>
-        <button className="bg-amber-300 p-2 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("update")}>🔄 Update Product</button>
-        <button className="bg-amber-300 p-2 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("view")}>👁️ View Products</button>
+      <div className="mb-10 md:mb-10 flex flex-col gap-2 md:flex-row md:justify-between" >
+        <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("add")}>➕ Add Product</button>
+        <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("remove")}>❌ Remove Product</button>
+        <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("update")}>🔄 Update Product</button>
+        <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("view")}>👁️ View Products</button>
       </div>
 
       {/* Conditional Views */}
