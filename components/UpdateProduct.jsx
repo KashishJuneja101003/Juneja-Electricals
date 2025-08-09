@@ -54,7 +54,7 @@ const UpdateProduct = () => {
     }
     try {
       await axios.put(
-        `${BASE_URL}/products/${selectedProduct._id}`,
+        `${BASE_URL}/products/id/${selectedProduct._id}`,
         updatedProduct,
         { withCredentials: true }
       );
