@@ -62,7 +62,7 @@ const ViewProducts = () => {
                   <p className="text-sm text-gray-500">{p.category}</p>
                 </div>
                 <div>
-                  <img src={p.imageUrl} alt="" />
+                  <img src={p.imageUrl} className="w-30" alt="" />
                   <p className="text-sm"><b><pre>In Stock: </pre></b>{p.quantity}</p>
                 </div>
               </div>
