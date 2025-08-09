@@ -55,7 +55,7 @@ const ViewProducts = () => {
               key={p._id}
               className="border p-4 rounded-lg shadow hover:shadow-md transition"
             >
-              <div className="flex">
+              <div className="flex justify-between">
                 <div>
                   <h4 className="font-semibold text-lg">{p.name}</h4>
                   <p className="text-green-600 font-bold">₹{p.price}</p>
