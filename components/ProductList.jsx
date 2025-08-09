@@ -13,7 +13,10 @@ const ViewProducts = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(`${BASE_URL}/products`);
-        console.log("Fetched products response from ProductList.jsx:", res.data);
+        console.log(
+          "Fetched products response from ProductList.jsx:",
+          res.data
+        );
 
         // Safely handle both array and object formats
         if (Array.isArray(res.data)) {
@@ -52,9 +55,17 @@ const ViewProducts = () => {
               key={p._id}
               className="border p-4 rounded-lg shadow hover:shadow-md transition"
             >
-              <h4 className="font-semibold text-lg">{p.name}</h4>
-              <p className="text-green-600 font-bold">₹{p.price}</p>
-              <p className="text-sm text-gray-500">{p.category}</p>
+              <div>
+                <div>
+                  <h4 className="font-semibold text-lg">{p.name}</h4>
+                  <p className="text-green-600 font-bold">₹{p.price}</p>
+                  <p className="text-sm text-gray-500">{p.category}</p>
+                </div>
+                <div>
+                  <img src={p.imageUrl} alt="" />
+                  <p className="text-sm"><b><pre>In Stock: </pre></b>{p.quantity}</p>
+                </div>
+              </div>
             </li>
           ))}
         </ul>
