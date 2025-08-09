@@ -48,6 +48,19 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
+// DELETE: Remove a product by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    if (!deletedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json({ message: "Product deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // routes/productRoutes.js
 router.post('/update-stock', updateProductStock);
 
