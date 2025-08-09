@@ -96,7 +96,7 @@ export default function RemoveProduct() {
           {/* Product Dropdown */}
           {filteredProducts.length > 0 && (
             <div className="mt-4 transition-all duration-300 ease-in-out">
-              <label className="font-medium"><pre>Select Product:  </pre></label>
+              <label className="font-medium"><pre>Select Product:</pre></label>
               <select
                 className="border rounded bg-white cursor-pointer transition-all duration-300 ease-in-out"
                 value={selectedProduct?._id || ""}
