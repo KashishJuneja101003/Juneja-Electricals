@@ -25,11 +25,11 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px" }} className="flex flex-col items-center">
       <h1 className="text-center text-3xl font-semibold mb-10">Admin Dashboard</h1>
 
       {/* Nav Buttons */}
-      <div className="mb-10 md:mb-10 flex flex-col gap-2 md:flex-row md:justify-between" >
+      <div className="mb-10 w-fit grid sm:grid-cols-2 md:grid-cols-4 gap-2 " >
         <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("add")}>➕ Add Product</button>
         <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("remove")}>❌ Remove Product</button>
         <button className="bg-amber-300 p-2 w-40 rounded-2xl active:scale-90 cursor-pointer active:text-slate-600" onClick={() => setView("update")}>🔄 Update Product</button>

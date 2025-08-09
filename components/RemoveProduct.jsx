@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
-const categories = ["Fans", "Lights", "Switches","Wires", "Irons", "Pipes"];
+const categories = ["Fans", "Lights", "Switches", "Wires", "Irons", "Pipes"];
 
 const RemoveProduct = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +12,10 @@ const RemoveProduct = () => {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/products`);
-      console.log("Fetched products response from RemoveProduct.jsx:", res.data);
+      console.log(
+        "Fetched products response from RemoveProduct.jsx:",
+        res.data
+      );
       setProducts(res.data.products || []);
     } catch (err) {
       console.error("Error fetching products from RemoveProduct.jsx:", err);
@@ -64,15 +67,15 @@ const RemoveProduct = () => {
           </select>
 
           {/* Step 2: Choose product from selected category */}
-          {category && (
-            <div className="bg-white rounded-xl p-1 border">
-              {filteredProducts.length === 0 ? (
+          <div className="bg-white rounded-xl p-1 border h-fit transition-all duration-300">
+            {category ? (
+              filteredProducts.length === 0 ? (
                 <p className="text-gray-500">No products in this category</p>
               ) : (
                 filteredProducts.map((p) => (
                   <div
                     key={p._id}
-                    className={`flex items-center gap-4 p-2 border-b cursor-pointer hover:bg-sky-100 ${
+                    className={`flex items-center gap-4 p-2 border-b cursor-pointer hover:bg-sky-100 transition-colors duration-200 ${
                       selectedId === p._id ? "bg-sky-200" : ""
                     }`}
                     onClick={() => setSelectedId(p._id)}
@@ -90,9 +93,13 @@ const RemoveProduct = () => {
                     </div>
                   </div>
                 ))
-              )}
-            </div>
-          )}
+              )
+            ) : (
+              <p className="text-gray-500">
+                Select a category to view products
+              </p>
+            )}
+          </div>
         </div>
 
         <button
