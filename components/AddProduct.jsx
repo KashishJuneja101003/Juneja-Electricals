@@ -64,12 +64,12 @@ const AddProduct = () => {
 
   return (
     <div className="flex justify-center text-green-800">
-      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-fit bg-sky-200">
+      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-fit gap-2 bg-sky-200">
         <h3 className="text-3xl font-semibold text-center">Add New Product</h3>
-        <hr className="text-sky-300" />
+        <hr className="text-sky-300 w-full" />
 
 
-        <div className="flex flex-col text-xl gap-2 p-2">
+        <div className="flex flex-col text-xl gap-3 p-2">
           {/* Name */}
           <div className="flex items-center gap-3">
             <label className="font-semibold " htmlFor="name">
