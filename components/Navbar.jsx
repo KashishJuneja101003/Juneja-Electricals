@@ -11,6 +11,7 @@ function Navbar() {
   const navRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
 
   // Close hamburger menu when clicked outside
   useEffect(() => {
@@ -96,6 +97,16 @@ function Navbar() {
               Contact Us
             </p>
           </div>
+
+          {user?.role === "admin" && (
+            <Link to="/admin">
+              <div className="flex items-center justify-center gap-1 cursor-pointer">
+                <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+                  Dashboard
+                </p>
+              </div>
+            </Link>
+          )}
           {<Cart />}
 
           {/* login - logout */}
