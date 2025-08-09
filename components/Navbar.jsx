@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import businessLogo from "../src/assets/Business Logo.png";
+import businessLogo from "../src/assets/BusinessLogo.png";
 import LoginBtn from "./LoginBtn";
 import Cart from "./Cart";
 import { Link, useNavigate, useLocation } from "react-router-dom";

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Fans from "../components/Products/Fans";
@@ -13,12 +14,52 @@ import OrderGateway from "../components/OrderGateway";
 import HomePage from "../components/HomePage";
 import PaymentSuccess from "../components/PaymentSuccess";
 import OrderSuccess from "../components/OrderSuccess";
-import AdminDashboard from "../components/AdminDashboard"
+import AdminDashboard from "../components/AdminDashboard";
 
 function App() {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallButton(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+    };
+  }, []);
+
+  const handleInstallClick = () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the install prompt");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      setDeferredPrompt(null);
+      setShowInstallButton(false);
+    });
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      
+      {/* Install button, show only when prompt is available */}
+      {showInstallButton && (
+        <div className="bg-emerald-600 text-white text-center py-2 cursor-pointer hover:bg-emerald-700 transition-all">
+          <button className="cursor-pointer" onClick={handleInstallClick}>Install Juneja Electricals App</button>
+        </div>
+      )}
+
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,7 +75,6 @@ function App() {
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/admin" element={<AdminDashboard />} />
-
         </Routes>
       </div>
       <Footer />
