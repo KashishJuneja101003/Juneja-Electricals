@@ -47,7 +47,7 @@ const ViewProducts = () => {
 
   return (
     <div className="p-4">
-      <h3 className="text-2xl font-bold mb-4">View All Products</h3>
+      <h3 className="text-2xl text-center font-bold mb-4">View All Products</h3>
       {products.length > 0 ? (
         <ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.map((p) => (
@@ -61,7 +61,7 @@ const ViewProducts = () => {
                   <p className="text-green-600 font-bold text-lg">₹{p.price}</p>
                   <p className="text-md text-gray-500">{p.category}</p>
                 </div>
-                <div>
+                <div className="flex flex-col gap-2">
                   <img src={p.imageUrl} className="w-30" alt="" />
                   <p className="text-sm flex"><b><pre>In Stock: </pre></b>{p.quantity}</p>
                 </div>
