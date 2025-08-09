@@ -2,6 +2,19 @@
 
 This project is a professional website built for Juneja Electricals to showcase their electrical products and services. The site is designed to attract new customers, provide essential business information, and enhance the business's online presence.
 
+## Table of Contents
+- [Features](#features)
+- [Tools and Technologies](#tools-and-technologies)
+- [Development Tools](#development-tools)
+- [Usage](#usage)
+- [Future Enhancements](#future-enhancements)
+- [Demo](#demo)
+- [Email Alerts](#email-alerts)
+- [Documentation](#documentation)
+- [Links & References](#links--references)
+- [Contact](#contact)
+
+
 ## Features
 - Responsive design for all device sizes
 - User registration and role-based login (admin, customer)
@@ -46,7 +59,29 @@ This project is a professional website built for Juneja Electricals to showcase 
 ## Demo
 
 ### User Registration & Login  
-![User Login Demo](assets/login-demo.gif)
+![User Registration & Login Demo](/public/assets/Register_Login.gif)
+
+### Buying Products  
+![Buying Products Demo](/public/assets/Buy_Products.gif)
+
+### Admin Dashboard (Add/Update/Delete Products)  
+![Admin Dashboard Demo](/public/assets/Admin_Dashboard.gif)
+
+### Contact Us Page  
+![Contact Us Demo](/public/assets/Contact_Us.gif)
+
+### Progressive Web App (PWA) on Mobile  
+![PWA Demo](/public/assets/PWA.gif)
+
+
+## Email Alerts
+
+### Order Confirmation
+![Order Confirmation](/public/assets/Order_Confirmation.png)
+
+### Out of Stock
+![Out of Stock](/public/assets/Out_of_Stock.png)
+
 
 
 ## Documentation
