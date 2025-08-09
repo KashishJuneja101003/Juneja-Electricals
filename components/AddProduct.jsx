@@ -146,6 +146,7 @@ const AddProduct = () => {
             <input
               className="p-1 outline-1 bg-white rounded-xl"
               name="quantity"
+              type="number"
               placeholder="Quantity"
               value={newProduct.quantity}
               onChange={handleChange}

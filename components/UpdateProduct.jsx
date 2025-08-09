@@ -73,7 +73,7 @@ const UpdateProduct = () => {
   const options = products.map((p) => ({
     value: p._id,
     label: (
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div className="w-fit" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <img
           src={p.imageUrl}
           alt={p.name}
@@ -178,9 +178,10 @@ const UpdateProduct = () => {
                   }
                 />
 
-                <input
-                  className="border p-2"
+                <textarea
+                  className="border p-2 resize-none"
                   placeholder="Description"
+                  rows={4}
                   value={updatedProduct.description}
                   onChange={(e) =>
                     setUpdatedProduct({
@@ -206,7 +207,7 @@ const UpdateProduct = () => {
               </div>
 
               <button
-                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded cursor-pointer active:scale-90 hover:bg-blue-700"
+                className="p-1.5 mt-3 w-50 cursor-pointer active:scale-90 bg-emerald-600 text-white rounded-2xl"
                 onClick={updateProduct}
               >
                 Update Product
