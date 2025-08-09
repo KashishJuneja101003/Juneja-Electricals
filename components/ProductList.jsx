@@ -55,7 +55,7 @@ const ViewProducts = () => {
               key={p._id}
               className="border p-4 rounded-lg shadow hover:shadow-md transition"
             >
-              <div>
+              <div className="flex">
                 <div>
                   <h4 className="font-semibold text-lg">{p.name}</h4>
                   <p className="text-green-600 font-bold">₹{p.price}</p>
@@ -63,7 +63,7 @@ const ViewProducts = () => {
                 </div>
                 <div>
                   <img src={p.imageUrl} className="w-30" alt="" />
-                  <p className="text-sm"><b><pre>In Stock: </pre></b>{p.quantity}</p>
+                  <p className="text-sm flex"><b><pre>In Stock: </pre></b>{p.quantity}</p>
                 </div>
               </div>
             </li>
