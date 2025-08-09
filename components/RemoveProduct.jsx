@@ -1,116 +1,104 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
-const categories = ["Fans", "Lights", "Switches", "Wires", "Irons", "Pipes"];
 
-const RemoveProduct = () => {
+export default function RemoveProduct() {
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("");
-  const [selectedId, setSelectedId] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/products`);
-      console.log(
-        "Fetched products response from RemoveProduct.jsx:",
-        res.data
-      );
-      setProducts(res.data.products || []);
-    } catch (err) {
-      console.error("Error fetching products from RemoveProduct.jsx:", err);
-    }
-  };
+  const categories = ["Fans", "Lights", "Switches", "Pipes", "Irons", "Wires"];
 
-  const deleteProduct = async () => {
-    if (!category) return alert("Please select the category of product.");
-    if (!selectedId) return alert("Please select a product to delete.");
-    try {
-      await axios.delete(`${BASE_URL}/products/${selectedId}`, {
-        withCredentials: true,
-      });
-      setSelectedId("");
-      fetchProducts();
-    } catch (err) {
-      console.error("Error deleting product:", err);
-    }
-  };
-
+  // Fetch products from backend
   useEffect(() => {
-    fetchProducts();
+    axios
+      .get(`${BASE_URL}/products`)
+      .then((res) => {
+        console.log("Fetched products:", res.data);
+        setProducts(res.data);
+      })
+      .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
-  // Filter products by chosen category
-  const filteredProducts = products.filter(
-    (p) => p.category?.toLowerCase() === category.toLowerCase()
-  );
+  // Filter products when category changes
+  useEffect(() => {
+    if (selectedCategory) {
+      setFilteredProducts(
+        products.filter(
+          (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase()
+        )
+      );
+    } else {
+      setFilteredProducts([]);
+    }
+  }, [selectedCategory, products]);
 
   return (
-    <div className="flex justify-center text-green-800">
-      <div className="flex justify-center items-center p-2 flex-col gap-2 border-2 border-sky-300 rounded-2xl w-fit bg-sky-200">
-        <h3 className="text-3xl font-semibold text-center">Remove Product</h3>
-        <hr className="text-sky-300 w-full" />
+    <div className="p-6">
+      {/* Category Dropdown */}
+      <label className="block mb-2 font-medium">Select Category</label>
+      <select
+        className="border px-3 py-2 rounded w-full transition-all duration-300 ease-in-out"
+        value={selectedCategory}
+        onChange={(e) => {
+          setSelectedCategory(e.target.value);
+          setSelectedProduct(null);
+        }}
+      >
+        <option value="">-- Select Category --</option>
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
 
-        <div className="flex flex-col text-xl gap-3 p-2">
-          {/* Step 1: Choose category */}
+      {/* Product Dropdown */}
+      {filteredProducts.length > 0 && (
+        <div className="mt-4 transition-all duration-300 ease-in-out">
+          <label className="block mb-2 font-medium">Select Product</label>
           <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="outline-1 p-1 bg-white rounded-xl"
+            className="border px-3 py-2 rounded w-full transition-all duration-300 ease-in-out"
+            onChange={(e) =>
+              setSelectedProduct(
+                filteredProducts.find((p) => p._id === e.target.value)
+              )
+            }
           >
-            <option value="">Select category</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+            <option value="">-- Select Product --</option>
+            {filteredProducts.map((product) => (
+              <option key={product._id} value={product._id}>
+                {product.name}
               </option>
             ))}
           </select>
-
-          {/* Step 2: Choose product from selected category */}
-          <div className="bg-white rounded-xl p-1 border h-fit transition-all duration-300">
-            {category ? (
-              filteredProducts.length === 0 ? (
-                <p className="text-gray-500">No products in this category</p>
-              ) : (
-                filteredProducts.map((p) => (
-                  <div
-                    key={p._id}
-                    className={`flex items-center gap-4 p-2 border-b cursor-pointer hover:bg-sky-100 transition-colors duration-200 ${
-                      selectedId === p._id ? "bg-sky-200" : ""
-                    }`}
-                    onClick={() => setSelectedId(p._id)}
-                  >
-                    <img
-                      src={p.imageUrl}
-                      alt={p.name}
-                      className="w-12 h-12 object-cover rounded"
-                    />
-                    <div>
-                      <p className="font-semibold">{p.name}</p>
-                      <p>ID: {p._id}</p>
-                      <p>Brand: {p.brand}</p>
-                      <p>₹{p.price}</p>
-                    </div>
-                  </div>
-                ))
-              )
-            ) : (
-              <p className="text-gray-500">
-                Select a category to view products
-              </p>
-            )}
-          </div>
         </div>
+      )}
 
-        <button
-          className="p-1.5 mt-3 w-50 cursor-pointer active:scale-90 bg-emerald-600 text-white rounded-2xl"
-          onClick={deleteProduct}
-        >
-          Delete Product
-        </button>
-      </div>
+      {/* Selected Product Details */}
+      {selectedProduct && (
+        <div className="mt-6 border p-4 rounded shadow-md transition-all duration-300 ease-in-out">
+          <img
+            src={selectedProduct.imageUrl}
+            alt={selectedProduct.name}
+            className="w-32 h-32 object-contain mb-4"
+          />
+          <p>
+            <strong>ID:</strong> {selectedProduct._id}
+          </p>
+          <p>
+            <strong>Name:</strong> {selectedProduct.name}
+          </p>
+          <p>
+            <strong>Price:</strong> ₹{selectedProduct.price}
+          </p>
+          <p>
+            <strong>Brand:</strong> {selectedProduct.brand}
+          </p>
+        </div>
+      )}
     </div>
   );
-};
-
-export default RemoveProduct;
+}
