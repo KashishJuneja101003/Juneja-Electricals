@@ -64,5 +64,21 @@ router.delete("/:id", async (req, res) => {
 // routes/productRoutes.js
 router.post('/update-stock', updateProductStock);
 
+router.put("/id/:id", async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json(updatedProduct);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 module.exports = router;
