@@ -1,12 +1,12 @@
-// UpdateProduct.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Select from "react-select";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
 const UpdateProduct = () => {
   const [products, setProducts] = useState([]);
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [updatedProduct, setUpdatedProduct] = useState({
     name: "",
     price: "",
@@ -18,13 +18,9 @@ const UpdateProduct = () => {
     features: "",
   });
 
-  // Fetch all products
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/products`);
-      console.log("Fetched products:", res.data);
-
-      // Backend sends array directly
       if (Array.isArray(res.data)) {
         setProducts(res.data);
       } else {
@@ -35,10 +31,8 @@ const UpdateProduct = () => {
     }
   };
 
-  // When selecting a product, fill the form
-  const handleSelectProduct = (id) => {
-    setSelectedId(id);
-    const product = products.find((p) => p._id === id);
+  const handleSelectProduct = (product) => {
+    setSelectedProduct(product);
     if (product) {
       setUpdatedProduct({
         name: product.name || "",
@@ -53,16 +47,17 @@ const UpdateProduct = () => {
     }
   };
 
-  // Send update request
   const updateProduct = async () => {
-    if (!selectedId) {
+    if (!selectedProduct) {
       alert("Please select a product to update.");
       return;
     }
     try {
-      await axios.put(`${BASE_URL}/products/${selectedId}`, updatedProduct, {
-        withCredentials: true,
-      });
+      await axios.put(
+        `${BASE_URL}/products/${selectedProduct._id}`,
+        updatedProduct,
+        { withCredentials: true }
+      );
       await fetchProducts();
       alert("Product updated successfully!");
     } catch (err) {
@@ -75,101 +70,135 @@ const UpdateProduct = () => {
     fetchProducts();
   }, []);
 
+  const options = products.map((p) => ({
+    value: p._id,
+    label: (
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <img
+          src={p.imageUrl}
+          alt={p.name}
+          style={{ width: "40px", height: "40px", objectFit: "cover" }}
+        />
+        <span>
+          {p.name} — ₹{p.price}
+        </span>
+      </div>
+    ),
+    product: p,
+  }));
+
   return (
     <div className="p-4">
       <h3 className="text-xl font-bold mb-4">Update Product</h3>
 
-      {/* Product Dropdown */}
-      <select
-        className="border p-2 mb-4 w-full"
-        onChange={(e) => handleSelectProduct(e.target.value)}
-        value={selectedId}
-      >
-        <option value="">Select a product</option>
-        {products.map((p) => (
-          <option key={p._id} value={p._id}>
-            {p.name} — ₹{p.price}
-          </option>
-        ))}
-      </select>
+      {/* Product dropdown with images */}
+      <Select
+        options={options}
+        onChange={(option) => handleSelectProduct(option.product)}
+        placeholder="Select a product"
+      />
 
-      {/* Update Form */}
-      <div className="flex flex-col gap-2">
-        <input
-          className="border p-2"
-          placeholder="Name"
-          value={updatedProduct.name}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, name: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Category"
-          value={updatedProduct.category}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, category: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Price"
-          value={updatedProduct.price}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, price: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Features"
-          value={updatedProduct.features}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, features: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Quantity"
-          value={updatedProduct.quantity}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, quantity: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Image URL"
-          value={updatedProduct.imageUrl}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, imageUrl: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Description"
-          value={updatedProduct.description}
-          onChange={(e) =>
-            setUpdatedProduct({
-              ...updatedProduct,
-              description: e.target.value,
-            })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Brand"
-          value={updatedProduct.brand}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, brand: e.target.value })
-          }
-        />
-      </div>
+      {selectedProduct && (
+        <div>
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            <input
+              className="border p-2"
+              placeholder="Name"
+              value={updatedProduct.name}
+              onChange={(e) =>
+                setUpdatedProduct({ ...updatedProduct, name: e.target.value })
+              }
+            />
 
-      <button
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        onClick={updateProduct}
-      >
-        Update Product
-      </button>
+            <img src={updateProduct.imageUrl} className="w-40" alt="" />
+
+            <input
+              className="border p-2"
+              placeholder="Category"
+              value={updatedProduct.category}
+              onChange={(e) =>
+                setUpdatedProduct({
+                  ...updatedProduct,
+                  category: e.target.value,
+                })
+              }
+            />
+
+            <input
+              className="border p-2"
+              placeholder="Image URL"
+              value={updatedProduct.imageUrl}
+              onChange={(e) =>
+                setUpdatedProduct({
+                  ...updatedProduct,
+                  imageUrl: e.target.value,
+                })
+              }
+            />
+
+            <input
+              className="border p-2"
+              placeholder="Price"
+              value={updatedProduct.price}
+              onChange={(e) =>
+                setUpdatedProduct({ ...updatedProduct, price: e.target.value })
+              }
+            />
+
+            <input
+              className="border p-2"
+              placeholder="Quantity"
+              type="number"
+              value={updatedProduct.quantity}
+              onChange={(e) =>
+                setUpdatedProduct({
+                  ...updatedProduct,
+                  quantity: e.target.value,
+                })
+              }
+            />
+
+            <input
+              className="border p-2"
+              placeholder="Features"
+              value={updatedProduct.features}
+              onChange={(e) =>
+                setUpdatedProduct({
+                  ...updatedProduct,
+                  features: e.target.value,
+                })
+              }
+            />
+
+            <input
+              className="border p-2"
+              placeholder="Description"
+              value={updatedProduct.description}
+              onChange={(e) =>
+                setUpdatedProduct({
+                  ...updatedProduct,
+                  description: e.target.value,
+                })
+              }
+            />
+            <input
+              className="border p-2"
+              placeholder="Brand"
+              value={updatedProduct.brand}
+              onChange={(e) =>
+                setUpdatedProduct({ ...updatedProduct, brand: e.target.value })
+              }
+            />
+          </div>
+
+          <button
+            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            onClick={updateProduct}
+          >
+            Update Product
+          </button>
+        </div>
+      )}
     </div>
   );
 };
