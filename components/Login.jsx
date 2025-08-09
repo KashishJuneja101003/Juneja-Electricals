@@ -26,7 +26,8 @@ const Login = () => {
       // ✅ Call context login to update state
       login({ name, role }, token);
 
-      alert("Login Successful!");
+      if(role === "admin") alert("Welcome, Admin!");
+      else alert("Login Successful!");
       console.log(name, "logged in!");
 
       // Role-based redirection

@@ -1,56 +1,44 @@
-# JUNEJA ELECTRICALS
+# Juneja Electricals Website — Project Overview
 
-This project is driven by the need to modernize our family’s electrical appliances business, which currently relies on offline customer interactions and word-of-mouth referrals. As the world moves more online, having a digital presence is essential for attracting new customers, building trust, and staying competitive. Creating a professional, user-friendly website will not only showcase our products and services more effectively but also streamline customer inquiries and improve accessibility
+## 1. Introduction  
+The Juneja Electricals Website is a professional e-commerce platform designed to showcase electrical products and services for Juneja Electricals, a local business. The project aims to establish a digital presence that attracts new customers, facilitates product discovery, and streamlines order management. By creating an intuitive and responsive website, the project addresses the need for easy access to products and business information for customers, while also providing an efficient admin interface for managing inventory and sales.
 
-## Goals and Purpose
+## 2. Goals and Objectives  
+- Develop a user-friendly platform for customers to browse and purchase electrical products online.  
+- Implement a secure role-based authentication system to differentiate between admin and customer access.  
+- Provide an admin dashboard for product management, order tracking, and stock monitoring.  
+- Enable automated email billing for both customers and administrators to enhance communication.  
+- Ensure responsiveness and offline capabilities by implementing Progressive Web App (PWA) features.  
+- Create a foundation that supports future enhancements like product reviews and analytics.
 
-- Improve online visibility and attract more customers.
-- Create a professional online portfolio for the business.
+## 3. Features Summary  
+- Responsive design compatible with desktops, tablets, and mobile devices.  
+- User registration and login with role-based access control (admin and customer).  
+- Admin dashboard enabling add, update, delete, and view operations on products.  
+- Product browsing and ordering functionality for customers.  
+- Automated billing emails sent upon order completion.  
+- Real-time stock alerts sent to the admin when product quantity is low.  
+- Contact page integrating Google Maps and multiple communication channels.  
+- Progressive Web App support for offline usage and improved performance.
 
-## Features
+## 4. Technology Stack  
+- **Frontend:** React for building a dynamic and responsive user interface, styled with Tailwind CSS for rapid UI development.  
+- **Backend:** Node.js and Express.js to create RESTful APIs for authentication, product management, and order processing.  
+- **Database:** MongoDB to store users, products, orders, and billing information with a flexible schema.  
+- **Email Service:** Nodemailer for sending automated billing and notification emails.  
+- **Deployment:** Frontend hosted on Netlify and backend deployed on Render for scalability and ease of maintenance.  
+- **Version Control:** Git and GitHub for code management and collaboration.
 
-- Explore various products with wide range of variety.
-- Reach out the owner for any query.
-- Locate the shop using Google Map.
+## 5. Future Enhancements  
+- Build an Admin Analytics Dashboard to visualize sales data, revenue, and product performance.  
+- Implement a Customer Reviews and Ratings system to enhance user engagement and trust.  
+- Automate post-purchase feedback emails to collect valuable customer insights.  
+- Introduce loyalty and referral programs to incentivize repeat business.  
+- Improve the mobile experience with native app-like features.  
+- Integrate third-party services for enhanced payment processing and marketing.
 
-## Tech Stack
+## 6. Deployment and Testing  
+The frontend is deployed on Netlify and the backend on Render, enabling continuous deployment workflows through GitHub. Manual testing was performed across devices to ensure responsive design and functional correctness. Basic unit testing for critical backend routes is planned for future iterations.
 
-- **Frontend:** HTML, CSS (Tailwind CSS)
-- **Version Control:** Git (2.46.2.windows.1), GitHub
-- **Deployment:** GitHub Pages
-
-## Development Tools
-
-- **Visual Studio Code (1.100.2)** - For coding and project management
-- **Canva** - For sketching wireframes and planning layouts
-
-## Designs
-
-- **Colors:** Colors we used primarily, are: ![Colors we used primarily](image-3.png)
-- **Design 1:** ![HomePage](image.png)
-- **Design 2:** ![Hover on Navbar Items (Search by Category)](https://github.com/user-attachments/assets/c84e4238-6584-447a-a603-94cfba08aa37)
-- **Design 3:** ![Hover on Navbar Items (Brands We Sell)](https://github.com/user-attachments/assets/33611c91-da01-4a81-9390-e00da351ed96)
-- **Design 4:** ![Hover on Navbar Items (Contact Us)](https://github.com/user-attachments/assets/6b6e8ad5-bce1-4a56-a665-a9ab3bc3f072)
-- **Design 5:** ![Explore Our Products](https://github.com/user-attachments/assets/1ab94db5-e23a-44df-bcb6-abb764a48171)
-- **Design 6:** ![Meet The Owner](https://github.com/user-attachments/assets/49acbe0e-8d2a-4ee0-92ac-e01894f583c6)
-- **Design 7:** ![Contact Us](https://github.com/user-attachments/assets/adf2a93d-ee4f-4a9f-a967-b05dd51534c8)
-- **Design 8:** ![Footer Section](https://github.com/user-attachments/assets/8acb4687-9029-4247-bb92-0fb4238bfe31)
-- **Design 9:** ![Fans.html](https://github.com/user-attachments/assets/c1b2b71e-ec1f-432a-a632-60ef035f04b8)
-- **Design 10:** ![Irons.html](https://github.com/user-attachments/assets/8e2fbd50-995e-41be-a9fb-9bbad5135472)
-- **Design 11:** ![Lightings.html](https://github.com/user-attachments/assets/e4d0b8f4-f701-4bc5-9e4e-c0273699aba2)
-- **Design 12:** ![Switches-Sockets.html](https://github.com/user-attachments/assets/968c30ff-d7e2-4a95-918c-809bead362b1)
-- **Design 13:** ![PVC-Pipes.html](https://github.com/user-attachments/assets/549cce56-679a-469b-9bcf-ceea74b83edd)
-- **Design 14:** ![Wirings.html](https://github.com/user-attachments/assets/fc7d06a8-37b8-43a3-b182-0e86f5fa0aab)
-
-
-## Future Scope
-
-- Inventory system can be developed.
-- Order & Billing section can be created before Payment.
-- An Android application can be developed.
-- An iOS application can be developed.
-
-## Links & References
-
-- **GitHub Repo link:** https://github.com/KashishJuneja101003/Juneja-Electricals
-- **Deployment link (Netlify):** https://junejaelectricals.netlify.app/
+## 10. Conclusion  
+This project provided hands-on experience building a full-stack e-commerce web application with real-world features. It strengthened skills in React, Node.js, database design, email automation, and deployment. The modular design and thorough documentation lay a strong foundation for further enhancements, positioning the project as a strong portfolio piece for placements and professional growth.
