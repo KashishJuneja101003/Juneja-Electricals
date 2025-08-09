@@ -96,6 +96,7 @@ const UpdateProduct = () => {
         options={options}
         onChange={(option) => handleSelectProduct(option.product)}
         placeholder="Select a product"
+        className="w-fit"
       />
 
       {selectedProduct && (
@@ -110,7 +111,7 @@ const UpdateProduct = () => {
               }
             />
 
-            <img src={updateProduct.imageUrl} className="w-40" alt="" />
+            <img src={updatedProduct.imageUrl} className="w-40" alt="" />
 
             <input
               className="border p-2"
