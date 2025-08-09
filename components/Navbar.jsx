@@ -77,7 +77,7 @@ function Navbar() {
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => handleNavClick("explore-our-products")}
           >
-            <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+            <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
               Search by Category
             </p>
           </div>
@@ -85,7 +85,7 @@ function Navbar() {
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => handleNavClick("brands-we-sell")}
           >
-            <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+            <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
               Brands We Sell
             </p>
           </div>
@@ -93,7 +93,7 @@ function Navbar() {
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => handleNavClick("contact-us")}
           >
-            <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+            <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
               Contact Us
             </p>
           </div>
@@ -101,7 +101,7 @@ function Navbar() {
           {user?.role === "admin" && (
             <Link to="/admin">
               <div className="flex items-center justify-center gap-1 cursor-pointer">
-                <p className="text-md lg:text-xl xl:text-2xl 2xl:text-3xl">
+                <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
                   Dashboard
                 </p>
               </div>

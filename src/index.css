@@ -97,3 +97,13 @@
 .logo{
   width: 150px;
 }
+
+.nav-item-style {
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-item-style:hover {
+  transform: translateY(-3px) scale(1.03);
+  color: #27548a;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
