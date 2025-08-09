@@ -8,11 +8,12 @@ export default function RemoveProduct() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const categories = ["Fans", "Lights", "Switches", "Pipes", "Irons", "Wires"];
 
   // Fetch products from backend
-  useEffect(() => {
+  const fetchProducts = () => {
     axios
       .get(`${BASE_URL}/products`)
       .then((res) => {
@@ -20,6 +21,10 @@ export default function RemoveProduct() {
         setProducts(res.data);
       })
       .catch((err) => console.error("Error fetching products:", err));
+  };
+
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   // Filter products when category changes
@@ -34,6 +39,27 @@ export default function RemoveProduct() {
       setFilteredProducts([]);
     }
   }, [selectedCategory, products]);
+
+  // Delete product
+  const deleteProduct = async () => {
+    if (!selectedProduct) return alert("Please select a product to delete.");
+    if (!window.confirm(`Are you sure you want to delete "${selectedProduct.name}"?`)) return;
+
+    try {
+      setLoading(true);
+      await axios.delete(`${BASE_URL}/products/${selectedProduct._id}`, {
+        withCredentials: true,
+      });
+      alert("Product deleted successfully.");
+      setSelectedProduct(null);
+      fetchProducts(); // Refresh list after deletion
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      alert("Failed to delete product.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-6">
@@ -61,6 +87,7 @@ export default function RemoveProduct() {
           <label className="block mb-2 font-medium">Select Product</label>
           <select
             className="border px-3 py-2 rounded w-full transition-all duration-300 ease-in-out"
+            value={selectedProduct?._id || ""}
             onChange={(e) =>
               setSelectedProduct(
                 filteredProducts.find((p) => p._id === e.target.value)
@@ -97,6 +124,17 @@ export default function RemoveProduct() {
           <p>
             <strong>Brand:</strong> {selectedProduct.brand}
           </p>
+
+          {/* Delete Button */}
+          <button
+            onClick={deleteProduct}
+            disabled={loading}
+            className={`mt-4 px-4 py-2 rounded text-white ${
+              loading ? "bg-gray-400" : "bg-red-600 hover:bg-red-700"
+            } transition-all duration-200`}
+          >
+            {loading ? "Deleting..." : "Delete Product"}
+          </button>
         </div>
       )}
     </div>
