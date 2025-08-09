@@ -84,7 +84,7 @@ export default function RemoveProduct() {
                 setSelectedProduct(null);
               }}
             >
-              <option value="">-- Select Category --</option>
+              <option value=""> Select Category </option>
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -96,9 +96,9 @@ export default function RemoveProduct() {
           {/* Product Dropdown */}
           {filteredProducts.length > 0 && (
             <div className="mt-4 transition-all duration-300 ease-in-out">
-              <label className="block mb-2 font-medium">Select Product</label>
+              <label className="font-medium">Select Product:</label>
               <select
-                className="border px-3 py-2 rounded w-full transition-all duration-300 ease-in-out"
+                className="border rounded bg-white cursor-pointer transition-all duration-300 ease-in-out"
                 value={selectedProduct?._id || ""}
                 onChange={(e) =>
                   setSelectedProduct(
@@ -106,7 +106,7 @@ export default function RemoveProduct() {
                   )
                 }
               >
-                <option value="">-- Select Product --</option>
+                <option value=""> Select Product </option>
                 {filteredProducts.map((product) => (
                   <option key={product._id} value={product._id}>
                     {product.name}
@@ -118,7 +118,7 @@ export default function RemoveProduct() {
 
           {/* Selected Product Details */}
           {selectedProduct && (
-            <div className="mt-6 border p-4 rounded shadow-md transition-all duration-300 ease-in-out">
+            <div className="mt-6 border p-4 bg-yellow-50 rounded shadow-md transition-all duration-300 ease-in-out">
               <img
                 src={selectedProduct.imageUrl}
                 alt={selectedProduct.name}
