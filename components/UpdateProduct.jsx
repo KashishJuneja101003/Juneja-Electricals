@@ -11,30 +11,31 @@ const UpdateProduct = () => {
     name: "",
     price: "",
     category: "",
-    image: "",
+    imageUrl: "",
     brand: "",
+    quantity: "",
+    description: "",
+    features: "",
   });
 
   // Fetch all products
   const fetchProducts = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/products`);
-      console.log("Fetched products response from UpdateProduct.jsx:", res.data);
+      console.log("Fetched products:", res.data);
 
-      // Handle array or object with products property
+      // Backend sends array directly
       if (Array.isArray(res.data)) {
         setProducts(res.data);
-      } else if (res.data.products && Array.isArray(res.data.products)) {
-        setProducts(res.data.products);
       } else {
         console.error("Unexpected response format", res.data);
       }
     } catch (err) {
-      console.error("Error fetching products from UpdateProduct.jsx:", err);
+      console.error("Error fetching products:", err);
     }
   };
 
-  // Handle product selection and prefill form
+  // When selecting a product, fill the form
   const handleSelectProduct = (id) => {
     setSelectedId(id);
     const product = products.find((p) => p._id === id);
@@ -43,13 +44,16 @@ const UpdateProduct = () => {
         name: product.name || "",
         price: product.price || "",
         category: product.category || "",
-        image: product.image || "",
+        imageUrl: product.imageUrl || "",
         brand: product.brand || "",
+        quantity: product.quantity || "",
+        description: product.description || "",
+        features: product.features || "",
       });
     }
   };
 
-  // Update product in backend
+  // Send update request
   const updateProduct = async () => {
     if (!selectedId) {
       alert("Please select a product to update.");
@@ -75,7 +79,7 @@ const UpdateProduct = () => {
     <div className="p-4">
       <h3 className="text-xl font-bold mb-4">Update Product</h3>
 
-      {/* Product selection dropdown */}
+      {/* Product Dropdown */}
       <select
         className="border p-2 mb-4 w-full"
         onChange={(e) => handleSelectProduct(e.target.value)}
@@ -84,12 +88,12 @@ const UpdateProduct = () => {
         <option value="">Select a product</option>
         {products.map((p) => (
           <option key={p._id} value={p._id}>
-            {p.name} - ₹{p.price}
+            {p.name} — ₹{p.price}
           </option>
         ))}
       </select>
 
-      {/* Update form */}
+      {/* Update Form */}
       <div className="flex flex-col gap-2">
         <input
           className="border p-2"
@@ -97,14 +101,6 @@ const UpdateProduct = () => {
           value={updatedProduct.name}
           onChange={(e) =>
             setUpdatedProduct({ ...updatedProduct, name: e.target.value })
-          }
-        />
-        <input
-          className="border p-2"
-          placeholder="Price"
-          value={updatedProduct.price}
-          onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, price: e.target.value })
           }
         />
         <input
@@ -117,10 +113,45 @@ const UpdateProduct = () => {
         />
         <input
           className="border p-2"
-          placeholder="Image URL"
-          value={updatedProduct.image}
+          placeholder="Price"
+          value={updatedProduct.price}
           onChange={(e) =>
-            setUpdatedProduct({ ...updatedProduct, image: e.target.value })
+            setUpdatedProduct({ ...updatedProduct, price: e.target.value })
+          }
+        />
+        <input
+          className="border p-2"
+          placeholder="Features"
+          value={updatedProduct.features}
+          onChange={(e) =>
+            setUpdatedProduct({ ...updatedProduct, features: e.target.value })
+          }
+        />
+        <input
+          className="border p-2"
+          placeholder="Quantity"
+          value={updatedProduct.quantity}
+          onChange={(e) =>
+            setUpdatedProduct({ ...updatedProduct, quantity: e.target.value })
+          }
+        />
+        <input
+          className="border p-2"
+          placeholder="Image URL"
+          value={updatedProduct.imageUrl}
+          onChange={(e) =>
+            setUpdatedProduct({ ...updatedProduct, imageUrl: e.target.value })
+          }
+        />
+        <input
+          className="border p-2"
+          placeholder="Description"
+          value={updatedProduct.description}
+          onChange={(e) =>
+            setUpdatedProduct({
+              ...updatedProduct,
+              description: e.target.value,
+            })
           }
         />
         <input
