@@ -68,11 +68,11 @@ export default function RemoveProduct() {
 
   return (
     <div className="flex justify-center text-green-800">
-      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-fit gap-2 bg-sky-200">
-        <h3 className="text-3xl font-semibold text-center">Remove Product</h3>
+      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-[80%] sm:w-fit gap-2 bg-sky-200">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-center">Remove Product</h3>
         <hr className="text-sky-300 w-full" />
 
-        <div className="flex flex-col w-fit text-xl gap-3 p-2">
+        <div className="flex flex-col w-fit text-md sm:text-xl gap-3 p-2">
           {/* Category Dropdown */}
           <div className="flex w-fit">
             <label className="font-medium"><pre>Select Category:  </pre></label>

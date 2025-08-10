@@ -64,14 +64,14 @@ const AddProduct = () => {
 
   return (
     <div className="flex justify-center text-green-800">
-      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-fit gap-2 bg-sky-200">
-        <h3 className="text-3xl font-semibold text-center">Add New Product</h3>
+      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-[80%] sm:w-fit gap-2 bg-sky-200">
+        <h3 className="text-xl sm:text-3xl font-semibold text-center">Add New Product</h3>
         <hr className="text-sky-300 w-full" />
 
 
-        <div className="flex flex-col text-xl gap-3 p-2">
+        <div className="flex flex-col text-md sm:text-xl gap-3 p-2">
           {/* Name */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold " htmlFor="name">
               <pre>Name           :</pre>
             </label>
@@ -87,7 +87,7 @@ const AddProduct = () => {
 
 
           {/* Category */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="category">
               <pre>Category     :</pre>
             </label>
@@ -109,7 +109,7 @@ const AddProduct = () => {
           </div>
 
           {/* Price */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="price">
               <pre>Price            :</pre>{" "}
             </label>
@@ -125,7 +125,7 @@ const AddProduct = () => {
           </div>
 
           {/* Features */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="features">
               <pre>Features      :</pre>
             </label>
@@ -139,7 +139,7 @@ const AddProduct = () => {
           </div>
 
           {/* Quantity */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="quantity">
               <pre>Quantity     :</pre>
             </label>
@@ -155,7 +155,7 @@ const AddProduct = () => {
           </div>
 
           {/* Image URL */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="image">
               <pre>Image          :</pre>
             </label>
@@ -170,7 +170,7 @@ const AddProduct = () => {
           </div>
 
           {/* Description */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="description">
               <pre>Description :</pre>
             </label>
@@ -184,7 +184,7 @@ const AddProduct = () => {
           </div>
 
           {/* Brands */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <label className="font-semibold" htmlFor="brand">
               <pre>Brand          :</pre>
             </label>
