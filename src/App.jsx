@@ -18,7 +18,6 @@ import AdminDashboard from "../components/AdminDashboard";
 import AdminRoute from "../components/AdminRoute";
 
 function App() {
-  const user = JSON.parse(localStorage.getItem("user"));
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
 
@@ -81,8 +80,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <AdminRoute user={user}>
-                {" "}
+              <AdminRoute>
                 <AdminDashboard />
               </AdminRoute>
             }
