@@ -175,6 +175,19 @@ function Navbar() {
             </div>
           </li>
 
+          {/* Admin Dashboard */}
+          <li>
+            {user?.role === "admin" && (
+            <Link to="/admin">
+              <div onClick={()=>setMobileMenuOpen(false)} className="flex items-center justify-center gap-1 cursor-pointer">
+                <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
+                  Dashboard
+                </p>
+              </div>
+            </Link>
+          )}
+          </li>
+
           <div className="flex items-center justify-between pr-2">
             {/* LoginBtn */}
 

@@ -64,7 +64,7 @@ const AddProduct = () => {
 
   return (
     <div className="flex justify-center text-green-800">
-      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-[80%] sm:w-fit gap-2 bg-sky-200">
+      <div className="flex justify-center items-center p-2 flex-col  border-2 border-sky-300 rounded-2xl w-[90%] sm:w-fit gap-2 bg-sky-200">
         <h3 className="text-xl sm:text-3xl font-semibold text-center">Add New Product</h3>
         <hr className="text-sky-300 w-full" />
 
