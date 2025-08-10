@@ -15,8 +15,10 @@ import HomePage from "../components/HomePage";
 import PaymentSuccess from "../components/PaymentSuccess";
 import OrderSuccess from "../components/OrderSuccess";
 import AdminDashboard from "../components/AdminDashboard";
+import AdminRoute from "../components/AdminRoute";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
 
@@ -52,11 +54,13 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      
+
       {/* Install button, show only when prompt is available */}
       {showInstallButton && (
         <div className="bg-emerald-600 text-white text-center py-2 cursor-pointer hover:bg-emerald-700 transition-all">
-          <button className="cursor-pointer" onClick={handleInstallClick}>Install Juneja Electricals App</button>
+          <button className="cursor-pointer" onClick={handleInstallClick}>
+            Install Juneja Electricals App
+          </button>
         </div>
       )}
 
@@ -74,7 +78,15 @@ function App() {
           <Route path="/OrderGateway" element={<OrderGateway />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/order-success" element={<OrderSuccess />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute user={user}>
+                {" "}
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
         </Routes>
       </div>
       <Footer />
