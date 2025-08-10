@@ -179,13 +179,13 @@ function Navbar() {
           <li>
             {user?.role === "admin" && (
             <Link to="/admin">
-              <div onClick={()=>setMobileMenuOpen(false)} className="flex items-center justify-center gap-1 cursor-pointer">
-                <p className="text-md nav-item-style lg:text-xl xl:text-2xl 2xl:text-3xl">
+              <div onClick={()=>setMobileMenuOpen(false)} className="flex justify-between items-center cursor-pointer hover:bg-gray-200 p-2 rounded-lg">
+                <span>
                   Dashboard
-                </p>
+                </span>
               </div>
             </Link>
-          )}
+          )} 
           </li>
 
           <div className="flex items-center justify-between pr-2">
