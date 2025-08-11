@@ -7,6 +7,7 @@ const { Cashfree, CFEnvironment } = require("cashfree-pg");
 const Bill = require("../models/Bill");
 const nodemailer = require("nodemailer");
 const authMiddleware = require("../middlewares/authMiddleware");
+const verifyToken = require("../middlewares/verifyToken");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
