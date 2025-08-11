@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
     next();
 
   } catch (err) {
+    alert("Kindly re-login your account!")
     console.log("❌ Token verification failed:", err.message);
     res.status(403).json({ message: "Invalid token", error: err.message });
   }
