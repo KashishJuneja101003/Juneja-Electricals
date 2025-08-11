@@ -17,11 +17,11 @@ window.addEventListener("load", () => {
   }, 3000);
 
   // Cashfree payment gateway
-  // if (window.Cashfree) {
-  //   console.log("✅ Cashfree SDK is ready");
-  // } else {
-  //   console.log("❌ Cashfree SDK not found");
-  // }
+  if (window.Cashfree) {
+    console.log("✅ Cashfree SDK is ready");
+  } else {
+    console.log("❌ Cashfree SDK not found");
+  }
 });
 
 createRoot(document.getElementById("root")).render(

@@ -2,7 +2,7 @@ import { useCart } from "./context/CartContext";
 import { redirect, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-// import { load } from "@cashfreepayments/cashfree-js";
+import { load } from "@cashfreepayments/cashfree-js";
 
 const BASE_URL = "https://juneja-electricals-backend.onrender.com";
 
@@ -16,18 +16,18 @@ const OrderGateway = () => {
   const grandTotal = total + gst;
 
   // To load Cashfree payment gateway
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (window.Cashfree) {
-  //       console.log("✅ Cashfree SDK loaded successfully:", window.Cashfree);
-  //       clearInterval(interval);
-  //     } else {
-  //       console.log("⏳ Waiting for Cashfree SDK to load...");
-  //     }
-  //   }, 500);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (window.Cashfree) {
+        console.log("✅ Cashfree SDK loaded successfully:", window.Cashfree);
+        clearInterval(interval);
+      } else {
+        console.log("⏳ Waiting for Cashfree SDK to load...");
+      }
+    }, 500);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   const handlePayment = async () => {
     // 🔻 Check if any item is out of stock
@@ -53,76 +53,74 @@ const OrderGateway = () => {
     }
 
     // Cashfree loading check
-    // if (!window.Cashfree) {
-    //   alert("Cashfree SDK not loaded yet. Try again.");
-    //   return;
-    // }
-    // try {
-    //   const res = await axios.post(
-    //     `${BASE_URL}/create-order`,
-    //     { amount: grandTotal },
-    //     { headers: { Authorization: `Bearer ${token}` } }
-    //   );
-
-    //   // const sessionId = res.data.payment_session_id;
-    //   // const orderId = res.data.order_id;
-
-    //   // if (!sessionId || !orderId) {
-    //   //   console.error("❌ Invalid session ID or order ID");
-    //   //   alert("Payment setup failed.");
-    //   //   return;
-    //   // }
-
-    //   // console.log("🔑 Received sessionId:", sessionId);
-    //   // console.log("🔑 Received order_id:", orderId);
-
-    //   // ✅ Load SDK and initialize payment
-    //   {// const cashfree = await load({ mode: "production" });
-    //   // console.log("Cashfree object loaded:", cashfree);
-    //   // try {
-    //   //   const chkout = await cashfree.checkout({
-    //   //     paymentSessionId: sessionId,
-    //   //     redirectTarget: "_blank",
-    //   //   });
-
-    //   //   console.log("Payment Initiated:", chkout);
-    //   // } catch (error) {
-    //   //   console.log("Payment Error:", error);
-    //   // }
-    //   }
-
-    // } catch (error) {
-    //   console.error("❌ Payment initiation failed:", error);
-    //   alert("Something went wrong during payment. Please try again.");
-    // }
-
-    const confirm = window.confirm(
-      "Are you sure you want to proceed with payment?"
-    );
-    if (!confirm) return;
-
+    if (!window.Cashfree) {
+      alert("Cashfree SDK not loaded yet. Try again.");
+      return;
+    }
     try {
-      // Create Order
-      const order = axios.post(
+      const res = await axios.post(
         `${BASE_URL}/create-order`,
-        {
-          cart,
-          amount: grandTotal,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { amount: grandTotal },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      console.log("Order Created Successfully");
-      clearCart();
-      navigate("/order-success");
+      const sessionId = res.data.payment_session_id;
+      const orderId = res.data.order_id;
+
+      if (!sessionId || !orderId) {
+        console.error("❌ Invalid session ID or order ID");
+        alert("Payment setup failed.");
+        return;
+      }
+
+      console.log("🔑 Received sessionId:", sessionId);
+      console.log("🔑 Received order_id:", orderId);
+
+      // ✅ Load SDK and initialize payment
+      const cashfree = await load({ mode: "production" });
+      console.log("Cashfree object loaded:", cashfree);
+      try {
+        const chkout = await cashfree.checkout({
+          paymentSessionId: sessionId,
+          redirectTarget: "_blank",
+        });
+
+        console.log("Payment Initiated:", chkout);
+      } catch (error) {
+        console.log("Payment Error:", error);
+      }
     } catch (error) {
-      console.error("Order failed:", error);
-      alert("❌ Failed to place order. Try again later.");
+      console.error("❌ Payment initiation failed:", error);
+      alert("Something went wrong during payment. Please try again.");
     }
+
+    // const confirm = window.confirm(
+    //   "Are you sure you want to proceed with payment?"
+    // );
+    // if (!confirm) return;
+
+    // try {
+    //   // Create Order
+    //   const order = axios.post(
+    //     `${BASE_URL}/create-order`,
+    //     {
+    //       cart,
+    //       amount: grandTotal,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     }
+    //   );
+
+    //   console.log("Order Created Successfully");
+    //   clearCart();
+    //   navigate("/order-success");
+    // } catch (error) {
+    //   console.error("Order failed:", error);
+    //   alert("❌ Failed to place order. Try again later.");
+    // }
   };
 
   useEffect(() => {
