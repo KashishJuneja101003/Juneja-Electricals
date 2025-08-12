@@ -177,8 +177,8 @@ const OrderGateway = () => {
                       }`}
                     >
                       {isAvailable
-                        ? `In Stock (${availableQuantity} available)`
-                        : `Out of Stock (${availableQuantity ?? 0} available)`}
+                        ? ``
+                        : `Out of Stock`}
                     </p>
                   )}
                 </div>
