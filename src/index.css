@@ -104,6 +104,10 @@
 
 .nav-item-style:hover {
   transform: translateY(-3px) scale(1.03);
-  color: #27548a;
+  color: RGB(47, 112, 140);
+  font-weight: 530;
+  background-color: rgba(30, 144, 255, 0.06);
+  border-radius: 10px;
+  padding: 2px 4px;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

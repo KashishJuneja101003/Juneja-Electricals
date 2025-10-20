@@ -16,13 +16,13 @@ function ExploreOurProducts() {
 
       {/* <!-- Lower Div --> */}
       <div
-        className="flex flex-col gap-4 w-full p-3 lg:flex-row lg:justify-between"
-        style={{ backgroundColor: "#e1d9d9" }}
+        className="flex flex-col gap-4 w-full p-3 lg:flex-row lg:justify-between bg-gray-300"
+        // style={{ backgroundColor: "#e1d9d9" }}
       >
         {/* <!-- Card 1: Fans --> */}
         <Link to="/Products/Fans" className="lg:w-[35%]">
         <div
-          className="group flex flex-col bg-white h-full p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl "
+          className="group flex flex-col bg-white h-full p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl   "
         >
           <img
             src={ceilingFan}
@@ -42,7 +42,7 @@ function ExploreOurProducts() {
             {/* <!-- Card 2: Irons --> */}
             <Link to="/Products/Irons" className="lg:w-[35%]">
             <div
-              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl   "
             >
               <img
                 src={iron}
@@ -58,7 +58,7 @@ function ExploreOurProducts() {
             {/* <!-- Card 3: Bulbs --> */}
             <Link to="/Products/Lights">
             <div
-              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl  "
             >
               <img
                 src= {Bulbs}
@@ -77,7 +77,7 @@ function ExploreOurProducts() {
             {/* <!-- Card 4: Switches --> */}
             <Link to="/Products/Switches" className="lg:w-[35%]">
             <div
-              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl  "
             >
               <img
                 src={Switch}
@@ -94,7 +94,7 @@ function ExploreOurProducts() {
             {/* <!-- Card 5: Wires --> */}
             <Link to="/Products/Wires">
             <div
-              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+              className="group w-32 flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl  "
             >
               <img
                 src={Wires}
@@ -112,7 +112,7 @@ function ExploreOurProducts() {
         {/* <!-- Card 6: PVC Pipes --> */}
         <Link to="/Products/Pipes" className="lg:w-[35%]">
         <div
-          className="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl"
+          className="group flex flex-col bg-white p-3 justify-around rounded-2xl items-center cursor-pointer hover:shadow-xl  "
         >
           <img
             src={PVCPipes}

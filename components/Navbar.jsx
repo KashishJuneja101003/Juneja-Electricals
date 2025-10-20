@@ -72,7 +72,7 @@ function Navbar() {
         </div>
 
         {/* Right Div for desktop */}
-        <div className="hidden bord md:flex gap-6 items-center justify-end pr-8">
+        <div className="hidden bold md:flex gap-6 items-center justify-end pr-8">
           <div
             className="flex items-center justify-center gap-1 cursor-pointer"
             onClick={() => handleNavClick("explore-our-products")}

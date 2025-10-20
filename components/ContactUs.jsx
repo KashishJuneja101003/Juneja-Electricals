@@ -4,8 +4,8 @@ function ContactUs() {
       <div className="text-2xl font-semibold mb-2 md:text-3xl">Contact Us</div>
 
       <div
-        className="flex flex-col gap-5 p-3 md:flex-row"
-        style={{ backgroundColor: "#e1d9d9" }}
+        className="flex flex-col gap-5 p-3 md:flex-row bg-gray-300"
+        // style={{ backgroundColor: "#e1d9d9" }}
         id="mapLocation"
       >
         <a

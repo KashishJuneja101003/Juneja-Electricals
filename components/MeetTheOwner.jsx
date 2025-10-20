@@ -8,8 +8,8 @@ function MeetTheOwner() {
       </div>
 
       <div
-        className="flex flex-col gap-5 p-3 md:flex-row"
-        style={{ backgroundColor: "#e1d9d9" }}
+        className="flex flex-col gap-5 p-3 md:flex-row bg-gray-300"
+        // style={{ backgroundColor: "#e1d9d9" }}
       >
         {/* Image */}
         <div>
