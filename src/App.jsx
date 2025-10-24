@@ -16,6 +16,7 @@ import PaymentSuccess from "../components/PaymentSuccess";
 import OrderSuccess from "../components/OrderSuccess";
 import AdminDashboard from "../components/AdminDashboard";
 import AdminRoute from "../components/AdminRoute";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -65,6 +66,7 @@ function App() {
 
       <div className="flex-grow">
         <Routes>
+          <Route path="*" element={<PageNotFound />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/Products/Fans" element={<Fans />} />
           <Route path="/Products/Irons" element={<Irons />} />
